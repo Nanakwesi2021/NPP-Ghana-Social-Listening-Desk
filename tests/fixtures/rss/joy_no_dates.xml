@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fictional feed: one item without a publication date and one without a guid. -->
+<rss version="2.0">
+  <channel>
+    <title>Sample outlet B (test fixture)</title>
+    <link>https://example.org/sample/outlet-b/</link>
+    <description>Fictional items for collector tests</description>
+    <item>
+      <title>Galamsey: water utility cuts output as river turbidity rises</title>
+      <link>https://example.org/sample/outlet-b/galamsey-water</link>
+      <guid>https://example.org/sample/outlet-b/galamsey-water</guid>
+      <description>Treatment costs are up again near the Pra.</description>
+    </item>
+    <item>
+      <title>Teachers' unions press for allowance arrears</title>
+      <link>https://example.org/sample/outlet-b/teachers</link>
+      <pubDate>Tue, 03 Nov 2026 09:30:00 GMT</pubDate>
+      <description>GNAT and NAGRAT say arrears now reach six months.</description>
+    </item>
+  </channel>
+</rss>

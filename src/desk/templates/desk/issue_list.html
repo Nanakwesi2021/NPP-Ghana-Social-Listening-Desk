@@ -1,0 +1,22 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}Issues{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Issues</h1>
+    <p class="page-header__lede num">{{ open_cases|length }} open, sorted by next deadline. {{ closed_cases|length }} closed.</p>
+  </div>
+</div>
+<div class="columns">
+  <section class="panel" aria-labelledby="open-title">
+    <div class="panel__header"><h2 id="open-title">Needs Attention</h2></div>
+    {% if open_cases %}<ul class="queue">{% for case in open_cases %}{% include "desk/partials/_case_item.html" %}{% endfor %}</ul>
+    {% else %}<div class="empty">{% icon "check-circle" 32 %}<h3>No open issues</h3><p>One credible report is enough to open a case; it does not need to trend first.</p></div>{% endif %}
+  </section>
+  <section class="panel" aria-labelledby="closed-title">
+    <div class="panel__header"><h2 id="closed-title">Closed</h2></div>
+    {% if closed_cases %}<ul class="queue">{% for case in closed_cases %}{% include "desk/partials/_case_item.html" %}{% endfor %}</ul>
+    {% else %}<div class="panel__body small muted">Nothing closed yet.</div>{% endif %}
+  </section>
+</div>
+{% endblock %}

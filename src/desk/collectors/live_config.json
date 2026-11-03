@@ -1,0 +1,176 @@
+{
+ "feeds": [
+  {
+   "key": "citi-newsroom",
+   "name": "Citi Newsroom",
+   "url": "https://www.citinewsroom.com/wp-json/wp/v2/posts?per_page=50&_fields=id,date_gmt,link,title,excerpt",
+   "method": "WordPress posts API · every 5 min",
+   "note": "RSS is switched off on this site (checked 3 Nov 2026); the public posts API is used instead."
+  },
+  {
+   "key": "joy-online",
+   "name": "Joy Online",
+   "url": "https://www.myjoyonline.com/feed/",
+   "method": "RSS · every 5 min"
+  },
+  {
+   "key": "daily-graphic",
+   "name": "Daily Graphic",
+   "url": "https://www.graphic.com.gh/news?format=feed&type=rss",
+   "method": "RSS · every 5 min"
+  },
+  {
+   "key": "peace-fm-online",
+   "name": "Peace FM Online",
+   "url": "",
+   "kind": "awaiting",
+   "method": "No public feed found",
+   "note": "Checked 3 Nov 2026: the blueprint feed returns HTTP 404 and the site advertises no feed. Ask Peace FM for a feed or API."
+  }
+ ],
+ "topics": [
+  {
+   "slug": "dumsor",
+   "name": "Dumsor and power supply",
+   "area": "Utilities and cost of living",
+   "subject": "government",
+   "subject_detail": "Power utility",
+   "keywords": [
+    "dumsor",
+    "dum sor",
+    "power outage",
+    "power outages",
+    "load shedding",
+    "load-shedding",
+    "light out",
+    "lights out",
+    "no light",
+    "power crisis",
+    "ECG",
+    "GRIDCo",
+    "VRA"
+   ]
+  },
+  {
+   "slug": "electricity-tariff",
+   "name": "Electricity and water tariffs",
+   "area": "Utilities and cost of living",
+   "subject": "government",
+   "subject_detail": "Energy regulator",
+   "keywords": [
+    "tariff",
+    "tariffs",
+    "PURC",
+    "utility bill",
+    "utility bills",
+    "light bill"
+   ]
+  },
+  {
+   "slug": "galamsey",
+   "name": "Galamsey and water bodies",
+   "area": "Environment",
+   "subject": "government",
+   "subject_detail": "Lands and mining",
+   "keywords": [
+    "galamsey",
+    "illegal mining",
+    "River Pra",
+    "Pra river",
+    "Ankobra",
+    "Birim",
+    "turbidity",
+    "mining lease",
+    "red zones"
+   ]
+  },
+  {
+   "slug": "cedi-cost-of-living",
+   "name": "Cedi and cost of living",
+   "area": "Economy",
+   "subject": "government",
+   "subject_detail": "Economy",
+   "keywords": [
+    "cedi",
+    "inflation",
+    "cost of living",
+    "dollar rate",
+    "exchange rate",
+    "sika mpɛ dede"
+   ]
+  },
+  {
+   "slug": "fuel-prices",
+   "name": "Fuel pump prices",
+   "area": "Cost of living",
+   "subject": "government",
+   "subject_detail": "Energy",
+   "keywords": [
+    "fuel price",
+    "fuel prices",
+    "pump price",
+    "pump prices",
+    "petrol",
+    "diesel",
+    "NPA"
+   ]
+  },
+  {
+   "slug": "schools-teachers",
+   "name": "Schools and teachers",
+   "area": "Education",
+   "subject": "government",
+   "subject_detail": "Education",
+   "keywords": [
+    "teacher",
+    "teachers",
+    "Free SHS",
+    "GES",
+    "GNAT",
+    "NAGRAT",
+    "teachers' allowance",
+    "teacher allowance"
+   ]
+  },
+  {
+   "slug": "corruption-procurement",
+   "name": "Corruption and procurement",
+   "area": "Accountability",
+   "subject": "unassigned",
+   "subject_detail": "Accountability",
+   "keywords": [
+    "corruption",
+    "procurement",
+    "kickback",
+    "bribe",
+    "bribery",
+    "embezzlement",
+    "Special Prosecutor",
+    "OSP",
+    "CHRAJ"
+   ]
+  },
+  {
+   "slug": "npp-party-affairs",
+   "name": "NPP party affairs",
+   "area": "Party politics",
+   "subject": "npp",
+   "subject_detail": "",
+   "keywords": [
+    "NPP",
+    "New Patriotic Party",
+    "flagbearer"
+   ]
+  },
+  {
+   "slug": "black-stars",
+   "name": "Black Stars",
+   "area": "Sport",
+   "subject": "unassigned",
+   "subject_detail": "Sport",
+   "keywords": [
+    "Black Stars"
+   ]
+  }
+ ]
+}

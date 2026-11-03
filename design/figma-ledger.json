@@ -1,0 +1,359 @@
+{
+ "fileKey": "V3AeKWDIKpfXyd5ET413US",
+ "sessionId": "e11ba97e-5cff-4f87-bcf9-90c0fd155de1",
+ "pages": {
+  "Design system": "0:1",
+  "Desktop \u00b7 1440": "3:2",
+  "Mobile \u00b7 390": "3:3"
+ },
+ "collections": {
+  "prim": "VariableCollectionId:3:4",
+  "color": "VariableCollectionId:3:31",
+  "spacing": "VariableCollectionId:3:79"
+ },
+ "completed": [
+  "pages",
+  "variables",
+  "textStyles",
+  "effectStyles",
+  "icons",
+  "atoms",
+  "controls",
+  "shell",
+  "patterns",
+  "desktop screens",
+  "states",
+  "notes",
+  "handoff",
+  "mobile",
+  "prototype wiring"
+ ],
+ "icons": {
+  "trending-up": "4:10",
+  "alert-triangle": "4:18",
+  "octagon-alert": "4:26",
+  "clock": "4:33",
+  "check-circle": "4:40",
+  "circle-dashed": "4:53",
+  "x-circle": "4:61",
+  "minus-circle": "4:68",
+  "half-circle": "4:75",
+  "eye": "4:82",
+  "lock": "4:89",
+  "link": "4:96",
+  "inbox": "4:103",
+  "wifi-off": "4:115",
+  "chevron-down": "4:121",
+  "chevron-right": "4:127",
+  "chevron-left": "4:133",
+  "arrow-left": "4:140",
+  "arrow-up": "4:147",
+  "arrow-down": "4:154",
+  "external-link": "4:162",
+  "layout-dashboard": "4:171",
+  "list-checks": "4:181",
+  "radio": "4:191",
+  "flag": "4:198",
+  "file-text": "4:208",
+  "search": "4:215",
+  "user": "4:222",
+  "message-square": "4:228",
+  "rss": "4:236",
+  "filter": "4:242",
+  "shield-check": "4:249",
+  "chevrons-up": "4:256",
+  "rotate-ccw": "4:263",
+  "history": "4:271",
+  "x": "4:278",
+  "check": "4:284",
+  "plus": "4:291",
+  "menu": "4:299",
+  "refresh-cw": "4:308",
+  "bell": "4:315",
+  "languages": "4:326",
+  "loader": "4:332",
+  "keyboard": "4:346"
+ },
+ "mark": "4:352",
+ "boards": {
+  "icons": "4:2",
+  "mark": "4:353",
+  "atoms": "5:4",
+  "controls": "6:74",
+  "shell": "8:110",
+  "patterns": "10:364"
+ },
+ "components": {
+  "Button": {
+   "id": "5:129",
+   "props": {
+    "Label": "Label#5:0",
+    "ShowIcon": "Show icon#5:25",
+    "Glyph": "Glyph#5:50"
+   }
+  },
+  "Urgency": {
+   "id": "5:158"
+  },
+  "Verification": {
+   "id": "5:205"
+  },
+  "Platform": {
+   "id": "5:222",
+   "props": {
+    "Label": "Label#5:75"
+   }
+  },
+  "SourceStatus": {
+   "id": "5:268"
+  },
+  "Avatar": {
+   "id": "5:281",
+   "props": {
+    "Initials": "Initials#5:79"
+   }
+  },
+  "RailItem": {
+   "id": "6:111",
+   "props": {
+    "Label": "Label#6:0",
+    "Glyph": "Glyph#6:5"
+   }
+  },
+  "Tab": {
+   "id": "6:121",
+   "props": {
+    "Label": "Label#6:10"
+   }
+  },
+  "Select": {
+   "id": "6:143",
+   "props": {
+    "FieldLabel": "Field label#6:14",
+    "Value": "Value#6:18"
+   }
+  },
+  "FilterChip": {
+   "id": "6:156",
+   "props": {
+    "Label": "Label#6:22",
+    "Count": "Count#6:26"
+   }
+  },
+  "Checkbox": {
+   "id": "6:175",
+   "props": {
+    "Label": "Label#6:30"
+   }
+  },
+  "Dropdown": {
+   "id": "6:200",
+   "props": {
+    "FieldLabel": "Field label#6:34",
+    "Value": "Value#6:38"
+   }
+  },
+  "Textarea": {
+   "id": "6:216",
+   "props": {
+    "FieldLabel": "Field label#6:42",
+    "Value": "Value#6:46",
+    "Helper": "Helper#6:50"
+   }
+  },
+  "Sparkline": {
+   "id": "7:140"
+  },
+  "MastheadDesktop": {
+   "id": "8:113",
+   "props": {
+    "User": "User#8:0",
+    "Role": "Role#8:1",
+    "AsOf": "As of#8:2"
+   }
+  },
+  "MastheadMobile": {
+   "id": "8:151"
+  },
+  "Rail": {
+   "id": "8:453"
+  },
+  "TabBar": {
+   "id": "8:588"
+  },
+  "TrendHeader": {
+   "id": "10:369"
+  },
+  "TrendRow": {
+   "id": "10:486",
+   "props": {
+    "Rank": "Rank#10:0",
+    "Topic": "Topic#10:5",
+    "Subject": "Subject#10:10",
+    "Issue": "Issue link#10:15",
+    "ShowIssue": "Show issue link#10:20",
+    "Now": "This hour#10:25",
+    "Prev": "Last hour#10:30",
+    "Change": "Change#10:35",
+    "ShowArrow": "Show arrow#10:40",
+    "Obs": "Observed on#10:45",
+    "Note": "Coverage note#10:50",
+    "ShowNote": "Show coverage note#10:55"
+   }
+  },
+  "CaseItem": {
+   "id": "10:637",
+   "props": {
+    "ID": "Case ID#10:60",
+    "Claim": "Claim#10:64",
+    "Why": "Why#10:68",
+    "First": "First report#10:72",
+    "ShowFirst": "Show first report#10:76",
+    "Owner": "Owner#10:80",
+    "Due": "Due#10:84",
+    "Next": "Next#10:88",
+    "Decision": "Decision#10:92",
+    "ShowDecision": "Show decision#10:96"
+   }
+  },
+  "Banner": {
+   "id": "10:683",
+   "props": {
+    "Title": "Title#10:100",
+    "Body": "Body#10:105",
+    "Action": "Action#10:110",
+    "ShowAction": "Show action#10:115"
+   }
+  },
+  "SourceHeader": {
+   "id": "11:494"
+  },
+  "SourceRow": {
+   "id": "11:607",
+   "props": {
+    "Name": "Source name#11:0",
+    "Detail": "Source detail#11:6",
+    "Method": "Method#11:12",
+    "Scope": "Scope#11:18",
+    "Check": "Check#11:24",
+    "Note": "Check note#11:30",
+    "ShowNote": "Show check note#11:36"
+   }
+  },
+  "EvidenceItem": {
+   "id": "11:691",
+   "props": {
+    "Src": "Account or outlet#11:42",
+    "Time": "Time#11:45",
+    "Lang": "Language#11:48",
+    "Ex": "Excerpt#11:51",
+    "Tr": "Translation#11:54",
+    "ShowTr": "Show translation#11:57",
+    "Foot": "Grouping#11:60"
+   }
+  },
+  "History": {
+   "id": "11:731",
+   "props": {
+    "Time": "Time#11:63",
+    "Actor": "Actor#11:67",
+    "Role": "Role#11:71",
+    "Action": "Action#11:75",
+    "Note": "Note#11:79",
+    "ShowNote": "Show note#11:83"
+   }
+  },
+  "Skeleton": {
+   "id": "11:735"
+  },
+  "PlatformRow": {
+   "id": "15:567",
+   "props": {
+    "Platform": "Platform#15:0",
+    "Count": "Count#15:1",
+    "Detail": "Detail#15:2"
+   }
+  },
+  "Note": {
+   "id": "18:572",
+   "props": {
+    "Number": "Number#18:0",
+    "Title": "Title#18:1",
+    "Body": "Body#18:2"
+   }
+  },
+  "TrendRowCompact": {
+   "id": "19:572"
+  },
+  "SourceRowCompact": {
+   "id": "19:677"
+  }
+ },
+ "note": "paint helper must resolve variable value as base colour (nested instance overrides render raw colour otherwise)",
+ "screens": {
+  "01 Desk overview start": "12:564",
+  "01b Desk overview after": "12:1157",
+  "02 Trend detail": "15:1428",
+  "03a Issue review unassigned": "16:1822",
+  "03b Issue review owned": "16:2151",
+  "03c Issue review editor": "16:2511",
+  "04 Source coverage": "17:2449",
+  "States board": "17:2789",
+  "Flow guide": "18:3152",
+  "Handoff board": "18:3155",
+  "M1 Overview": "19:678",
+  "M1 Overview full length": "19:1128",
+  "M2 Issue review Original": "20:1204",
+  "M3 Issue review Evidence": "20:1304",
+  "M4 Source coverage": "20:1399",
+  "Flow guide mobile": "20:4223"
+ },
+ "screenRefs": {
+  "tariffRow_start": "12:730",
+  "cases_start": {
+   "ISS-0409": "12:929",
+   "ISS-0412": "12:996",
+   "ISS-0415": "12:1045",
+   "ISS-0398": "12:1095"
+  },
+  "rail_start": "12:604",
+  "banner_start": "12:711",
+  "cases_after": {
+   "ISS-0409": "12:1530",
+   "ISS-0415": "12:1591",
+   "ISS-0412": "12:1641",
+   "ISS-0398": "12:1697"
+  },
+  "rail_after": "12:1197",
+  "crumb_02": "15:1520",
+  "claimItem_02": "15:1830",
+  "openBtn_claim_02": "I15:1830;11:684",
+  "linkedCase_02": "15:1986",
+  "rail_02": "15:1468",
+  "take_03a": "16:1972",
+  "crumb_03a": "16:1914",
+  "rail_03a": "16:1862",
+  "submit_03b": "16:2449",
+  "crumb_03b": "16:2243",
+  "rail_03b": "16:2191",
+  "approve_03c": "16:2670",
+  "crumb_03c": "16:2603",
+  "rail_03c": "16:2551",
+  "rail_04": "17:2489",
+  "banner_04": "17:2601"
+ },
+ "remaining": [],
+ "flows": {
+  "desktop": {
+   "start": "12:564",
+   "name": "Sample shift \u00b7 desktop",
+   "links": 39
+  },
+  "mobile": {
+   "start": "19:678",
+   "name": "Sample shift \u00b7 mobile",
+   "links": 8
+  },
+  "hoverInteractions": 9
+ }
+}

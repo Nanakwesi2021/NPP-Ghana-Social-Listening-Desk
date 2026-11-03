@@ -1,0 +1,42 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}Source coverage{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Source coverage</h1>
+    <p class="page-header__lede num">What the desk can see as of {{ calc.as_of|gmt }} GMT. A source with no new items is quiet, not missing.</p>
+  </div>
+</div>
+<section class="summary" aria-label="Status summary">
+  {% for s in summary %}<div><span class="status status--{{ s.status }}">{% icon s.status|status_icon 14 %}{{ s.label }}</span><span class="num">{{ s.count }}</span></div>{% endfor %}
+</section>
+{% for s in delayed %}
+<div class="banner banner--delayed" role="status">
+  {% icon "alert-triangle" 18 %}
+  <div class="banner__text">
+    <div class="banner__title">{% if s.status == "delayed" %}{{ s.source.name }} collection delayed since {{ s.since }} GMT{% else %}{{ s.source.name }} has no successful check yet{% endif %}</div>
+    <div class="banner__body">{{ s.note|capfirst }}. {{ s.source.note }}</div>
+  </div>
+</div>
+{% endfor %}
+<section class="panel" aria-label="Sources">
+  <table class="source-table">
+    <thead><tr><th scope="col" style="width: 240px">Source</th><th scope="col" style="width: 220px">Collection method</th><th scope="col">Scope</th><th scope="col" style="width: 300px">Last successful check</th><th scope="col" style="width: 150px">Status</th></tr></thead>
+    <tbody>
+    {% for row in rows %}
+      <tr class="{% if row.status == 'delayed' %}is-delayed{% endif %}">
+        <td><span class="source-name">{{ row.name }}</span><br><span class="caption muted">{{ row.detail }}</span></td>
+        <td class="col-method">{{ row.source.method }}</td>
+        <td class="col-scope">{{ row.source.scope }}{% if row.source.note and row.status != 'delayed' %} {{ row.source.note }}{% endif %}</td>
+        <td class="col-check"><span class="check-line check-line--{{ row.status }} num">{% icon row.status|status_icon 16 %}<span>{{ row.check }}{% if row.note %}<span class="check-note">{{ row.note }}</span>{% endif %}{% if row.freshness %}<span class="check-note">{{ row.freshness }}</span>{% endif %}</span></span></td>
+        <td><span class="status status--{{ row.status }}">{% icon row.status|status_icon 14 %}{{ row.label }}</span></td>
+      </tr>
+      {% if row.members|length > 1 %}{% for m in row.members %}
+      <tr class="sub"><td style="padding-left: 36px">{{ m.source.name }}</td><td class="col-method"></td><td class="col-scope"></td><td class="col-check num">{{ m.check }}{% if m.note %} · {{ m.note }}{% endif %}{% if m.freshness %}<span class="check-note">{{ m.freshness }}</span>{% endif %}</td><td><span class="status status--{{ m.status }}">{% icon m.status|status_icon 14 %}{{ m.label }}</span></td></tr>
+      {% endfor %}{% endif %}
+    {% endfor %}
+    </tbody>
+  </table>
+  <div class="panel__footer"><p>Labels follow the observed source set. A topic seen on news and X reads “News + X”. “Across social platforms” needs direct observations on two or more social networks; an outlet quoting a TikTok video counts as that outlet. A WhatsApp tip is one submission and does not count toward trends.</p></div>
+</section>
+{% endblock %}

@@ -1,0 +1,106 @@
+/* Design tokens exported from the Figma variables (file V3AeKWDIKpfXyd5ET413US).
+   Names follow each variable's WEB code syntax. Primitives are not used directly in components. */
+:root {
+  /* Primitives */
+  --blue-royal: #014EA6;
+  --blue-deep: #00387F;
+  --blue-sky: #7FBCFF;
+  --blue-50: #EEF5FF;
+  --blue-100: #DCEBFF;
+  --blue-800: #002B63;
+  --blue-rail-selected: #17508F;
+  --blue-on-dark-muted: #B8D4F5;
+  --red-signal: #E60000;
+  --red-50: #FFF0F0;
+  --red-700: #B00000;
+  --amber-700: #8A4B00;
+  --amber-500: #D98200;
+  --amber-100: #FCEBCB;
+  --amber-50: #FFF7E8;
+  --green-700: #17693C;
+  --green-50: #EAF6EF;
+  --ink-900: #12161D;
+  --ink-700: #343B48;
+  --ink-500: #5A6372;
+  --ink-400: #858D9B;
+  --gray-300: #C7CDD6;
+  --gray-200: #E1E5EB;
+  --gray-100: #EDF0F4;
+  --gray-50: #F4F6F9;
+  --white: #FFFFFF;
+
+  /* Color · backgrounds */
+  --bg-page: var(--gray-50);
+  --bg-surface: var(--white);
+  --bg-subtle: var(--gray-100);
+  --bg-selected: var(--blue-50);
+  --bg-rail: var(--blue-deep);
+  --bg-masthead: var(--blue-deep);
+  --bg-brand: var(--blue-royal);
+  --bg-rail-selected: var(--blue-rail-selected);
+  --bg-critical: var(--red-signal);
+  --bg-critical-subtle: var(--red-50);
+  --bg-warning: var(--amber-100);
+  --bg-warning-subtle: var(--amber-50);
+  --bg-success-subtle: var(--green-50);
+  --bg-highlight: var(--blue-100);
+  --bg-skeleton: var(--gray-100);
+
+  /* Color · text */
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-700);
+  --text-muted: var(--ink-500);
+  --text-on-dark: var(--white);
+  --text-on-dark-muted: var(--blue-on-dark-muted);
+  --text-on-dark-selected: var(--blue-sky);
+  --text-link: var(--blue-royal);
+  --text-critical: var(--red-700);
+  --text-on-critical: var(--white);
+  --text-warning: var(--amber-700);
+  --text-success: var(--green-700);
+  --text-disabled: var(--ink-400);
+
+  /* Color · borders */
+  --border-default: var(--gray-200);
+  --border-strong: var(--gray-300);
+  --border-focus: var(--blue-royal);
+  --border-focus-on-dark: var(--blue-sky);
+  --border-warning: var(--amber-500);
+  --border-critical: var(--red-signal);
+  --border-selected: var(--blue-royal);
+
+  /* Color · actions, charts, icons */
+  --action-primary: var(--blue-royal);
+  --action-primary-hover: var(--blue-deep);
+  --action-disabled: var(--gray-200);
+  --chart-current: var(--blue-royal);
+  --chart-previous: var(--blue-sky);
+  --chart-grid: var(--gray-200);
+  --icon-default: var(--ink-700);
+  --icon-muted: var(--ink-400);
+  --icon-on-dark: var(--white);
+  --icon-brand: var(--blue-royal);
+  --icon-critical: var(--red-signal);
+  --icon-warning: var(--amber-700);
+  --icon-success: var(--green-700);
+
+  /* Spacing and radius */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 999px;
+
+  /* Type (text styles) */
+  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --font-desk-name: "Archivo Narrow", "Archivo", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}

@@ -1,0 +1,331 @@
+{
+ "cases": [
+  {
+   "ref": "ISS-0391",
+   "claim": "A ministry letter cancelling school feeding contracts is genuine.",
+   "subject": "government",
+   "subject_detail": "Education",
+   "topic": null,
+   "origin_item": null,
+   "urgency": "l2",
+   "urgency_reason": "",
+   "verification": "not_supported",
+   "status": "closed",
+   "owner": "abena",
+   "owned_since": "2026-11-03T08:05:00Z",
+   "why_now": "Shared in two education pages overnight.",
+   "first_report_note": "",
+   "next_action": "None. Closed.",
+   "due_at": "2026-11-03T09:00:00Z",
+   "opened_at": "2026-11-03T08:02:00Z",
+   "finding_rationale": "The letterhead and reference number do not match the ministry's published letters.",
+   "finding_by": "abena",
+   "finding_at": "2026-11-03T08:40:00Z",
+   "decision": "closed",
+   "decision_by": "ama",
+   "decision_at": "2026-11-03T08:55:00Z",
+   "closed_at": "2026-11-03T08:55:00Z",
+   "evidence": [],
+   "events": [
+    {
+     "at": "2026-11-03T08:02:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from a flagged item.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T08:40:00Z",
+     "kind": "analyst",
+     "actor": "abena",
+     "action": "Submitted finding: Not supported.",
+     "note": "Letterhead and reference number do not match published letters."
+    },
+    {
+     "at": "2026-11-03T08:55:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Closed the case.",
+     "note": "No further spread after 08:30."
+    }
+   ]
+  },
+  {
+   "ref": "ISS-0394",
+   "claim": "An NPP regional chairman resigned this morning.",
+   "subject": "npp",
+   "subject_detail": "",
+   "topic": null,
+   "origin_item": null,
+   "urgency": "l2",
+   "urgency_reason": "",
+   "verification": "not_supported",
+   "status": "closed",
+   "owner": "yaw",
+   "owned_since": "2026-11-03T08:50:00Z",
+   "why_now": "Repeated by three accounts within 20 minutes.",
+   "first_report_note": "",
+   "next_action": "None. Closed.",
+   "due_at": "2026-11-03T09:45:00Z",
+   "opened_at": "2026-11-03T08:45:00Z",
+   "finding_rationale": "The chairman spoke at a public event at 09:10 and the party denied the report.",
+   "finding_by": "yaw",
+   "finding_at": "2026-11-03T09:20:00Z",
+   "decision": "closed",
+   "decision_by": "ama",
+   "decision_at": "2026-11-03T09:30:00Z",
+   "closed_at": "2026-11-03T09:30:00Z",
+   "evidence": [],
+   "events": [
+    {
+     "at": "2026-11-03T08:45:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from a flagged item.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T09:20:00Z",
+     "kind": "analyst",
+     "actor": "yaw",
+     "action": "Submitted finding: Not supported.",
+     "note": "Spoke at a public event at 09:10; party denied the report."
+    },
+    {
+     "at": "2026-11-03T09:30:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Closed the case.",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "ref": "ISS-0398",
+   "claim": "The galamsey task-force budget was cut by half this year.",
+   "subject": "government",
+   "subject_detail": "Lands and mining",
+   "topic": "galamsey",
+   "origin_item": null,
+   "urgency": "l2",
+   "urgency_reason": "Attached to a rising topic.",
+   "verification": "partly",
+   "status": "reviewed",
+   "owner": "abena",
+   "owned_since": "2026-11-03T09:10:00Z",
+   "why_now": "Attached to a rising topic; budget lines show a smaller cut.",
+   "first_report_note": "",
+   "next_action": "Duty editor: approve, escalate, close or send back.",
+   "due_at": "2026-11-03T12:00:00Z",
+   "opened_at": "2026-11-03T09:05:00Z",
+   "finding_rationale": "The 2026 annex allocates GH₵ 60 million against GH₵ 75 million in 2025: a 20% cut, not half.",
+   "finding_by": "abena",
+   "finding_at": "2026-11-03T10:05:00Z",
+   "decision": "",
+   "decision_by": null,
+   "decision_at": null,
+   "closed_at": null,
+   "evidence": [
+    {
+     "document": "sample-budget-statement-2026",
+     "stance": "primary",
+     "cited": true,
+     "added_by": "abena",
+     "added_at": "2026-11-03T09:50:00Z"
+    }
+   ],
+   "events": [
+    {
+     "at": "2026-11-03T09:05:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from trend “Galamsey and river pollution, Western Region”.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T09:10:00Z",
+     "kind": "analyst",
+     "actor": "abena",
+     "action": "Took ownership.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T09:50:00Z",
+     "kind": "analyst",
+     "actor": "abena",
+     "action": "Added primary evidence: Budget statement 2026 · natural resources annex (dated 12 Feb 2026).",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T10:05:00Z",
+     "kind": "analyst",
+     "actor": "abena",
+     "action": "Submitted finding: Partly supported.",
+     "note": "A 20% cut, not half."
+    }
+   ]
+  },
+  {
+   "ref": "ISS-0409",
+   "claim": "A clip shows a party spokesperson announcing the primary has been postponed.",
+   "subject": "npp",
+   "subject_detail": "",
+   "topic": "npp-primary",
+   "origin_item": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000237570"
+   },
+   "urgency": "l4",
+   "urgency_reason": "Critical confirmed by A. Owusu at 09:58.",
+   "verification": "in_review",
+   "status": "in_review",
+   "owner": "efua",
+   "owned_since": "2026-11-03T09:42:00Z",
+   "why_now": "Critical confirmed by A. Owusu at 09:58. The full speech, reviewed so far, does not contain the line.",
+   "first_report_note": "",
+   "next_action": "Editor signs off the correction note.",
+   "due_at": "2026-11-03T10:45:00Z",
+   "opened_at": "2026-11-03T09:40:00Z",
+   "finding_rationale": "",
+   "finding_by": null,
+   "finding_at": null,
+   "decision": "escalated",
+   "decision_by": "ama",
+   "decision_at": "2026-11-03T09:58:00Z",
+   "closed_at": null,
+   "evidence": [
+    {
+     "document": "sample-rally-transcript-2026-11-01",
+     "stance": "contrary",
+     "cited": false,
+     "added_by": "efua",
+     "added_at": "2026-11-03T10:10:00Z"
+    }
+   ],
+   "events": [
+    {
+     "at": "2026-11-03T09:40:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from an item on X (@CampaignClipsGH).",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T09:42:00Z",
+     "kind": "analyst",
+     "actor": "efua",
+     "action": "Took ownership.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T09:58:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Escalated to Critical · L4.",
+     "note": "Clip spreading in party groups; risk of members acting on a false date."
+    },
+    {
+     "at": "2026-11-03T10:10:00Z",
+     "kind": "analyst",
+     "actor": "efua",
+     "action": "Added contrary evidence: Rally speech transcript (dated 1 Nov 2026).",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "ref": "ISS-0412",
+   "claim": "The new electricity tariff takes effect today.",
+   "subject": "government",
+   "subject_detail": "Energy regulator",
+   "topic": "electricity-tariff",
+   "origin_item": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   },
+   "urgency": "l3",
+   "urgency_reason": "Time-sensitive: customers may act on the date today.",
+   "verification": "unverified",
+   "status": "new",
+   "owner": null,
+   "owned_since": null,
+   "why_now": "Spreading inside the fastest-rising topic; customers may act on a wrong date today.",
+   "first_report_note": "",
+   "next_action": "Assign a reviewer and compare with the dated notice.",
+   "due_at": "2026-11-03T10:50:00Z",
+   "opened_at": "2026-11-03T10:31:00Z",
+   "finding_rationale": "",
+   "finding_by": null,
+   "finding_at": null,
+   "decision": "",
+   "decision_by": null,
+   "decision_at": null,
+   "closed_at": null,
+   "evidence": [],
+   "events": [
+    {
+     "at": "2026-11-03T10:25:00Z",
+     "kind": "system",
+     "actor": null,
+     "actor_label": "Collector",
+     "role_label": "X recent search",
+     "action": "Collected the post from @AccraVoices and grouped 13 copies with it.",
+     "note": ""
+    },
+    {
+     "at": "2026-11-03T10:31:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from trend “Electricity tariff increase” and set urgency to Urgent · L3.",
+     "note": "Time-sensitive: customers may act on the date today."
+    }
+   ]
+  },
+  {
+   "ref": "ISS-0415",
+   "claim": "The footbridge near the market has collapsed.",
+   "subject": "unassigned",
+   "subject_detail": "Public safety",
+   "topic": null,
+   "origin_item": {
+    "source": "coastline-news",
+    "id": "coastline-news:2026-11-03:1026:n-0043"
+   },
+   "urgency": "l3",
+   "urgency_reason": "Credible local report of a safety risk.",
+   "verification": "unverified",
+   "status": "assigned",
+   "owner": "yaw",
+   "owned_since": "2026-11-03T10:33:00Z",
+   "why_now": "Credible local report of a safety risk. Low volume does not lower its priority.",
+   "first_report_note": "First report · 1 source (Coastline News) · not trending",
+   "next_action": "Find a second source or an official statement.",
+   "due_at": "2026-11-03T11:05:00Z",
+   "opened_at": "2026-11-03T10:32:00Z",
+   "finding_rationale": "",
+   "finding_by": null,
+   "finding_at": null,
+   "decision": "",
+   "decision_by": null,
+   "decision_at": null,
+   "closed_at": null,
+   "evidence": [],
+   "events": [
+    {
+     "at": "2026-11-03T10:32:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Opened the case from a single news item (Coastline News, 10:26) and set urgency to Urgent · L3.",
+     "note": "One credible report is enough to open a safety case."
+    },
+    {
+     "at": "2026-11-03T10:33:00Z",
+     "kind": "editor",
+     "actor": "ama",
+     "action": "Assigned the case to Yaw Boateng.",
+     "note": ""
+    }
+   ]
+  }
+ ]
+}

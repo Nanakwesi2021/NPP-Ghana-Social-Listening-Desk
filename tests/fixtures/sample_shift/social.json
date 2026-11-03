@@ -1,0 +1,892 @@
+{
+ "stream": "Sample public social posts, links and tips · fictional accounts",
+ "posts": [
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000007919",
+   "url": "https://example.org/sample/x-recent-search/AccraBizDesk/x-1855204000000007919",
+   "account": "@AccraBizDesk",
+   "text": "Tariff review: the regulator's consultation closed last week. Notice expected soon.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:10:00Z",
+   "collected": "2026-11-03T09:10:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000015838",
+   "url": "https://example.org/sample/x-recent-search/PowerWatchGH/x-1855204000000015838",
+   "account": "@PowerWatchGH",
+   "text": "Reminder: tariff notices are published on the regulator's site, not on WhatsApp.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:30:00Z",
+   "collected": "2026-11-03T09:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000023757",
+   "url": "https://example.org/sample/x-recent-search/PowerWatchGH/x-1855204000000023757",
+   "account": "@PowerWatchGH",
+   "text": "Customers are asking when the quarterly tariff notice will be published. Nothing on the site yet.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:39:00Z",
+   "collected": "2026-11-03T09:40:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000031676",
+   "url": "https://example.org/sample/x-recent-search/AccraBizDesk/x-1855204000000031676",
+   "account": "@AccraBizDesk",
+   "text": "Quarterly tariff adjustment published. Effective 1 December, per the regulator's notice.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:14:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000039595",
+   "url": "https://example.org/sample/x-recent-search/AccraVoices/x-1855204000000039595",
+   "account": "@AccraVoices",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "The electricity bill goes up from today! Buy your prepaid credit now before they change it.",
+   "translation_status": "draft",
+   "published": "2026-11-03T10:21:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000047514",
+   "url": "https://example.org/sample/x-recent-search/GhanaDailyTalk/x-1855204000000047514",
+   "account": "@GhanaDailyTalk",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:22:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000055433",
+   "url": "https://example.org/sample/x-recent-search/KasoaUpdates/x-1855204000000055433",
+   "account": "@KasoaUpdates",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:23:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000063352",
+   "url": "https://example.org/sample/x-recent-search/TemaPeople/x-1855204000000063352",
+   "account": "@TemaPeople",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:24:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000071271",
+   "url": "https://example.org/sample/x-recent-search/MadinaNow/x-1855204000000071271",
+   "account": "@MadinaNow",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:25:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000079190",
+   "url": "https://example.org/sample/x-recent-search/SpintexVoice/x-1855204000000079190",
+   "account": "@SpintexVoice",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:26:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000087109",
+   "url": "https://example.org/sample/x-recent-search/TeshieTalks/x-1855204000000087109",
+   "account": "@TeshieTalks",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:27:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000095028",
+   "url": "https://example.org/sample/x-recent-search/AdabrakaDaily/x-1855204000000095028",
+   "account": "@AdabrakaDaily",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:28:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000102947",
+   "url": "https://example.org/sample/x-recent-search/NimaNews/x-1855204000000102947",
+   "account": "@NimaNews",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:29:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000110866",
+   "url": "https://example.org/sample/x-recent-search/LapazLive/x-1855204000000110866",
+   "account": "@LapazLive",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:30:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000118785",
+   "url": "https://example.org/sample/x-recent-search/DansomanDesk/x-1855204000000118785",
+   "account": "@DansomanDesk",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:31:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000126704",
+   "url": "https://example.org/sample/x-recent-search/OsuWatch/x-1855204000000126704",
+   "account": "@OsuWatch",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:32:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000134623",
+   "url": "https://example.org/sample/x-recent-search/AchimotaHub/x-1855204000000134623",
+   "account": "@AchimotaHub",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:33:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000142542",
+   "url": "https://example.org/sample/x-recent-search/WeijaToday/x-1855204000000142542",
+   "account": "@WeijaToday",
+   "text": "Light bill go up from today o! Buy your prepaid now before dem change am.",
+   "language": "pcm",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:34:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "x-recent-search",
+    "id": "x-1855204000000039595"
+   }
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000150461",
+   "url": "https://example.org/sample/x-recent-search/KumasiWatch/x-1855204000000150461",
+   "account": "@KumasiWatch",
+   "text": "Second tariff rise this year and nobody has explained it. Who is speaking for ordinary customers?",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:26:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000150461",
+   "url": "https://example.org/sample/x-recent-search/KumasiWatch/x-1855204000000150461",
+   "account": "@KumasiWatch",
+   "text": "Second tariff rise this year and nobody has explained it. Who is speaking for ordinary customers?",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:26:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000166299",
+   "url": "https://example.org/sample/x-recent-search/Ohemaa_Speaks/x-1855204000000166299",
+   "account": "@Ohemaa_Speaks",
+   "text": "Kanea ka no bɛkɔ soro ɛnnɛ anaa? Obiara nnim.",
+   "language": "tw",
+   "translation": "Is the electricity bill going up today? Nobody knows.",
+   "translation_status": "reviewed",
+   "published": "2026-11-03T10:29:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "whatsapp-tips",
+   "id": "whatsapp-1855204000000174218",
+   "url": "https://example.org/sample/whatsapp-tips/Tipline/whatsapp-1855204000000174218",
+   "account": "Tip line",
+   "text": "Forwarded: new light bill starts today, buy your credit now.",
+   "language": "pcm",
+   "translation": "Forwarded: the new electricity bill starts today, buy your credit now.",
+   "translation_status": "draft",
+   "published": null,
+   "collected": "2026-11-03T10:05:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000182137",
+   "url": "https://example.org/sample/x-recent-search/WaterWatchGH/x-1855204000000182137",
+   "account": "@WaterWatchGH",
+   "text": "Pra river colour this morning. Water utility says treatment costs are up again.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T08:55:00Z",
+   "collected": "2026-11-03T08:55:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000190056",
+   "url": "https://example.org/sample/x-recent-search/TarkwaVoices/x-1855204000000190056",
+   "account": "@TarkwaVoices",
+   "text": "Another pit opened behind the school farm. Who is enforcing the ban?",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:15:00Z",
+   "collected": "2026-11-03T09:15:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000197975",
+   "url": "https://example.org/sample/x-recent-search/WaterWatchGH/x-1855204000000197975",
+   "account": "@WaterWatchGH",
+   "text": "Turbidity readings near Daboase are the worst this month.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:49:00Z",
+   "collected": "2026-11-03T09:50:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000205894",
+   "url": "https://example.org/sample/x-recent-search/TarkwaVoices/x-1855204000000205894",
+   "account": "@TarkwaVoices",
+   "text": "Task force came, took two machines, left the pits open.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:11:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000213813",
+   "url": "https://example.org/sample/x-recent-search/EcoGhana/x-1855204000000213813",
+   "account": "@EcoGhana",
+   "text": "Galamsey is a water problem before it is a mining problem.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:33:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "youtube-channels",
+   "id": "youtube-1855204000000221732",
+   "url": "https://example.org/sample/youtube-channels/AccraMorningShow(sample)/youtube-1855204000000221732",
+   "account": "Accra Morning Show (sample)",
+   "text": "Panel: is the galamsey task force working?",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:50:00Z",
+   "collected": "2026-11-03T10:00:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "youtube-channels",
+   "id": "youtube-1855204000000229651",
+   "url": "https://example.org/sample/youtube-channels/WesternRegionToday(sample)/youtube-1855204000000229651",
+   "account": "Western Region Today (sample)",
+   "text": "Report from the Pra river: water utility and residents speak",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:02:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000237570",
+   "url": "https://example.org/sample/x-recent-search/CampaignClipsGH/x-1855204000000237570",
+   "account": "@CampaignClipsGH",
+   "text": "WATCH: party spokesperson says the primary is postponed. Clip from Saturday's rally.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:33:00Z",
+   "collected": "2026-11-03T09:35:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000245489",
+   "url": "https://example.org/sample/x-recent-search/PartyWatchGH/x-1855204000000245489",
+   "account": "@PartyWatchGH",
+   "text": "The clip going round is cut. Full speech says the timetable comes after the council meets.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:43:00Z",
+   "collected": "2026-11-03T09:45:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000253408",
+   "url": "https://example.org/sample/x-recent-search/AshantiYouth/x-1855204000000253408",
+   "account": "@AshantiYouth",
+   "text": "We want the primary dates now. Delay helps nobody.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:07:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000261327",
+   "url": "https://example.org/sample/x-recent-search/PollsterGH/x-1855204000000261327",
+   "account": "@PollsterGH",
+   "text": "Primary timing: three scenarios and what each means for the party.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:18:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000269246",
+   "url": "https://example.org/sample/x-recent-search/KumasiLights/x-1855204000000269246",
+   "account": "@KumasiLights",
+   "text": "Lights off in Bantama since 6am.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T08:40:00Z",
+   "collected": "2026-11-03T08:40:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000277165",
+   "url": "https://example.org/sample/x-recent-search/AsokwaResident/x-1855204000000277165",
+   "account": "@AsokwaResident",
+   "text": "Third outage this week in Asokwa.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T08:52:00Z",
+   "collected": "2026-11-03T08:55:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000285084",
+   "url": "https://example.org/sample/x-recent-search/KumasiLights/x-1855204000000285084",
+   "account": "@KumasiLights",
+   "text": "Suame and Tafo also off now.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:08:00Z",
+   "collected": "2026-11-03T09:10:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000293003",
+   "url": "https://example.org/sample/x-recent-search/KNUSTStudents/x-1855204000000293003",
+   "account": "@KNUSTStudents",
+   "text": "Hostels on generator again.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:26:00Z",
+   "collected": "2026-11-03T09:30:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000300922",
+   "url": "https://example.org/sample/x-recent-search/KumasiLights/x-1855204000000300922",
+   "account": "@KumasiLights",
+   "text": "Power back in Bantama, still off in Suame.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:42:00Z",
+   "collected": "2026-11-03T09:45:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000308841",
+   "url": "https://example.org/sample/x-recent-search/AsokwaResident/x-1855204000000308841",
+   "account": "@AsokwaResident",
+   "text": "Schedule please. We cannot plan anything.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:58:00Z",
+   "collected": "2026-11-03T10:00:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000316760",
+   "url": "https://example.org/sample/x-recent-search/TraderAma/x-1855204000000316760",
+   "account": "@TraderAma",
+   "text": "Cold store traders counting losses after outages in Kumasi Central Market.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:10:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000324679",
+   "url": "https://example.org/sample/x-recent-search/KNUSTStudents/x-1855204000000324679",
+   "account": "@KNUSTStudents",
+   "text": "Outage again at 10. Exams next week.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:20:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000332598",
+   "url": "https://example.org/sample/x-recent-search/KumasiLights/x-1855204000000332598",
+   "account": "@KumasiLights",
+   "text": "Utility says fault on a feeder line; no time given for repair.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:31:00Z",
+   "collected": "2026-11-03T10:35:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "facebook-links",
+   "id": "facebook-1855204000000340517",
+   "url": "https://example.org/sample/facebook-links/KumasiResidentsForum(samplepage)/facebook-1855204000000340517",
+   "account": "Kumasi Residents Forum (sample page)",
+   "text": "Members post outage times by area.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T08:48:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "facebook-links",
+   "id": "facebook-1855204000000348436",
+   "url": "https://example.org/sample/facebook-links/SuameTraders(samplepage)/facebook-1855204000000348436",
+   "account": "Suame Traders (sample page)",
+   "text": "Traders ask the utility for a load-shedding timetable.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T09:18:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "facebook-links",
+   "id": "facebook-1855204000000356355",
+   "url": "https://example.org/sample/facebook-links/KumasiResidentsForum(samplepage)/facebook-1855204000000356355",
+   "account": "Kumasi Residents Forum (sample page)",
+   "text": "Outage map updated by members.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T09:40:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "facebook-links",
+   "id": "facebook-1855204000000364274",
+   "url": "https://example.org/sample/facebook-links/AsokwaCommunity(samplepage)/facebook-1855204000000364274",
+   "account": "Asokwa Community (sample page)",
+   "text": "Residents share the utility's fault notice.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T09:55:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "facebook-links",
+   "id": "facebook-1855204000000372193",
+   "url": "https://example.org/sample/facebook-links/SuameTraders(samplepage)/facebook-1855204000000372193",
+   "account": "Suame Traders (sample page)",
+   "text": "Traders plan a meeting on generator costs.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T10:02:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "whatsapp-tips",
+   "id": "whatsapp-1855204000000380112",
+   "url": "https://example.org/sample/whatsapp-tips/Tipline/whatsapp-1855204000000380112",
+   "account": "Tip line",
+   "text": "Forwarded: outage timetable for Kumasi this week (image).",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T09:20:00Z",
+   "topics": [
+    "dumsor-kumasi"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000388031",
+   "url": "https://example.org/sample/x-recent-search/AccraTraffic/x-1855204000000388031",
+   "account": "@AccraTraffic",
+   "text": "Flooding at Kwame Nkrumah Circle after the overnight rain.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T08:42:00Z",
+   "collected": "2026-11-03T08:45:00Z",
+   "topics": [
+    "accra-flooding"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000395950",
+   "url": "https://example.org/sample/x-recent-search/AccraTraffic/x-1855204000000395950",
+   "account": "@AccraTraffic",
+   "text": "Avoid the Odaw bridge, water still high.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:24:00Z",
+   "collected": "2026-11-03T09:25:00Z",
+   "topics": [
+    "accra-flooding"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000403869",
+   "url": "https://example.org/sample/x-recent-search/WeatherGH/x-1855204000000403869",
+   "account": "@WeatherGH",
+   "text": "More rain expected over Accra this afternoon.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T09:57:00Z",
+   "collected": "2026-11-03T10:00:00Z",
+   "topics": [
+    "accra-flooding"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "x-recent-search",
+   "id": "x-1855204000000411788",
+   "url": "https://example.org/sample/x-recent-search/AccraTraffic/x-1855204000000411788",
+   "account": "@AccraTraffic",
+   "text": "Circle clearing slowly.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": "2026-11-03T10:17:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "accra-flooding"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "tiktok-links",
+   "id": "tiktok-1855204000000419707",
+   "url": "https://example.org/sample/tiktok-links/accra.rain.watch/tiktok-1855204000000419707",
+   "account": "@accra.rain.watch",
+   "text": "Video of flooded street near Circle.",
+   "language": "en",
+   "translation": "",
+   "translation_status": "none",
+   "published": null,
+   "collected": "2026-11-03T09:15:00Z",
+   "topics": [
+    "accra-flooding"
+   ],
+   "copy_of": null
+  }
+ ]
+}

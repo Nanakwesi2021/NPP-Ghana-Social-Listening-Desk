@@ -1,0 +1,13 @@
+{% extends "desk/base.html" %}
+{% block title %}Trends{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Trends</h1>
+    <p class="page-header__lede">Open a topic to see its timeline, platforms and source items. Use “Open for review” on any item to flag it, even if it is not trending.</p>
+  </div>
+</div>
+<section class="panel" id="trending" aria-labelledby="trending-title">
+  {% include "desk/partials/_trend_panel.html" %}
+</section>
+{% endblock %}

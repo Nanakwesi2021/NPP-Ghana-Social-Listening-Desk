@@ -1,0 +1,68 @@
+{% load desk_tags %}<div class="panel__header">
+  <div>
+    <h2 id="trending-title">Trending Now</h2>
+    <p>Ranked by increase · at least {{ calc.min_mentions }} mentions this hour · {{ windows.current }} vs {{ windows.previous }} GMT</p>
+  </div>
+  <form class="filters" method="get" action="" data-autosubmit>
+    <label class="select">Subject
+      <select name="subject">{% for value, label in subject_filters %}<option value="{{ value }}" {% if value == subject %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+      {% icon "chevron-down" 14 %}
+    </label>
+    <label class="select">Platform
+      <select name="platform">{% for value, label in platform_filters %}<option value="{{ value }}" {% if value == platform %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>
+      {% icon "chevron-down" 14 %}
+    </label>
+    <button class="btn btn--secondary btn--s js-hide" type="submit">Apply</button>
+  </form>
+</div>
+{% for s in delayed_sources %}
+<div class="banner-wrap">
+  <div class="banner banner--delayed" role="status">
+    {% icon "alert-triangle" 18 %}
+    <div class="banner__text">
+      <div class="banner__title">{% if s.status == "delayed" %}{{ s.source.name }} collection delayed · {{ s.check|cut:" · delayed" }}{% else %}{{ s.source.name }} is not collecting · {{ s.note|default:s.check }}{% endif %}</div>
+      <div class="banner__body">{% with platform=s.source.get_platform_display %}Topics observed on {{ platform }} are marked “{{ platform }} partial”. Their {{ platform }} counts may be low; other sources are current.{% endwith %}</div>
+    </div>
+    <a class="banner__action" href="{% url 'desk:sources' %}">View source coverage</a>
+  </div>
+</div>
+{% endfor %}
+{% if rows %}
+<table class="trend-table" aria-labelledby="trending-title">
+  <thead>
+    <tr>
+      <th class="col-rank" scope="col">#</th>
+      <th scope="col">Topic</th>
+      <th class="col-num" scope="col">This hour</th>
+      <th class="col-num" scope="col">Last hour</th>
+      <th class="col-change" scope="col">Change</th>
+      <th class="col-observed" scope="col">Observed on</th>
+      <th class="col-spark" scope="col">Last 2 h</th>
+      <th class="col-go" scope="col"><span class="visually-hidden">Open</span></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in rows %}
+    <tr class="trend-row">
+      <td class="col-rank"><span class="rank num">{{ row.rank }}</span></td>
+      <td>
+        <a class="trend-row__link" href="{% url 'desk:trend_detail' row.topic.slug %}" data-row>{{ row.topic.name }}</a>
+        <div class="trend-row__meta"><span>Subject: {{ row.topic.subject_label }}</span>{% if row.open_issues %}<a class="issue-link" href="{% url 'desk:trend_detail' row.topic.slug %}#linked-issues">{{ row.open_issues }} open issue{{ row.open_issues|pluralize }}</a>{% endif %}</div>
+        <div class="trend-compact num">{{ row.current_count }} this hour · {{ row.previous_count }} last hour<br><span class="caption muted">{{ row.observed_label }}</span>{% for p in row.partial_labels %} <span class="caption warning-text">{{ p }} partial</span>{% endfor %}</div>
+      </td>
+      <td class="col-num"><span class="count-now num">{{ row.current_count }}</span></td>
+      <td class="col-num"><span class="count-prev num">{{ row.previous_count }}</span></td>
+      <td class="col-change">{% if row.is_new %}<span class="change change--new">New this hour</span>{% else %}<span class="change num">{% icon "arrow-up" 14 %}+{{ row.change }}</span>{% endif %}</td>
+      <td class="col-observed"><span class="observed">{{ row.observed_label }}</span>{% for p in row.partial_labels %}<span class="partial-note">{{ p }} partial</span>{% endfor %}</td>
+      <td class="col-spark">{% sparkline row.buckets row.current_count row.previous_count %}</td>
+      <td class="col-go"><span class="go">{% icon "chevron-right" 16 %}</span></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="empty">{% icon "search" 28 %}<h3>No rising topics match these filters</h3><p>Clear a filter to see all ranked topics.</p><a class="btn btn--secondary" href="?">Clear filters</a></div>
+{% endif %}
+<div class="panel__footer">
+  <p>Counts are distinct items from monitored sources, with syndicated and repeated copies grouped once. They show attention on the sources the desk can see, not public support.{% if calc.below_threshold %} {{ calc.below_threshold }} more topic{{ calc.below_threshold|pluralize }} {{ calc.below_threshold|pluralize:"is,are" }} below the {{ calc.min_mentions }}-mention threshold.{% endif %}</p>
+</div>

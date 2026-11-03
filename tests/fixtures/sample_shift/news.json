@@ -1,0 +1,639 @@
+{
+ "stream": "Sample news feeds · fictional outlets",
+ "entries": [
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0850:n-0001",
+   "link": "https://example.org/sample/coastline-news/n-0001",
+   "title": "Quarterly utility tariff review due before month end",
+   "summary": "The regulator's quarterly review of utility tariffs is expected before the end of the month.",
+   "language": "en",
+   "published": "2026-11-03T08:50:00Z",
+   "collected": "2026-11-03T08:50:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0920:n-0002",
+   "link": "https://example.org/sample/kumasi-courier/n-0002",
+   "title": "Manufacturers urge regulator to phase in any tariff change",
+   "summary": "Industry groups asked for any change to be phased in over two quarters.",
+   "language": "en",
+   "published": "2026-11-03T09:20:00Z",
+   "collected": "2026-11-03T09:20:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:0952:n-0003",
+   "link": "https://example.org/sample/northern-star/n-0003",
+   "title": "Regulator expected to announce quarterly tariff review this week",
+   "summary": "A statement on the quarterly review is expected within days.",
+   "language": "en",
+   "published": "2026-11-03T09:52:00Z",
+   "collected": "2026-11-03T09:55:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1000:n-0004",
+   "link": "https://example.org/sample/volta-today/n-0004",
+   "title": "Traders in Ho brace for a possible electricity tariff increase",
+   "summary": "Market traders say they have not been told when any change would apply.",
+   "language": "en",
+   "published": "2026-11-03T10:00:00Z",
+   "collected": "2026-11-03T10:00:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1005:n-0005",
+   "link": "https://example.org/sample/kumasi-courier/n-0005",
+   "title": "Consumer groups call for clarity on the tariff review timetable",
+   "summary": "Consumer groups want the effective date published with the notice.",
+   "language": "en",
+   "published": "2026-11-03T10:05:00Z",
+   "collected": "2026-11-03T10:05:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1005:n-0005",
+   "link": "https://example.org/sample/kumasi-courier/n-0005",
+   "title": "Consumer groups call for clarity on the tariff review timetable",
+   "summary": "Consumer groups want the effective date published with the notice.",
+   "language": "en",
+   "published": "2026-11-03T10:05:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1012:n-0006",
+   "link": "https://example.org/sample/coastline-news/n-0006",
+   "title": "Regulator publishes quarterly tariff adjustment; new rates take effect on 1 December",
+   "summary": "The notice dated 28 October sets the adjusted tariffs from 1 December 2026.",
+   "language": "en",
+   "published": "2026-11-03T10:12:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1012:n-0006",
+   "link": "https://example.org/sample/coastline-news/n-0006",
+   "title": "Regulator publishes quarterly tariff adjustment; new rates take effect on 1 December",
+   "summary": "The notice dated 28 October sets the adjusted tariffs from 1 December 2026.",
+   "language": "en",
+   "published": "2026-11-03T10:12:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1015:n-0007",
+   "link": "https://example.org/sample/volta-today/n-0007",
+   "title": "Regulator publishes quarterly tariff adjustment; new rates take effect on 1 December",
+   "summary": "Carried from Coastline News. The notice dated 28 October sets the adjusted tariffs from 1 December 2026.",
+   "language": "en",
+   "published": "2026-11-03T10:15:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "coastline-news",
+    "id": "coastline-news:2026-11-03:1012:n-0006"
+   }
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1018:n-0008",
+   "link": "https://example.org/sample/northern-star/n-0008",
+   "title": "Regulator publishes quarterly tariff adjustment; new rates take effect on 1 December",
+   "summary": "Carried from Coastline News. The notice dated 28 October sets the adjusted tariffs from 1 December 2026.",
+   "language": "en",
+   "published": "2026-11-03T10:18:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": {
+    "source": "coastline-news",
+    "id": "coastline-news:2026-11-03:1012:n-0006"
+   }
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1016:n-0009",
+   "link": "https://example.org/sample/northern-star/n-0009",
+   "title": "What the new electricity tariff means for prepaid customers",
+   "summary": "Prepaid customers keep their current rate until the adjustment applies.",
+   "language": "en",
+   "published": "2026-11-03T10:16:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1028:n-0010",
+   "link": "https://example.org/sample/volta-today/n-0010",
+   "title": "Explainer: how quarterly tariff adjustments are calculated",
+   "summary": "The adjustment follows fuel, exchange-rate and inflation inputs.",
+   "language": "en",
+   "published": "2026-11-03T10:28:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1030:n-0011",
+   "link": "https://example.org/sample/kumasi-courier/n-0011",
+   "title": "Party spokespeople trade words over the timing of the tariff adjustment",
+   "summary": "Spokespeople for the governing party and the NPP disagreed about when customers were told.",
+   "language": "en",
+   "published": "2026-11-03T10:30:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "electricity-tariff"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0944:n-0012",
+   "link": "https://example.org/sample/coastline-news/n-0012",
+   "title": "Teachers' unions say allowance arrears reach six months",
+   "summary": "Teachers' unions say allowance arrears reach six months.",
+   "language": "en",
+   "published": "2026-11-03T09:44:00Z",
+   "collected": "2026-11-03T09:45:00Z",
+   "topics": [
+    "teacher-allowance"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:0958:n-0013",
+   "link": "https://example.org/sample/northern-star/n-0013",
+   "title": "Northern teachers threaten to withdraw services over allowance arrears",
+   "summary": "Northern teachers threaten to withdraw services over allowance arrears.",
+   "language": "en",
+   "published": "2026-11-03T09:58:00Z",
+   "collected": "2026-11-03T10:00:00Z",
+   "topics": [
+    "teacher-allowance"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1009:n-0014",
+   "link": "https://example.org/sample/kumasi-courier/n-0014",
+   "title": "Education ministry says allowance arrears will be cleared this quarter",
+   "summary": "Education ministry says allowance arrears will be cleared this quarter.",
+   "language": "en",
+   "published": "2026-11-03T10:09:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "teacher-allowance"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1019:n-0015",
+   "link": "https://example.org/sample/volta-today/n-0015",
+   "title": "Teacher trainees join calls for prompt allowance payment",
+   "summary": "Teacher trainees join calls for prompt allowance payment.",
+   "language": "en",
+   "published": "2026-11-03T10:19:00Z",
+   "collected": "2026-11-03T10:20:00Z",
+   "topics": [
+    "teacher-allowance"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1027:n-0016",
+   "link": "https://example.org/sample/coastline-news/n-0016",
+   "title": "Parents worry about strike threat over teacher allowances",
+   "summary": "Parents worry about strike threat over teacher allowances.",
+   "language": "en",
+   "published": "2026-11-03T10:27:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "teacher-allowance"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0845:n-0017",
+   "link": "https://example.org/sample/coastline-news/n-0017",
+   "title": "River turbidity rises again near Tarkwa, says water utility",
+   "summary": "River turbidity rises again near Tarkwa, says water utility.",
+   "language": "en",
+   "published": "2026-11-03T08:45:00Z",
+   "collected": "2026-11-03T08:45:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0905:n-0018",
+   "link": "https://example.org/sample/kumasi-courier/n-0018",
+   "title": "Chiefs call for renewed action on illegal mining",
+   "summary": "Chiefs call for renewed action on illegal mining.",
+   "language": "en",
+   "published": "2026-11-03T09:05:00Z",
+   "collected": "2026-11-03T09:05:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:0925:n-0019",
+   "link": "https://example.org/sample/volta-today/n-0019",
+   "title": "Cocoa farmers report land lost to illegal mining pits",
+   "summary": "Cocoa farmers report land lost to illegal mining pits.",
+   "language": "en",
+   "published": "2026-11-03T09:25:00Z",
+   "collected": "2026-11-03T09:25:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0941:n-0020",
+   "link": "https://example.org/sample/coastline-news/n-0020",
+   "title": "Water treatment plant reduces output as river quality falls",
+   "summary": "Water treatment plant reduces output as river quality falls.",
+   "language": "en",
+   "published": "2026-11-03T09:41:00Z",
+   "collected": "2026-11-03T09:45:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:0955:n-0021",
+   "link": "https://example.org/sample/volta-today/n-0021",
+   "title": "Task force reports seizures of excavators in Western Region",
+   "summary": "Task force reports seizures of excavators in Western Region.",
+   "language": "en",
+   "published": "2026-11-03T09:55:00Z",
+   "collected": "2026-11-03T09:55:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1008:n-0022",
+   "link": "https://example.org/sample/kumasi-courier/n-0022",
+   "title": "Opposition and civil society question galamsey task force funding",
+   "summary": "Opposition and civil society question galamsey task force funding.",
+   "language": "en",
+   "published": "2026-11-03T10:08:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1024:n-0023",
+   "link": "https://example.org/sample/northern-star/n-0023",
+   "title": "Small-scale miners ask for licensing reform",
+   "summary": "Small-scale miners ask for licensing reform.",
+   "language": "en",
+   "published": "2026-11-03T10:24:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "galamsey"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0900:n-0024",
+   "link": "https://example.org/sample/kumasi-courier/n-0024",
+   "title": "NPP national council to meet on primary timetable",
+   "summary": "The council is expected to set dates for the flagbearer primary.",
+   "language": "en",
+   "published": "2026-11-03T09:00:00Z",
+   "collected": "2026-11-03T09:00:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0922:n-0025",
+   "link": "https://example.org/sample/coastline-news/n-0025",
+   "title": "Aspirants await NPP primary guidelines",
+   "summary": "Aspirants say they are waiting for nomination guidelines.",
+   "language": "en",
+   "published": "2026-11-03T09:22:00Z",
+   "collected": "2026-11-03T09:25:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0945:n-0026",
+   "link": "https://example.org/sample/kumasi-courier/n-0026",
+   "title": "NPP says no decision yet on primary dates",
+   "summary": "NPP says no decision yet on primary dates.",
+   "language": "en",
+   "published": "2026-11-03T09:45:00Z",
+   "collected": "2026-11-03T09:45:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1001:n-0027",
+   "link": "https://example.org/sample/coastline-news/n-0027",
+   "title": "Clip claiming primary postponement circulates online",
+   "summary": "Clip claiming primary postponement circulates online.",
+   "language": "en",
+   "published": "2026-11-03T10:01:00Z",
+   "collected": "2026-11-03T10:05:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1022:n-0028",
+   "link": "https://example.org/sample/northern-star/n-0028",
+   "title": "Regional executives call for early NPP primary",
+   "summary": "Regional executives call for early NPP primary.",
+   "language": "en",
+   "published": "2026-11-03T10:22:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1025:n-0029",
+   "link": "https://example.org/sample/volta-today/n-0029",
+   "title": "Analysts: primary timetable will shape opposition strategy",
+   "summary": "Analysts: primary timetable will shape opposition strategy.",
+   "language": "en",
+   "published": "2026-11-03T10:25:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "npp-primary"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0858:n-0030",
+   "link": "https://example.org/sample/coastline-news/n-0030",
+   "title": "Black Stars squad announcement expected today",
+   "summary": "Black Stars squad announcement expected today.",
+   "language": "en",
+   "published": "2026-11-03T08:58:00Z",
+   "collected": "2026-11-03T09:00:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:0928:n-0031",
+   "link": "https://example.org/sample/volta-today/n-0031",
+   "title": "Coach to name provisional squad for qualifiers",
+   "summary": "Coach to name provisional squad for qualifiers.",
+   "language": "en",
+   "published": "2026-11-03T09:28:00Z",
+   "collected": "2026-11-03T09:30:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:0938:n-0032",
+   "link": "https://example.org/sample/northern-star/n-0032",
+   "title": "Black Stars: three uncapped players in provisional squad",
+   "summary": "Black Stars: three uncapped players in provisional squad.",
+   "language": "en",
+   "published": "2026-11-03T09:38:00Z",
+   "collected": "2026-11-03T09:40:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0953:n-0033",
+   "link": "https://example.org/sample/kumasi-courier/n-0033",
+   "title": "Kumasi club celebrates call-up of its striker",
+   "summary": "Kumasi club celebrates call-up of its striker.",
+   "language": "en",
+   "published": "2026-11-03T09:53:00Z",
+   "collected": "2026-11-03T09:55:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1004:n-0034",
+   "link": "https://example.org/sample/coastline-news/n-0034",
+   "title": "Black Stars squad named for qualifiers",
+   "summary": "Black Stars squad named for qualifiers.",
+   "language": "en",
+   "published": "2026-11-03T10:04:00Z",
+   "collected": "2026-11-03T10:05:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:1013:n-0035",
+   "link": "https://example.org/sample/volta-today/n-0035",
+   "title": "Fans react to Black Stars selection",
+   "summary": "Fans react to Black Stars selection.",
+   "language": "en",
+   "published": "2026-11-03T10:13:00Z",
+   "collected": "2026-11-03T10:15:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1023:n-0036",
+   "link": "https://example.org/sample/northern-star/n-0036",
+   "title": "Injured captain left out of Black Stars squad",
+   "summary": "Injured captain left out of Black Stars squad.",
+   "language": "en",
+   "published": "2026-11-03T10:23:00Z",
+   "collected": "2026-11-03T10:25:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:1029:n-0037",
+   "link": "https://example.org/sample/kumasi-courier/n-0037",
+   "title": "Analysis: what the Black Stars squad says about the coach's plans",
+   "summary": "Analysis: what the Black Stars squad says about the coach's plans.",
+   "language": "en",
+   "published": "2026-11-03T10:29:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "black-stars"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:0844:n-0038",
+   "link": "https://example.org/sample/coastline-news/n-0038",
+   "title": "Fuel prices to hold for the next pricing window",
+   "summary": "Fuel prices to hold for the next pricing window.",
+   "language": "en",
+   "published": "2026-11-03T08:44:00Z",
+   "collected": "2026-11-03T08:45:00Z",
+   "topics": [
+    "fuel-prices"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "kumasi-courier",
+   "guid": "kumasi-courier:2026-11-03:0912:n-0039",
+   "link": "https://example.org/sample/kumasi-courier/n-0039",
+   "title": "Transport operators watch fuel prices",
+   "summary": "Transport operators watch fuel prices.",
+   "language": "en",
+   "published": "2026-11-03T09:12:00Z",
+   "collected": "2026-11-03T09:15:00Z",
+   "topics": [
+    "fuel-prices"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "volta-today",
+   "guid": "volta-today:2026-11-03:0947:n-0040",
+   "link": "https://example.org/sample/volta-today/n-0040",
+   "title": "Diesel price edges up at some pumps",
+   "summary": "Diesel price edges up at some pumps.",
+   "language": "en",
+   "published": "2026-11-03T09:47:00Z",
+   "collected": "2026-11-03T09:50:00Z",
+   "topics": [
+    "fuel-prices"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "northern-star",
+   "guid": "northern-star:2026-11-03:1006:n-0041",
+   "link": "https://example.org/sample/northern-star/n-0041",
+   "title": "Fuel marketers explain pump price changes",
+   "summary": "Fuel marketers explain pump price changes.",
+   "language": "en",
+   "published": "2026-11-03T10:06:00Z",
+   "collected": "2026-11-03T10:10:00Z",
+   "topics": [
+    "fuel-prices"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1026:n-0042",
+   "link": "https://example.org/sample/coastline-news/n-0042",
+   "title": "Fuel price window: what to expect",
+   "summary": "Fuel price window: what to expect.",
+   "language": "en",
+   "published": "2026-11-03T10:26:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [
+    "fuel-prices"
+   ],
+   "copy_of": null
+  },
+  {
+   "source": "coastline-news",
+   "guid": "coastline-news:2026-11-03:1026:n-0043",
+   "link": "https://example.org/sample/coastline-news/n-0043",
+   "title": "Residents report footbridge collapse near the market",
+   "summary": "Residents say a footbridge near the market gave way this morning. No official statement yet.",
+   "language": "en",
+   "published": "2026-11-03T10:26:00Z",
+   "collected": "2026-11-03T10:30:00Z",
+   "topics": [],
+   "copy_of": null
+  }
+ ]
+}

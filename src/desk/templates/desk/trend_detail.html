@@ -1,0 +1,129 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}{{ topic.name }}{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: 0 0 0 0">
+  <a href="{% url 'desk:overview' %}">{% icon "chevron-left" 16 %}Desk overview</a><span>/</span>
+  <a href="{% url 'desk:trend_list' %}">Trending Now</a><span>/</span>
+  <span aria-current="page">{{ topic.name }}</span>
+</nav>
+
+<div class="page-header">
+  <div>
+    <h1>{{ topic.name }}</h1>
+    <p class="page-header__lede num">Topic: {{ topic.area }} · Subject: {{ topic.subject_label }} · Window {{ windows.current }} GMT</p>
+  </div>
+</div>
+
+<section class="comparison" aria-label="Comparison">
+  <div class="comparison__text">
+    <p class="comparison__sentence num">{% if row.is_new %}{{ row.current_count }} distinct mentions this hour, new this hour.{% else %}{{ row.current_count }} distinct mentions this hour, {% if row.change >= 0 %}up{% else %}down{% endif %} from {{ row.previous_count }}.{% endif %}</p>
+    <p class="comparison__detail num">{% if row.change > 0 %}An increase of {{ row.change }} on the previous hour.{% elif row.change < 0 %}A fall of {{ row.change|cut:"-" }} on the previous hour.{% else %}No change on the previous hour.{% endif %}
+      Observed on {{ platform_names|join:" and " }}.{% for p in partial_names %} {{ p }} collection was incomplete in this window, so the {{ p }} count may be low.{% endfor %}</p>
+  </div>
+  <dl class="windows num">
+    <div><dt>This hour</dt><dd>{{ row.current_count }}</dd><small>{{ windows.current }} GMT</small></div>
+    <div><dt>Last hour</dt><dd>{{ row.previous_count }}</dd><small>{{ windows.previous }} GMT</small></div>
+    <div><dt>Change</dt><dd class="change-value">{% if row.is_new %}New{% else %}{% if row.change > 0 %}+{% endif %}{{ row.change }}{% endif %}</dd><small>distinct items</small></div>
+  </dl>
+</section>
+
+<form class="filters" method="get" data-autosubmit aria-label="Filter items">
+  <span class="caption muted strong">Platform</span>
+  {% for chip in chips %}
+  <a class="filter-chip num" href="?platform={{ chip.key }}{% if subject != 'all' %}&subject={{ subject }}{% endif %}" {% if chip.key == platform %}aria-current="true"{% endif %}>{{ chip.label }} <span>{{ chip.count }}</span></a>
+  {% endfor %}
+  <input type="hidden" name="platform" value="{{ platform }}">
+  <label class="select">Topic
+    <select name="topic">{% for r in topic_options %}<option value="{{ r.topic.slug }}" {% if r.topic == topic %}selected{% endif %}>{{ r.topic.name }}</option>{% endfor %}</select>{% icon "chevron-down" 14 %}
+  </label>
+  <label class="select">Subject
+    <select name="subject">{% for value, label in subject_filters %}<option value="{{ value }}" {% if value == subject %}selected{% endif %}>{{ label }}</option>{% endfor %}</select>{% icon "chevron-down" 14 %}
+  </label>
+  <button class="btn btn--secondary btn--s js-hide" type="submit">Apply</button>
+  <span class="spacer"></span>
+  <span class="caption muted num">Showing {{ items|length }} of {{ item_total }} item{{ item_total|pluralize }}</span>
+</form>
+
+<div class="columns">
+  <section class="panel" aria-labelledby="timeline-title">
+    <div class="panel__header">
+      <h3 id="timeline-title">Last two hours · 10-minute buckets</h3>
+      <div class="legend"><span><i class="swatch swatch--previous"></i>{{ windows.previous }} · {{ row.previous_count }}</span><span><i class="swatch swatch--current"></i>{{ windows.current }} · {{ row.current_count }}</span>{% for p in partial_names %}<span><i class="swatch swatch--partial"></i>{{ p }} partial</span>{% endfor %}</div>
+    </div>
+    <div class="panel__body">
+      <div class="timeline" role="img" aria-label="Distinct mentions per 10 minutes: {% for b in bars %}{{ b.label }} {{ b.value }}{% if not forloop.last %}, {% endif %}{% endfor %}">
+        <div class="timeline__y num">{% for t in ticks %}<span>{{ t }}</span>{% endfor %}</div>
+        <div class="timeline__plot" style="background-size: 100% {{ grid_step }}px">
+
+          {% for b in bars %}<div class="timeline__bar{% if b.current %} timeline__bar--current{% endif %}" style="height: {{ b.pct }}%"><span class="num">{{ b.value }}</span></div>{% endfor %}
+          <div class="timeline__boundary"><span>Window boundary {{ windows.current|slice:":5" }}</span></div>
+          {% if partial_names %}<div class="timeline__partial" style="left: 50%"></div>{% endif %}
+        </div>
+        <div class="timeline__x num">{% for t in axis %}<span>{{ t }}</span>{% endfor %}</div>
+      </div>
+    </div>
+  </section>
+  <section class="panel" aria-labelledby="where-title">
+    <div class="panel__header"><div><h3 id="where-title">Where it was observed</h3><p class="num">Distinct items in {{ windows.current }} GMT · total {{ row.current_count }}</p></div></div>
+    <ul class="breakdown">
+      {% for b in breakdown %}
+      <li>
+        <strong class="small">{{ b.label }}</strong>
+        <span class="breakdown__track">{% if b.count %}<span class="breakdown__bar" style="width: {% widthratio b.count row.current_count 100 %}%; display:block"></span>{% endif %}</span>
+        <span class="breakdown__value num">{{ b.value }}</span>
+        <span class="breakdown__status"><span class="status status--{{ b.status }}">{% icon b.status|status_icon 14 %}{{ b.status_label|default:"Tips only" }}</span><span class="num">{{ b.detail }}</span></span>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+
+<div class="columns">
+  <section class="panel" aria-labelledby="items-title">
+    <div class="panel__header"><div><h3 id="items-title">{% if show_all %}All items this hour{% else %}Representative items{% endif %}</h3><p>{% if show_all %}Every distinct item in the window, oldest first.{% else %}Chosen for spread of source and language. Original wording first; reviewed translations follow.{% endif %}</p></div></div>
+    <ul class="items">
+      {% for item in items %}
+      <li class="item{% if item.case_count %} item--claim{% endif %}">
+        <div class="item__content">
+          <div class="item__meta">
+            <span class="tag{% if item.source.kind == 'manual' %} tag--manual{% endif %}">{% if item.source.kind == 'manual' %}{% icon "link" 12 %}{% endif %}{{ item.source.get_platform_display }}</span>
+            <strong>{{ item.author }}</strong>
+            <time class="num" datetime="{{ item.observed|date:'c' }}">{{ item.observed|gmt }} GMT{% if item.uses_collection_time %} (collected){% endif %}</time>
+            <span class="tag tag--language">{% icon "languages" 12 %}{{ item.get_language_display }}</span>
+            {% if item.case_count %}<span class="tag tag--claim">{% icon "flag" 12 %}Has an open case</span>{% endif %}
+          </div>
+          <p class="item__excerpt" lang="{{ item.language }}">“{{ item.excerpt }}”</p>
+          {% if item.translation %}<p class="item__translation"><b>{% if item.translation_status == 'reviewed' %}Reviewed translation{% else %}Draft translation{% endif %}</b><span lang="en">“{{ item.translation }}”</span></p>{% endif %}
+          <div class="item__foot">
+            <span class="num">{% if item.copy_count %}{{ item.copy_count }} grouped cop{{ item.copy_count|pluralize:"y,ies" }} · counted once{% else %}1 item{% endif %}</span>
+            <a href="{{ item.url }}" rel="noopener noreferrer" target="_blank">View original{% icon "external-link" 12 %}</a>
+          </div>
+        </div>
+        <form method="post" action="{% url 'desk:issue_new' %}">{% csrf_token %}
+          <input type="hidden" name="item" value="{{ item.pk }}">
+          <button class="btn {% if item.case_count %}btn--primary{% else %}btn--secondary{% endif %} btn--s" type="submit">{% if item.case_count %}Open case{% else %}Open for review{% endif %}</button>
+        </form>
+      </li>
+      {% empty %}
+      <li class="empty">No items on this platform in the current window.</li>
+      {% endfor %}
+    </ul>
+    <div class="panel__footer">{% if show_all %}<a href="?platform={{ platform }}">Show representative items</a>{% else %}<a href="?platform={{ platform }}&all=1">View all {{ item_total }} items</a>{% endif %}</div>
+  </section>
+  <div class="side">
+    <section class="panel" id="linked-issues" aria-labelledby="linked-title">
+      <div class="panel__header"><h3 id="linked-title">Open issues from this topic</h3></div>
+      {% if linked_cases %}<ul class="queue">{% for case in linked_cases %}{% include "desk/partials/_case_item.html" %}{% endfor %}</ul>
+      {% else %}<div class="panel__body small muted">No open issues. Use “Open for review” on an item to start one.</div>{% endif %}
+    </section>
+    <section class="panel" aria-labelledby="why-title">
+      <div class="panel__header"><h3 id="why-title">Why it rose</h3></div>
+      <ol class="sequence">
+        {% for item in first_items %}<li><time class="num">{{ item.observed|gmt }}</time><span>{{ item.author }} ({{ item.source.get_platform_display }}): {{ item.excerpt|truncatewords:14 }}</span></li>{% endfor %}
+        {% if biggest %}<li><time class="num">{{ biggest.observed|gmt }}</time><span>{{ biggest.author }}’s post has {{ biggest.copy_count }} copies; they count as one item.</span></li>{% endif %}
+        <li><time>Rule</time><span class="caption muted num">{% if row.rank %}Ranked #{{ row.rank }} by increase ({% if row.change > 0 %}+{% endif %}{{ row.change }}) across {{ row.platforms|length }} platform{{ row.platforms|length|pluralize }}.{% else %}Below the ranking threshold this hour.{% endif %}</span></li>
+      </ol>
+    </section>
+  </div>
+</div>
+{% endblock %}

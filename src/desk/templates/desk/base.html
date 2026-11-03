@@ -1,0 +1,119 @@
+{% load static desk_tags %}<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Desk{% endblock %} · Social Listening Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Archivo+Narrow:wght@700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="{% static 'desk/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'desk/desk.css' %}">
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="{% static 'desk/js/refresh.js' %}" defer></script>
+  <script src="{% static 'desk/js/keys.js' %}" defer></script>
+  <script src="{% static 'desk/js/enhance.js' %}" defer></script>
+</head>
+<body class="{% block body_class %}{% endblock %}" data-refresh-seconds="{{ refresh_seconds }}">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app">
+  <header class="masthead on-dark">
+    <div class="brand-wrap">
+      <a class="brand" href="{% url 'desk:overview' %}">
+        {% include "desk/partials/_brand_mark.html" %}
+        <span>
+          <span class="brand__name"><span class="long">Social </span>Listening Desk</span><br>
+          <span class="brand__sub">NPP Ghana<span class="long"> · Research and social media</span></span>
+        </span>
+      </a>
+    </div>
+    <div class="masthead__content">
+      <div class="masthead__group">
+        {% if sample_mode %}<span class="sample-tag">Sample shift<span class="long"> · fictional data</span></span>{% endif %}
+        <span class="shift-time num">{{ desk_now|gmt_date }} · desk time {{ desk_now|gmt }} GMT</span>
+      </div>
+      <div class="masthead__group">
+        {% if evidence_as_of %}<span class="as-of num" aria-live="polite" data-as-of>Evidence as of {{ evidence_as_of|gmt }} GMT</span>{% endif %}
+        <form class="search" action="{% url 'desk:search' %}" method="get" role="search">
+          {% icon "search" 16 %}
+          <label class="visually-hidden" for="desk-search">Search topics, claims and items</label>
+          <input id="desk-search" name="q" type="search" placeholder="Search the desk" value="{{ q|default:'' }}" data-search>
+          <span class="kbd" aria-hidden="true">/</span>
+        </form>
+        {% if user.is_authenticated %}
+        <details class="user-menu">
+          <summary aria-label="Account: {{ user.get_full_name|default:user.username }}, {{ user_role }}">
+            <span class="avatar" aria-hidden="true">{{ user_initials }}</span>
+            <span class="user-menu__who"><strong>{{ user.get_full_name|default:user.username }}</strong><span>{{ user_role }}</span></span>
+            {% icon "chevron-down" 14 %}
+          </summary>
+          <div class="user-menu__panel">
+            {% if sample_mode and sample_people %}
+              <p class="caption muted">Sample shift · view the desk as</p>
+              {% for person in sample_people %}
+              <form method="post" action="{% url 'desk:sample_role' %}">{% csrf_token %}
+                <input type="hidden" name="username" value="{{ person.username }}">
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button class="menu-item" type="submit" {% if person.pk == user.pk %}aria-current="true"{% endif %}>
+                  <span class="avatar" aria-hidden="true">{{ person.first_name|slice:":1" }}{{ person.last_name|slice:":1" }}</span>
+                  <span>{{ person.get_full_name }}<br><span class="caption muted">{% for g in person.groups.all %}{{ g.name }}{% endfor %}</span></span>
+                </button>
+              </form>
+              {% endfor %}
+              <hr>
+            {% endif %}
+            <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="menu-item" type="submit">Sign out</button></form>
+          </div>
+        </details>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <nav class="rail on-dark" aria-label="Desk">
+    <a class="rail__item" href="{% url 'desk:overview' %}" {% if nav == "overview" %}aria-current="page"{% endif %} data-nav="o">{% icon "layout-dashboard" 20 %}Overview</a>
+    <a class="rail__item" href="{% url 'desk:trend_list' %}" {% if nav == "trends" %}aria-current="page"{% endif %} data-nav="t">{% icon "trending-up" 20 %}Trends</a>
+    <a class="rail__item" href="{% url 'desk:issue_list' %}" {% if nav == "issues" %}aria-current="page"{% endif %} data-nav="i">{% icon "list-checks" 20 %}Issues</a>
+    <a class="rail__item" href="{% url 'desk:sources' %}" {% if nav == "sources" %}aria-current="page"{% endif %} data-nav="s">{% icon "radio" 20 %}Sources</a>
+    <span class="rail__spacer"></span>
+    <button class="rail__item rail__item--button" type="button" data-open-shortcuts>{% icon "keyboard" 20 %}Keys</button>
+  </nav>
+
+  <main class="main" id="main" tabindex="-1">
+    {% if messages %}
+    <div class="messages" role="status">
+      {% for message in messages %}
+      <div class="banner {% if message.tags == 'error' %}banner--error{% elif message.tags == 'success' %}banner--success{% else %}banner--info{% endif %}">
+        {% if message.tags == 'error' %}{% icon "alert-triangle" 18 %}{% elif message.tags == 'success' %}{% icon "check-circle" 18 %}{% else %}{% icon "eye" 18 %}{% endif %}
+        <div class="banner__text"><div class="banner__title">{{ message }}</div></div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <nav class="tabbar" aria-label="Desk">
+    <a href="{% url 'desk:overview' %}" {% if nav == "overview" %}aria-current="page"{% endif %}>{% icon "layout-dashboard" 22 %}Overview</a>
+    <a href="{% url 'desk:issue_list' %}" {% if nav == "issues" %}aria-current="page"{% endif %}>{% icon "list-checks" 22 %}Issues</a>
+    <a href="{% url 'desk:trend_list' %}" {% if nav == "trends" %}aria-current="page"{% endif %}>{% icon "trending-up" 22 %}Trends</a>
+    <a href="{% url 'desk:sources' %}" {% if nav == "sources" %}aria-current="page"{% endif %}>{% icon "radio" 22 %}Sources</a>
+  </nav>
+</div>
+
+<dialog id="shortcuts" aria-labelledby="shortcuts-title">
+  <div class="stack" style="padding: 8px; min-width: 320px;">
+    <h2 id="shortcuts-title">Keyboard shortcuts</h2>
+    <dl class="stack small" style="margin: 0;">
+      <div class="row"><dt><span class="kbd">j</span> <span class="kbd">k</span></dt><dd>Next or previous row</dd></div>
+      <div class="row"><dt><span class="kbd">Enter</span></dt><dd>Open the focused topic or issue</dd></div>
+      <div class="row"><dt><span class="kbd">g</span> then <span class="kbd">o</span> <span class="kbd">t</span> <span class="kbd">i</span> <span class="kbd">s</span></dt><dd>Overview, Trends, Issues, Sources</dd></div>
+      <div class="row"><dt><span class="kbd">/</span></dt><dd>Search the desk</dd></div>
+      <div class="row"><dt><span class="kbd">a</span></dt><dd>Take ownership of the open issue</dd></div>
+      <div class="row"><dt><span class="kbd">?</span></dt><dd>Show this list</dd></div>
+    </dl>
+    <form method="dialog"><button class="btn btn--secondary" type="submit">Close</button></form>
+  </div>
+</dialog>
+</body>
+</html>

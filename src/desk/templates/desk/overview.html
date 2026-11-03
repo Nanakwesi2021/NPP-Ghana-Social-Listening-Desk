@@ -1,0 +1,57 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}Desk overview{% endblock %}
+{% block content %}
+<div class="mobile-evidence">
+  <span class="as-of num" style="color: var(--text-primary)">Evidence as of {{ evidence_as_of|gmt }} GMT</span>
+  {% for s in delayed_sources %}
+  <a class="banner banner--delayed" href="{% url 'desk:sources' %}" style="text-decoration:none">
+    {% icon "alert-triangle" 18 %}
+    <span class="banner__text"><span class="banner__title">{% if s.status == "delayed" %}{{ s.source.name }} delayed · {{ s.since }} GMT{% else %}{{ s.source.name }} not collecting{% endif %}</span><br><span class="banner__body">{{ s.source.name }} counts may be low.</span></span>
+    <span class="banner__action">Sources</span>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="page-header">
+  <div>
+    <h1>Desk overview</h1>
+    <p class="page-header__lede num">Distinct mentions in {{ windows.current }} GMT compared with {{ windows.previous }} GMT.</p>
+  </div>
+  <div class="page-header__actions">
+    <span class="caption muted num">Windows calculated at {{ calc.as_of|gmt }} GMT</span>
+    <a class="btn btn--secondary" href="{% url 'desk:trend_list' %}">{% icon "flag" 16 %}Flag an item</a>
+  </div>
+</div>
+
+<section class="brief" aria-label="Shift brief">
+  <a class="brief__cell" href="#trending">
+    <span style="color: var(--icon-brand)">{% icon "trending-up" 20 %}</span>
+    <span>{% if brief.top %}<strong>{{ brief.top.topic.name }}</strong> is rising fastest: {{ brief.top.current_count }} distinct mentions this hour, {% if brief.top.is_new %}new this hour{% else %}up from {{ brief.top.previous_count }}{% endif %}.{% else %}<strong>No topic is rising</strong> above the threshold this hour.{% endif %}</span>
+  </a>
+  <a class="brief__cell" href="#queue">
+    <span style="color: var(--icon-default)">{% icon "list-checks" 20 %}</span>
+    <span><strong>{% if brief.need == brief.open %}{{ brief.need }} issue{{ brief.need|pluralize }} need{{ brief.need|pluralize:"s," }} a decision.{% else %}{{ brief.open }} issues open, {{ brief.need }} need a decision.{% endif %}</strong>
+      {% if brief.critical %}{{ brief.critical }} critical{% if brief.urgent %}, {% endif %}{% endif %}{% if brief.urgent %}{{ brief.urgent }} urgent{% endif %}{% if brief.critical or brief.urgent %}.{% endif %}
+      {% for c in brief.overdue %}<span class="brief__overdue">{{ c.ref }} is overdue</span> (due {{ c.due_at|gmt }} GMT). {% endfor %}
+      {% if brief.next_due %}Next deadline {{ brief.next_due.due_at|gmt }} GMT.{% endif %}</span>
+  </a>
+  <a class="brief__cell" href="{% url 'desk:sources' %}">
+    <span style="color: {% if brief.delayed %}var(--icon-warning){% else %}var(--icon-success){% endif %}">{% if brief.delayed %}{% icon "alert-triangle" 20 %}{% else %}{% icon "check-circle" 20 %}{% endif %}</span>
+    <span><strong>Evidence as of {{ evidence_as_of|gmt }} GMT.</strong>{% if brief.fresh %} {{ brief.fresh }}.{% endif %}{% for d in brief.delayed %} {{ d }}, so its counts may be low.{% endfor %}</span>
+  </a>
+</section>
+
+<div class="columns">
+  <section class="panel" id="trending" aria-labelledby="trending-title" data-refresh-url="{% url 'desk:overview_trends_part' %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">
+    {% include "desk/partials/_trend_panel.html" %}
+  </section>
+  <section class="panel queue-panel" id="queue" aria-labelledby="queue-title" data-refresh-url="{% url 'desk:overview_queue_part' %}">
+    {% include "desk/partials/_queue_panel.html" %}
+  </section>
+</div>
+<div class="banner banner--offline" data-offline-banner hidden role="status">
+  {% icon "wifi-off" 18 %}
+  <div class="banner__text"><div class="banner__title" data-offline-title>Could not refresh</div><div class="banner__body">Showing the last data received. The desk retries every minute.</div></div>
+  <button class="link-button banner__action" type="button" data-refresh-now>Retry now</button>
+</div>
+{% endblock %}

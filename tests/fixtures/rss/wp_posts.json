@@ -1,0 +1,11 @@
+[
+ {"id": 301, "date_gmt": "2026-11-03T09:45:12", "link": "https://example.org/sample/outlet-c/2026/11/ecg-load-shedding/",
+  "title": {"rendered": "ECG&#8217;s load-shedding timetable &#8211; what we know"},
+  "excerpt": {"rendered": "<p>Fictional test item. Customers in Kumasi ask when power will return.&nbsp;[&hellip;]</p>\n"}},
+ {"id": 302, "date_gmt": "2026-11-03T09:52:40", "link": "https://example.org/sample/outlet-c/2026/11/parliament-resumes/",
+  "title": {"rendered": "Parliament resumes sitting"},
+  "excerpt": {"rendered": "<p>Fictional test item with no tracked topic.</p>"}},
+ {"id": 303, "date_gmt": null, "link": "",
+  "title": {"rendered": "Undated post without a link"},
+  "excerpt": {"rendered": ""}}
+]

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fictional test feed shaped like a WordPress RSS 2.0 feed. Not real Citi Newsroom content. -->
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sample outlet A (test fixture)</title>
+    <link>https://example.org/sample/outlet-a/</link>
+    <description>Fictional items for collector tests</description>
+    <item>
+      <title>Regulator publishes quarterly tariff adjustment</title>
+      <link>https://example.org/sample/outlet-a/tariff-adjustment</link>
+      <guid isPermaLink="false">https://example.org/sample/outlet-a/?p=1001</guid>
+      <pubDate>Tue, 03 Nov 2026 09:40:00 +0000</pubDate>
+      <description><![CDATA[<p>The notice sets the adjusted tariffs from 1 December. <a href="#">Read more</a></p>]]></description>
+    </item>
+    <item>
+      <title>Residents in Kumasi report another night without power</title>
+      <link>https://example.org/sample/outlet-a/kumasi-outage</link>
+      <guid isPermaLink="false">https://example.org/sample/outlet-a/?p=1002</guid>
+      <pubDate>Tue, 03 Nov 2026 09:50:00 +0000</pubDate>
+      <description><![CDATA[Traders say ECG has not published a load-shedding timetable.]]></description>
+    </item>
+    <item>
+      <title>Black Stars name squad for qualifiers</title>
+      <link>https://example.org/sample/outlet-a/black-stars</link>
+      <guid isPermaLink="false">https://example.org/sample/outlet-a/?p=1003</guid>
+      <pubDate>Tue, 03 Nov 2026 09:55:00 +0000</pubDate>
+      <description>The coach named three uncapped players. Fans call it a con job &amp; a gamble.</description>
+    </item>
+    <item>
+      <title>Regulator publishes quarterly tariff adjustment</title>
+      <link>https://example.org/sample/outlet-a/tariff-adjustment</link>
+      <guid isPermaLink="false">https://example.org/sample/outlet-a/?p=1001</guid>
+      <pubDate>Tue, 03 Nov 2026 09:40:00 +0000</pubDate>
+      <description>Repeated entry with the same guid inside one feed.</description>
+    </item>
+  </channel>
+</rss>

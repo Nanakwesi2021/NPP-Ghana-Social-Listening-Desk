@@ -1,0 +1,28 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="page-header"><div><h1>Search</h1><p class="page-header__lede">{% if q %}Results for “{{ q }}”.{% else %}Search topics, claims and source items. Open any item for review from its trend.{% endif %}</p></div></div>
+{% if q %}
+<div class="columns">
+  <section class="panel" aria-labelledby="items-title">
+    <div class="panel__header"><h2 id="items-title">Items</h2></div>
+    <ul class="search-results">
+      {% for item in items %}
+      <li class="row">
+        <span class="tag">{{ item.source.get_platform_display }}</span><strong class="small">{{ item.author }}</strong><span class="caption muted num">{{ item.observed_at|gmt }} GMT</span>
+        <span class="spacer"></span>
+        <form method="post" action="{% url 'desk:issue_new' %}">{% csrf_token %}<input type="hidden" name="item" value="{{ item.pk }}"><button class="btn btn--secondary btn--s" type="submit">Open for review</button></form>
+        <p class="small" style="flex-basis: 100%" lang="{{ item.language }}">“{{ item.excerpt }}”</p>
+      </li>
+      {% empty %}<li class="small muted">No items match.</li>{% endfor %}
+    </ul>
+  </section>
+  <div class="side">
+    <section class="panel" aria-labelledby="topics-title"><div class="panel__header"><h2 id="topics-title">Topics</h2></div>
+      <ul class="search-results">{% for t in topics %}<li><a href="{% url 'desk:trend_detail' t.slug %}">{{ t.name }}</a></li>{% empty %}<li class="small muted">No topics match.</li>{% endfor %}</ul></section>
+    <section class="panel" aria-labelledby="cases-title"><div class="panel__header"><h2 id="cases-title">Issues</h2></div>
+      <ul class="search-results">{% for c in cases %}<li><a href="{% url 'desk:issue_detail' c.ref %}">{{ c.ref }} · “{{ c.claim }}”</a></li>{% empty %}<li class="small muted">No issues match.</li>{% endfor %}</ul></section>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

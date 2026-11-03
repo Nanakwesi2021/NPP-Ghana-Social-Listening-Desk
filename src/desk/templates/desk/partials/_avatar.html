@@ -1,0 +1,1 @@
+{% load desk_tags %}{% if person %}<span class="avatar" aria-hidden="true">{{ person.first_name|slice:":1" }}{{ person.last_name|slice:":1" }}</span>{% else %}<span class="avatar avatar--unassigned" aria-hidden="true">{% icon "user" 14 %}</span>{% endif %}

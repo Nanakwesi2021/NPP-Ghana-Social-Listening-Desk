@@ -1,0 +1,19 @@
+[Unit]
+Description=NPP Ghana Social Listening Desk - News & Social Ingestion Worker
+After=network.target npp-desk-web.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/npp-listening-desk/src
+EnvironmentFile=/opt/npp-listening-desk/.env
+ExecStart=/opt/npp-listening-desk/.venv/bin/python manage.py run_worker --collect-every 300 --recompute-every 60
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/npp-desk/worker.log
+StandardError=append:/var/log/npp-desk/worker-error.log
+
+[Install]
+WantedBy=multi-user.target
+

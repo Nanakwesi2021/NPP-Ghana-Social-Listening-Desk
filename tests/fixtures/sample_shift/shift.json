@@ -1,0 +1,129 @@
+{
+ "shift": {
+  "label": "Sample shift",
+  "date": "2026-11-03",
+  "as_of": "2026-11-03T10:37:00Z",
+  "starts": "2026-11-03T08:00:00Z",
+  "ends": "2026-11-03T16:00:00Z",
+  "note": "All outlets, accounts, people, notices and claims are fictional."
+ },
+ "people": [
+  {
+   "username": "ama",
+   "first_name": "Ama",
+   "last_name": "Owusu",
+   "role": "Duty editor"
+  },
+  {
+   "username": "kwame",
+   "first_name": "Kwame",
+   "last_name": "Mensah",
+   "role": "Analyst"
+  },
+  {
+   "username": "efua",
+   "first_name": "Efua",
+   "last_name": "Asante",
+   "role": "Analyst"
+  },
+  {
+   "username": "yaw",
+   "first_name": "Yaw",
+   "last_name": "Boateng",
+   "role": "Analyst"
+  },
+  {
+   "username": "abena",
+   "first_name": "Abena",
+   "last_name": "Darko",
+   "role": "Analyst"
+  }
+ ],
+ "topics": [
+  {
+   "slug": "electricity-tariff",
+   "name": "Electricity tariff increase",
+   "area": "Utilities and cost of living",
+   "subject": "government",
+   "subject_detail": "Energy regulator"
+  },
+  {
+   "slug": "teacher-allowance",
+   "name": "Teacher allowance arrears",
+   "area": "Education",
+   "subject": "government",
+   "subject_detail": "Education"
+  },
+  {
+   "slug": "galamsey",
+   "name": "Galamsey and river pollution, Western Region",
+   "area": "Environment",
+   "subject": "government",
+   "subject_detail": "Lands and mining"
+  },
+  {
+   "slug": "npp-primary",
+   "name": "NPP flagbearer primary timetable",
+   "area": "Party politics",
+   "subject": "npp",
+   "subject_detail": ""
+  },
+  {
+   "slug": "black-stars",
+   "name": "Black Stars squad announcement",
+   "area": "Sport",
+   "subject": "unassigned",
+   "subject_detail": "Sport"
+  },
+  {
+   "slug": "dumsor-kumasi",
+   "name": "Dumsor reports in Kumasi",
+   "area": "Utilities and cost of living",
+   "subject": "government",
+   "subject_detail": "Power utility"
+  },
+  {
+   "slug": "fuel-prices",
+   "name": "Fuel pump prices",
+   "area": "Cost of living",
+   "subject": "government",
+   "subject_detail": "Energy"
+  },
+  {
+   "slug": "accra-flooding",
+   "name": "Flooding in Accra",
+   "area": "Weather",
+   "subject": "unassigned",
+   "subject_detail": "Weather"
+  }
+ ],
+ "documents": [
+  {
+   "key": "sample-tariff-notice-2026-10-28",
+   "title": "Quarterly tariff adjustment",
+   "publisher": "Regulator website (sample)",
+   "dated": "2026-10-28",
+   "url": "https://example.org/sample/regulator/tariff-notice-2026-10-28.pdf",
+   "summary": "Following the quarterly review, the approved adjustment applies to residential and non-residential customers on prepaid and postpaid meters.",
+   "key_line": "The adjusted tariffs shall take effect from 1 December 2026."
+  },
+  {
+   "key": "sample-budget-statement-2026",
+   "title": "Budget statement 2026 · natural resources annex",
+   "publisher": "Finance ministry (sample)",
+   "dated": "2026-02-12",
+   "url": "https://example.org/sample/finance/budget-2026-annex.pdf",
+   "summary": "Annex tables for the lands and natural resources sector.",
+   "key_line": "Allocation to the anti-illegal-mining task force: GH₵ 60 million (2025: GH₵ 75 million)."
+  },
+  {
+   "key": "sample-rally-transcript-2026-11-01",
+   "title": "Rally speech transcript",
+   "publisher": "Party website (sample)",
+   "dated": "2026-11-01",
+   "url": "https://example.org/sample/party/rally-transcript-2026-11-01",
+   "summary": "Full transcript of the spokesperson's Saturday rally speech.",
+   "key_line": "We will publish the primary timetable after the national council meets."
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+[Unit]
+Description=NPP Ghana Social Listening Desk - Web Service
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/npp-listening-desk/src
+EnvironmentFile=/opt/npp-listening-desk/.env
+ExecStart=/opt/npp-listening-desk/.venv/bin/gunicorn \
+    --config /opt/npp-listening-desk/deploy/gunicorn.conf.py \
+    desk_site.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=10
+PrivateTmp=true
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

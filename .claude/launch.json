@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "desk",
+      "runtimeExecutable": "/Users/barnabaseshun/Documents/NPP-Ghana-Social-Listening-Desk/.venv/bin/python",
+      "runtimeArgs": ["/Users/barnabaseshun/Documents/NPP-Ghana-Social-Listening-Desk/src/manage.py", "runserver", "127.0.0.1:8000", "--noreload"],
+      "port": 8000
+    }
+  ]
+}

@@ -1,0 +1,1111 @@
+{
+ "sources": [
+  {
+   "key": "coastline-news",
+   "name": "Coastline News",
+   "group": "News feeds",
+   "detail": "Sample outlet",
+   "platform": "news",
+   "kind": "collected",
+   "method": "RSS · every 5 min",
+   "scope": "Ghanaian national and regional news: politics, economy, public safety.",
+   "poll_interval_minutes": 5,
+   "note": ""
+  },
+  {
+   "key": "kumasi-courier",
+   "name": "Kumasi Courier",
+   "group": "News feeds",
+   "detail": "Sample outlet",
+   "platform": "news",
+   "kind": "collected",
+   "method": "RSS · every 5 min",
+   "scope": "Ghanaian national and regional news: politics, economy, public safety.",
+   "poll_interval_minutes": 5,
+   "note": ""
+  },
+  {
+   "key": "volta-today",
+   "name": "Volta Today",
+   "group": "News feeds",
+   "detail": "Sample outlet",
+   "platform": "news",
+   "kind": "collected",
+   "method": "RSS · every 5 min",
+   "scope": "Ghanaian national and regional news: politics, economy, public safety.",
+   "poll_interval_minutes": 5,
+   "note": ""
+  },
+  {
+   "key": "northern-star",
+   "name": "Northern Star FM",
+   "group": "News feeds",
+   "detail": "Sample outlet",
+   "platform": "news",
+   "kind": "collected",
+   "method": "RSS · every 5 min",
+   "scope": "Ghanaian national and regional news: politics, economy, public safety.",
+   "poll_interval_minutes": 5,
+   "note": ""
+  },
+  {
+   "key": "x-recent-search",
+   "name": "X",
+   "group": "X",
+   "detail": "18 Ghana-relevant queries",
+   "platform": "x",
+   "kind": "collected",
+   "method": "Recent search API · every 5 min",
+   "scope": "English and Twi terms, Ghana places and issue words (dumsor, galamsey). Capped at 100 posts per poll.",
+   "poll_interval_minutes": 5,
+   "note": "Since 09:40 the provider returns the first page only (rate limit)."
+  },
+  {
+   "key": "facebook-links",
+   "name": "Facebook",
+   "group": "Facebook",
+   "detail": "Named public pages",
+   "platform": "facebook",
+   "kind": "manual",
+   "method": "Analyst-submitted links",
+   "scope": "Public pages the desk may review. Not automated collection, so counts reflect submissions only.",
+   "poll_interval_minutes": null,
+   "note": ""
+  },
+  {
+   "key": "instagram",
+   "name": "Instagram",
+   "group": "Instagram",
+   "detail": "Public accounts",
+   "platform": "instagram",
+   "kind": "awaiting",
+   "method": "Awaiting approved access",
+   "scope": "No collection yet. An outlet quoting an Instagram post counts as that outlet.",
+   "poll_interval_minutes": null,
+   "note": ""
+  },
+  {
+   "key": "threads",
+   "name": "Threads",
+   "group": "Threads",
+   "detail": "Public accounts",
+   "platform": "threads",
+   "kind": "awaiting",
+   "method": "Awaiting approved access",
+   "scope": "No collection yet.",
+   "poll_interval_minutes": null,
+   "note": ""
+  },
+  {
+   "key": "tiktok-links",
+   "name": "TikTok",
+   "group": "TikTok",
+   "detail": "Public videos",
+   "platform": "tiktok",
+   "kind": "manual",
+   "method": "Analyst-submitted links",
+   "scope": "Links only until research access is approved.",
+   "poll_interval_minutes": null,
+   "note": "Research access application pending since 21 Oct 2026."
+  },
+  {
+   "key": "youtube-channels",
+   "name": "YouTube",
+   "group": "YouTube",
+   "detail": "12 selected channels",
+   "platform": "youtube",
+   "kind": "collected",
+   "method": "Data API · every 15 min",
+   "scope": "Ghanaian public channels and political programmes, linked to original videos.",
+   "poll_interval_minutes": 15,
+   "note": ""
+  },
+  {
+   "key": "whatsapp-tips",
+   "name": "WhatsApp tips",
+   "group": "WhatsApp tips",
+   "detail": "Voluntary submissions",
+   "platform": "whatsapp",
+   "kind": "tips",
+   "method": "Desk tip line · forwarded messages",
+   "scope": "Tips for verification only. A tip is one submission; it says nothing about how many groups received it.",
+   "poll_interval_minutes": null,
+   "note": ""
+  }
+ ],
+ "polls": [
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:50:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T08:55:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:25:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T09:55:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:05:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:25:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "complete",
+   "new_items": 3,
+   "note": ""
+  },
+  {
+   "source": "coastline-news",
+   "finished_at": "2026-11-03T10:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T08:55:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:05:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:20:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:25:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T09:55:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:05:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:10:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:25:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "kumasi-courier",
+   "finished_at": "2026-11-03T10:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T08:55:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:25:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:50:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T09:55:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:20:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:25:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "volta-today",
+   "finished_at": "2026-11-03T10:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:40:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T08:55:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:10:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:25:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:40:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T09:55:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:10:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:20:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:25:00Z",
+   "result": "complete",
+   "new_items": 3,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "northern-star",
+   "finished_at": "2026-11-03T10:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:35:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:40:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:50:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T08:55:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:05:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:10:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:20:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:25:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 2,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:35:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:40:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "capped",
+   "new_items": 2,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:50:00Z",
+   "result": "capped",
+   "new_items": 1,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T09:55:00Z",
+   "result": "capped",
+   "new_items": 0,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "capped",
+   "new_items": 2,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:05:00Z",
+   "result": "capped",
+   "new_items": 0,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:10:00Z",
+   "result": "capped",
+   "new_items": 2,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "capped",
+   "new_items": 2,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:20:00Z",
+   "result": "capped",
+   "new_items": 3,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:25:00Z",
+   "result": "capped",
+   "new_items": 5,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "capped",
+   "new_items": 7,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "x-recent-search",
+   "finished_at": "2026-11-03T10:35:00Z",
+   "result": "capped",
+   "new_items": 6,
+   "note": "Rate limit: first page only"
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T08:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T08:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T09:00:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T09:15:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T09:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T09:45:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T10:00:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T10:15:00Z",
+   "result": "complete",
+   "new_items": 1,
+   "note": ""
+  },
+  {
+   "source": "youtube-channels",
+   "finished_at": "2026-11-03T10:30:00Z",
+   "result": "complete",
+   "new_items": 0,
+   "note": ""
+  }
+ ]
+}

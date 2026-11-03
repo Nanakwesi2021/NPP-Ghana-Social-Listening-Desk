@@ -1,0 +1,17 @@
+{% load desk_tags %}<li class="case{% if case.decision == 'approved' %} case--updated{% endif %}">
+  <div class="case__fields">
+    <span class="badge badge--{{ case.urgency }}">{% icon case.urgency|urgency_icon 14 %}{{ case.get_urgency_display }}</span>
+    <span class="chip chip--{{ case.verification }}">{% icon case.verification|verification_icon 14 %}{{ case.get_verification_display }}</span>
+    <span class="case__ref">{{ case.subject_short }} · {{ case.ref }}</span>
+  </div>
+  <a class="case__claim" href="{% url 'desk:issue_detail' case.ref %}" data-row>“{{ case.claim }}”</a>
+  <p class="case__why">{% if case.decision == 'approved' and case.finding_rationale %}Finding: {{ case.finding_rationale|truncatewords:24 }}{% else %}Why now: {{ case.why_now }}{% endif %}</p>
+  {% if case.first_report_note %}<span class="case__first">{% icon "flag" 14 %}{{ case.first_report_note }}</span>{% endif %}
+  <div class="case__owner">
+    {% include "desk/partials/_avatar.html" with person=case.owner %}
+    <span class="owner-name">{% if case.owner %}{{ case.owner.get_full_name }}{% if case.owner == request.user %} (you){% endif %}{% else %}Unassigned{% endif %}</span>
+    <span class="due{% if case.due.overdue %} due--overdue{% endif %} num">{% icon "clock" 14 %}{{ case.due.text }}</span>
+  </div>
+  <p class="case__next">Next: {{ case.next_action }}</p>
+  {% if case.decision_line %}<p class="case__decision">{% icon "shield-check" 14 %}{{ case.decision_line }}</p>{% endif %}
+</li>

@@ -1,0 +1,19 @@
+{% load desk_tags %}<div class="panel__header">
+  <div>
+    <div class="row"><h2 id="queue-title">Needs Attention</h2><span class="count-pill num">{{ cases|length }} open</span></div>
+    <p>Sorted by next deadline</p>
+  </div>
+</div>
+{% if cases %}
+<ul class="queue" aria-labelledby="queue-title">
+  {% for case in cases %}{% include "desk/partials/_case_item.html" %}{% endfor %}
+</ul>
+{% else %}
+<div class="empty">
+  {% icon "check-circle" 32 %}
+  <h3>No open issues</h3>
+  <p>New claims appear here when someone opens a case from an item or a trend. One credible report is enough; it does not need to trend first.</p>
+  <a class="btn btn--secondary" href="{% url 'desk:trend_list' %}">{% icon "flag" 16 %}Find an item to flag</a>
+</div>
+{% endif %}
+<div class="panel__footer"><a href="{% url 'desk:issue_list' %}">View all issues · {{ cases|length }} open · {{ closed_today }} closed today</a></div>

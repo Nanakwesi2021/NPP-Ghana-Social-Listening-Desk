@@ -1,0 +1,37 @@
+{% load static %}<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Social Listening Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Archivo+Narrow:wght@700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="{% static 'desk/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'desk/desk.css' %}">
+</head>
+<body>
+<main class="login">
+  <div class="login__card">
+    <div class="brand-wrap"><span class="brand">{% include "desk/partials/_brand_mark.html" %}<span><span class="brand__name">Listening Desk</span><br><span class="brand__sub">NPP Ghana · private workspace</span></span></span></div>
+    <div class="login__body">
+      <h1 style="font-size: 22px; line-height: 28px">Sign in</h1>
+      {% if sample_mode and sample_people %}
+      <div class="banner banner--info"><div class="banner__text"><div class="banner__title">Sample shift</div><div class="banner__body">Fictional data. Choose a sample person to see the desk as that role. These accounts have no passwords and exist only in sample mode.</div></div></div>
+      {% for person in sample_people %}
+      <form method="post" action="{% url 'desk:sample_role' %}">{% csrf_token %}
+        <input type="hidden" name="username" value="{{ person.username }}"><input type="hidden" name="next" value="{{ request.GET.next|default:'/desk/' }}">
+        <button class="menu-item" type="submit" style="border: 1px solid var(--border-default)"><span class="avatar" aria-hidden="true">{{ person.first_name|slice:":1" }}{{ person.last_name|slice:":1" }}</span><span>{{ person.get_full_name }}<br><span class="caption muted">{% for g in person.groups.all %}{{ g.name }}{% endfor %}</span></span></button>
+      </form>
+      {% endfor %}
+      <hr>
+      {% endif %}
+      <form method="post" class="stack">{% csrf_token %}
+        {% if form.errors %}<div class="banner banner--error" role="alert"><div class="banner__text"><div class="banner__title">The username or password is not correct.</div></div></div>{% endif %}
+        <div class="field"><label for="id_username">Username</label><input type="text" name="username" id="id_username" autocomplete="username" required></div>
+        <div class="field"><label for="id_password">Password</label><input type="password" name="password" id="id_password" autocomplete="current-password" required style="width:100%; border: 1px solid var(--border-strong); border-radius: 4px; padding: 9px 12px; font: inherit"></div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="btn btn--primary" type="submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,260 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}{{ case.ref }}{% endblock %}
+{% block body_class %}has-mobile-actions{% endblock %}
+{% block content %}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{% url 'desk:overview' %}">{% icon "chevron-left" 16 %}Desk overview</a><span>/</span>
+  <a href="{% url 'desk:issue_list' %}">Needs Attention</a><span>/</span>
+  <span aria-current="page">{{ case.ref }}</span>
+</nav>
+
+{% if case.status == "reviewed" and is_editor and case.decision != "approved" %}
+<div class="banner banner--info" role="status">{% icon "eye" 18 %}<div class="banner__text"><div class="banner__title">Finding submitted by {{ case.finding_by.get_full_name }} at {{ case.finding_at|gmt }} GMT</div><div class="banner__body">Check the comparison below, then approve, escalate, close or send it back.</div></div></div>
+{% elif can_work %}
+<div class="banner banner--info" role="status">{% icon "eye" 18 %}<div class="banner__text"><div class="banner__title">You own this case</div><div class="banner__body">Compare the original with the primary evidence, then submit a finding. The duty editor decides.</div></div></div>
+{% endif %}
+
+{% for notif in case.notifications.all %}
+  {% if notif.status == "failed" %}
+  <div class="banner banner--error" role="alert">{% icon "alert-triangle" 18 %}
+    <div class="banner__text">
+      <div class="banner__title">Telegram alert delivery failed</div>
+      <div class="banner__body">{{ notif.error_message }}. The case remains active and reviewable.
+        {% if is_editor %}
+        <form method="post" action="{% url 'desk:issue_retry_notification' case.ref %}" style="display:inline-block; margin-top: 6px;">{% csrf_token %}
+          <button class="btn btn--secondary btn--s" type="submit">{% icon "rotate-ccw" 12 %}Retry Telegram alert</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endfor %}
+
+<section class="decision" aria-labelledby="claim">
+  <div class="decision__meta">
+    <span class="num">{{ case.ref }} · Opened {{ case.opened_at|gmt }} GMT{% if case.topic %} from trend “{{ case.topic.name }}”{% endif %} · Subject: {{ case.subject_label }}</span>
+    <span class="workflow-status">Status: {{ case.get_status_display }}</span>
+  </div>
+  <h1 class="claim" id="claim">“{{ case.claim }}”</h1>
+  <dl class="fields">
+    <div><dt>Urgency</dt><dd><span class="badge badge--{{ case.urgency }}">{% icon case.urgency|urgency_icon 14 %}{{ case.get_urgency_display }}</span>{% if case.urgency_reason %}<span>{{ case.urgency_reason }}</span>{% endif %}</dd></div>
+    <div><dt>Verification</dt><dd><span class="chip chip--{{ case.verification }}">{% icon case.verification|verification_icon 14 %}{{ case.get_verification_display }}</span>
+      <span>{% if case.status == "reviewed" and case.decision != "approved" %}Analyst finding · awaiting editor approval.{% elif case.decision == "approved" %}Approved by {{ case.decision_by.get_full_name }} at {{ case.decision_at|gmt }} GMT.{% elif evidence %}Evidence added {{ evidence.last.added_at|gmt }} GMT.{% else %}No evidence reviewed yet.{% endif %}</span></dd></div>
+    <div><dt>Owner</dt><dd><span class="owner">{% include "desk/partials/_avatar.html" with person=case.owner %}<span>{% if case.owner %}<strong>{{ case.owner.get_full_name }}{% if is_owner %} (you){% endif %}</strong>Since {{ case.owned_since|gmt }} GMT{% else %}<strong>Unassigned</strong>Anyone on the desk can take it{% endif %}</span></span></dd></div>
+    <div><dt>Next decision</dt><dd><span class="next-text">{{ case.next_action }}</span>
+      <span class="due{% if due.overdue %} due--overdue{% else %} warning-text{% endif %} num">{% icon "clock" 14 %}{{ due.text }}{% if due.relative %} · {{ due.relative }}{% endif %}</span></dd></div>
+  </dl>
+  <div class="actions">
+    <div class="row">
+      {% if can_take %}
+      <form method="post" action="{% url 'desk:issue_take' case.ref %}" data-shortcut="take">{% csrf_token %}<button class="btn btn--primary" type="submit">{% icon "user" 16 %}Take ownership</button></form>
+      <a class="btn btn--secondary" aria-disabled="true" title="Take ownership first">{% icon "plus" 16 %}Add evidence</a>
+      <span class="caption muted">Ownership unlocks evidence and the finding form.</span>
+      {% elif can_work %}
+      <a class="btn btn--secondary" href="#add-evidence">{% icon "plus" 16 %}Add evidence</a>
+      <form method="post" action="{% url 'desk:issue_release' case.ref %}">{% csrf_token %}<button class="btn btn--tertiary" type="submit">Release ownership</button></form>
+      {% elif case.status == "reviewed" %}
+      <span class="caption muted">Analyst actions are locked while the finding awaits a decision.</span>
+      {% elif not case.is_open %}
+      <span class="caption muted">Closed {{ case.closed_at|gmt }} GMT. An editor can reopen it.</span>
+      {% else %}
+      <span class="caption muted">{{ case.owner.get_full_name }} owns this case.</span>
+      {% endif %}
+    </div>
+    <div class="editor-only" role="group" aria-label="Editor only actions">
+      <span class="editor-only__label" id="editor-only-label">{% icon "lock" 14 %}Editor only</span>
+      {% if is_editor %}
+        {% if "approve" in decisions %}
+        <details><summary class="btn btn--primary">{% icon "shield-check" 16 %}Approve finding</summary>
+          <form class="decision-form" method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}
+            <input type="hidden" name="action" value="approve">
+            <div class="field"><label for="next-action">Next action</label><input id="next-action" type="text" name="next_action" value="Publish the correction note."></div>
+            <div class="field"><label for="approve-note">Note for the record (optional)</label><textarea id="approve-note" name="note" rows="2"></textarea></div>
+            <button class="btn btn--primary" type="submit">Approve finding</button>
+          </form></details>
+        {% endif %}
+        {% if "send_back" in decisions %}
+        <details><summary class="btn btn--secondary">{% icon "rotate-ccw" 16 %}Send back</summary>
+          <form class="decision-form" method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}
+            <input type="hidden" name="action" value="send_back">
+            <div class="field"><label for="sendback-note">What should the analyst revise?</label><textarea id="sendback-note" name="note" rows="3" required></textarea></div>
+            <button class="btn btn--primary" type="submit">Send back</button>
+          </form></details>
+        {% endif %}
+        {% if "escalate" in decisions %}
+        <details><summary class="btn btn--secondary">{% icon "chevrons-up" 16 %}Escalate to L4</summary>
+          <form class="decision-form" method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}
+            <input type="hidden" name="action" value="escalate">
+            <div class="field"><label for="escalate-note">Why is this a confirmed crisis?</label><textarea id="escalate-note" name="note" rows="3" required></textarea></div>
+            <button class="btn btn--primary" type="submit">Escalate to Critical · L4</button>
+          </form></details>
+        {% endif %}
+        {% if "close" in decisions %}
+        <details><summary class="btn btn--secondary">{% icon "x" 16 %}Close case</summary>
+          <form class="decision-form" method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}
+            <input type="hidden" name="action" value="close">
+            <div class="field"><label for="close-note">Reason (optional)</label><textarea id="close-note" name="note" rows="2"></textarea></div>
+            <button class="btn btn--primary" type="submit">Close case</button>
+          </form></details>
+        {% endif %}
+        {% if "reopen" in decisions %}
+        <form method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}<input type="hidden" name="action" value="reopen"><button class="btn btn--secondary" type="submit">{% icon "rotate-ccw" 16 %}Reopen</button></form>
+        {% else %}
+        <button class="btn btn--secondary" type="button" disabled>{% icon "rotate-ccw" 16 %}Reopen</button>
+        {% endif %}
+      {% else %}
+        <button class="btn btn--primary" type="button" disabled aria-describedby="editor-only-label">{% icon "shield-check" 16 %}Approve finding</button>
+        <button class="btn btn--secondary" type="button" disabled aria-describedby="editor-only-label">{% icon "chevrons-up" 16 %}Escalate to L4</button>
+        <button class="btn btn--secondary" type="button" disabled aria-describedby="editor-only-label">{% icon "x" 16 %}Close case</button>
+        <button class="btn btn--secondary" type="button" disabled aria-describedby="editor-only-label">{% icon "rotate-ccw" 16 %}Reopen</button>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<nav class="issue-tabs" aria-label="Case sections" data-tabs>
+  <a href="#original" role="tab" aria-selected="true" data-tab="original">Original</a>
+  <a href="#evidence" role="tab" aria-selected="false" data-tab="evidence">Evidence</a>
+  <a href="#history" role="tab" aria-selected="false" data-tab="history">History</a>
+</nav>
+
+<div class="compare">
+  <section class="panel tab-panel" id="original" data-tab-panel="original" aria-labelledby="original-title">
+    <div class="panel__header">
+      <div><h3 id="original-title">Original item</h3><p>As collected. Wording is never edited.</p></div>
+      {% if item %}<a class="small strong" href="{{ item.url }}" rel="noopener noreferrer" target="_blank">View original on {{ item.source.get_platform_display }} {% icon "external-link" 12 %}</a>{% endif %}
+    </div>
+    <div class="panel__body stack">
+      {% if item %}
+      <div class="item__meta"><span class="tag">{{ item.source.get_platform_display }}</span><strong>{{ item.author }}</strong><span class="num">{% if item.published_at %}Posted {{ item.published_at|gmt }} GMT · {% endif %}collected {{ item.collected_at|gmt }} GMT</span></div>
+      <span class="row caption secondary">{% icon "languages" 14 %}Original · {{ item.get_language_display }}</span>
+      <p class="original" lang="{{ item.language }}">“{{ item.excerpt }}”</p>
+      {% if item.translation %}
+      <div class="translation">
+        <span class="translation__label{% if item.translation_status != 'reviewed' %} translation__label--draft{% endif %}">{% if item.translation_status == 'reviewed' %}Reviewed translation · English{% else %}Draft translation · not yet reviewed{% endif %}</span>
+        <p lang="en">“{{ item.translation }}”</p>
+        {% if item.translation_reviewed_by %}<span class="caption muted num">Reviewed by {{ item.translation_reviewed_by.get_full_name }} · {{ item.translation_reviewed_at|gmt }} GMT</span>{% endif %}
+        {% if can_work and item.translation_status != 'reviewed' %}
+        <form class="stack" method="post" action="{% url 'desk:issue_translation' case.ref %}">{% csrf_token %}
+          <div class="field"><label for="translation">Reviewed English translation</label><textarea id="translation" name="translation" rows="2">{{ item.translation }}</textarea></div>
+          <div><button class="btn btn--secondary btn--s" type="submit">Mark translation reviewed</button></div>
+        </form>
+        {% endif %}
+      </div>
+      {% endif %}
+      <p class="caption muted num">{% if copy_count %}{{ copy_count }} grouped cop{{ copy_count|pluralize:"y,ies" }}, counted once in the trend.{% else %}No grouped copies.{% endif %}{% if item.uses_collection_time %} No publication time; collection time used.{% endif %}</p>
+      {% else %}
+      <p class="muted small">This case was opened without a single source item.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="panel tab-panel" id="evidence" data-tab-panel="evidence" aria-labelledby="evidence-title">
+    <div class="panel__header"><div><h3 id="evidence-title">Primary evidence</h3><p>The records the claim can be checked against.</p></div></div>
+    <div class="panel__body stack">
+      {% for ev in evidence %}
+      <article class="doc">
+        <span class="doc__kicker">{{ ev.get_stance_display }}{% if ev.document.is_sample %} · sample record, fictional{% endif %}</span>
+        <h3>{{ ev.title }}</h3>
+        <span class="caption muted">{% if ev.dated %}Dated {{ ev.dated|date:"j F Y" }} · {% endif %}{{ ev.publisher }}</span>
+        {% if ev.key_line %}<mark>“{{ ev.key_line }}”</mark>{% endif %}
+        <span class="caption muted num">Added by {{ ev.added_by.get_full_name }} · {{ ev.added_at|gmt }} GMT{% if ev.cited %} · cited in the finding{% endif %} · <a href="{{ ev.url }}" rel="noopener noreferrer" target="_blank">Open record</a></span>
+      </article>
+      {% if ev.stance == "primary" and ev.key_line %}
+      <div class="date-compare"><div><span>The claim says</span><strong>“{{ case.claim }}”</strong></div><div><span>The record says</span><strong>“{{ ev.key_line }}”</strong></div></div>
+      {% endif %}
+      {% empty %}
+      <div class="empty-evidence">{% icon "file-text" 28 %}<strong>No primary evidence yet</strong><span>Add the dated notice or an official statement. Each record is linked and timestamped.</span></div>
+      {% endfor %}
+      {% if can_work %}
+      <form class="stack" id="add-evidence" method="post" action="{% url 'desk:issue_evidence' case.ref %}">{% csrf_token %}
+        <h3>Add evidence</h3>
+        <div class="field"><label for="document">From the records library</label>
+          <select id="document" name="document"><option value="">Choose a record…</option>{% for doc in documents %}<option value="{{ doc.pk }}">{{ doc.title }} · {{ doc.publisher }} · dated {{ doc.dated|date:"j M Y" }}</option>{% endfor %}</select></div>
+        <details><summary class="small strong" style="cursor:pointer; color: var(--text-link)">Or add a link</summary>
+          <div class="stack" style="margin-top: 8px">
+            <div class="field"><label for="ev-title">Title</label><input id="ev-title" type="text" name="title"></div>
+            <div class="field"><label for="ev-url">Link</label><input id="ev-url" type="url" name="url"></div>
+            <div class="field"><label for="ev-line">Key line</label><input id="ev-line" type="text" name="key_line"></div>
+          </div>
+        </details>
+        <div class="field"><label for="stance">Role</label><select id="stance" name="stance"><option value="primary">Primary evidence</option><option value="supporting">Supporting</option><option value="contrary">Contrary</option></select></div>
+        <div><button class="btn btn--secondary" type="submit">{% icon "plus" 16 %}Add evidence</button></div>
+      </form>
+      {% endif %}
+    </div>
+  </section>
+</div>
+
+<div class="bottom">
+  <section class="panel tab-panel" id="finding" data-tab-panel="evidence" aria-labelledby="finding-title">
+    <div class="panel__header"><div><h3 id="finding-title">Finding</h3><p>{% if case.finding_at %}Submitted by {{ case.finding_by.get_full_name }} · {{ case.finding_at|gmt }} GMT{% else %}What the evidence shows. The duty editor makes the decision.{% endif %}</p></div></div>
+    <div class="panel__body">
+      {% if can_work %}
+      <form class="stack" method="post" action="{% url 'desk:issue_finding' case.ref %}">{% csrf_token %}
+        <div class="field"><label for="finding-select">Finding</label>
+          <select id="finding-select" name="finding" required><option value="">Select a finding</option>{% for value, label in findings %}<option value="{{ value }}" {% if case.verification == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+        <div class="field"><label for="rationale">Rationale</label>
+          <textarea id="rationale" name="rationale" required aria-describedby="rationale-help">{{ case.finding_rationale }}</textarea>
+          <span class="field__help" id="rationale-help">The duty editor sees this text with your name and the time.</span></div>
+        {% if evidence %}<fieldset class="field"><legend>Cite evidence</legend>
+          {% for ev in evidence %}<label class="check"><input type="checkbox" name="cite" value="{{ ev.pk }}" {% if ev.cited or evidence|length == 1 %}checked{% endif %}>{{ ev.title }}{% if ev.dated %}, dated {{ ev.dated|date:"j M Y" }}{% endif %}</label>{% endfor %}
+        </fieldset>{% endif %}
+        <div><button class="btn btn--primary" type="submit">{% icon "send" 16 %}Submit finding for editor review</button></div>
+      </form>
+      {% elif case.finding_at %}
+      <div class="stack">
+        <div class="row"><span class="chip chip--{{ case.verification }}">{% icon case.verification|verification_icon 14 %}{{ case.get_verification_display }}</span></div>
+        <p>{{ case.finding_rationale }}</p>
+        {% for ev in evidence %}{% if ev.cited %}<p class="row small">{% icon "file-text" 14 %}<a href="{{ ev.url }}" rel="noopener noreferrer" target="_blank">Cited: {{ ev.title }}{% if ev.dated %}, dated {{ ev.dated|date:"j M Y" }}{% endif %}</a></p>{% endif %}{% endfor %}
+      </div>
+      {% else %}
+      <div class="stack" aria-disabled="true">
+        <div class="field"><label for="finding-disabled">Finding</label><select id="finding-disabled" disabled><option>Select a finding</option></select></div>
+        <div class="field"><label for="rationale-disabled">Rationale</label><textarea id="rationale-disabled" disabled placeholder="Explain what the evidence shows and link the source."></textarea>
+          <span class="field__help">{% if can_take %}Take ownership to record a finding.{% else %}Only the owner records the finding.{% endif %}</span></div>
+        <div><button class="btn btn--primary" type="button" disabled>Submit finding for editor review</button></div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="panel tab-panel" id="history" data-tab-panel="history" aria-labelledby="history-title">
+    <div class="panel__header"><div><h3 id="history-title">Decision history</h3><p>Append-only. Every change records who and when.</p></div></div>
+    <ol class="history">
+      {% for ev in events %}
+      <li>
+        <time class="num" datetime="{{ ev.at|date:'c' }}">{{ ev.at|gmt }}</time>
+        <span class="history__dot history__dot--{{ ev.kind }}" aria-hidden="true"></span>
+        <div>
+          <div class="history__who">{{ ev.actor_label }}<span>{{ ev.role_label }}</span></div>
+          <div class="history__action">{{ ev.action }}</div>
+          {% if ev.note %}<div class="history__note">{{ ev.note }}</div>{% endif %}
+          {% for notif in ev.notifications.all %}
+            {% if notif.status == "sent" %}
+            <div class="caption secondary num" style="margin-top: 4px;">{% icon "send" 12 %} Telegram alert dispatched (#{{ notif.external_message_id }})</div>
+            {% elif notif.status == "failed" %}
+            <div class="caption error num" style="margin-top: 4px; color: var(--text-critical);">{% icon "alert-triangle" 12 %} Telegram alert failed: {{ notif.error_message }}</div>
+            {% elif notif.status == "disabled" %}
+            <div class="caption muted num" style="margin-top: 4px;">{% icon "info" 12 %} Telegram alert skipped (credentials not configured)</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+</div>
+
+<div class="mobile-actions">
+  {% if can_take %}
+  <form method="post" action="{% url 'desk:issue_take' case.ref %}">{% csrf_token %}<button class="btn btn--primary btn--block" type="submit">Take ownership</button></form>
+  {% elif can_work %}
+  <a class="btn btn--primary btn--block" href="#finding" data-tab-link="evidence">Submit finding</a>
+  {% elif is_editor and "approve" in decisions %}
+  <form method="post" action="{% url 'desk:issue_decision' case.ref %}">{% csrf_token %}<input type="hidden" name="action" value="approve"><button class="btn btn--primary btn--block" type="submit">Approve finding</button></form>
+  {% endif %}
+  <span class="caption muted">{% if is_editor %}Escalate, close and reopen are on the desktop view.{% else %}The duty editor approves, escalates or closes.{% endif %}</span>
+</div>
+{% endblock %}
