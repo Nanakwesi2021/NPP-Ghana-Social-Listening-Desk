@@ -1,0 +1,15 @@
+[Unit]
+Description=NPP Ghana Social Listening Desk - Database Backup
+After=network.target
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/npp-listening-desk/src
+EnvironmentFile=/opt/npp-listening-desk/.env
+# Writes to DESK_BACKUP_DIR (default /opt/npp-listening-desk/backups), checks the file reads back,
+# and deletes backups older than 14 days. Copy that folder off the server as well.
+ExecStart=/opt/npp-listening-desk/.venv/bin/python manage.py backup_desk --keep-days 14
+StandardOutput=append:/var/log/npp-desk/backup.log
+StandardError=append:/var/log/npp-desk/backup-error.log

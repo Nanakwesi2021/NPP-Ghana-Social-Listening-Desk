@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Case, CaseEvent, Document, Evidence, Item, PollRun, Source, Topic
+from .models import Case, CaseEvent, Document, Evidence, Item, PollRun, SignInEvent, Source, Topic
+from .signin import LockoutAdminAuthenticationForm
 
 
 @admin.register(Source)
@@ -54,3 +55,25 @@ class CaseAdmin(admin.ModelAdmin):
     list_filter = ("urgency", "verification", "status", "subject")
     search_fields = ("ref", "claim")
     inlines = [EvidenceInline, CaseEventInline]
+
+
+admin.site.login_form = LockoutAdminAuthenticationForm
+
+
+@admin.register(SignInEvent)
+class SignInEventAdmin(admin.ModelAdmin):
+    """Read-only sign-in audit log."""
+
+    list_display = ("at", "username", "outcome", "ip", "user_agent")
+    list_filter = ("outcome",)
+    search_fields = ("username", "ip")
+    date_hierarchy = "at"
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

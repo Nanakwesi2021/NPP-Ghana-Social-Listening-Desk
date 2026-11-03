@@ -4,7 +4,7 @@ Read `HANDOFF.md` before starting work. These rules protect the current, working
 
 ## Before and after every change
 
-1. Run the test suite from `src/`: `../.venv/bin/python manage.py test desk`. On 3 November 2026 (after Phase 0), 79 tests passed. If a test fails before you start, stop and report it. Do not change code to make it pass.
+1. Run the test suite from `src/`: `../.venv/bin/python manage.py test desk`. On 3 November 2026 (after Phase 1 hardening), 107 tests passed in about 10 seconds. If a test fails before you start, stop and report it. Do not change code to make it pass.
 2. Run the same command after your change. Every existing test must still pass.
 3. If a change alters what the desk shows or calculates, say so explicitly in your summary.
 

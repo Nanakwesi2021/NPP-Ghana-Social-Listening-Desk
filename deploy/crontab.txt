@@ -10,3 +10,6 @@
 # 21:30 GMT · Evening Shift Handover Briefing
 30 21 * * * cd /opt/npp-listening-desk/src && /opt/npp-listening-desk/.venv/bin/python manage.py brief_shift --title "Evening Handover Brief" --telegram >> /var/log/npp-desk/brief.log 2>&1
 
+
+# 02:15 GMT · Daily database backup with read-back check (keeps 14 days)
+15 2 * * * cd /opt/npp-listening-desk/src && /opt/npp-listening-desk/.venv/bin/python manage.py backup_desk --keep-days 14 >> /var/log/npp-desk/backup.log 2>&1

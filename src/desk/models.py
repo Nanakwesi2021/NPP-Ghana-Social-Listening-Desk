@@ -382,3 +382,28 @@ class ShiftClock(models.Model):
 
     sample_start = models.DateTimeField()
     real_start = models.DateTimeField()
+
+
+class SignInEvent(models.Model):
+    """Append-only record of every sign-in, failed attempt, lockout refusal and sign-out."""
+
+    class Outcome(models.TextChoices):
+        SUCCESS = "success", "Signed in"
+        FAILURE = "failure", "Wrong username or password"
+        LOCKED = "locked", "Refused: too many failed attempts"
+        SIGN_OUT = "sign_out", "Signed out"
+
+    at = models.DateTimeField(db_index=True)
+    username = models.CharField(max_length=150, help_text="As typed, for failed attempts.")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL,
+                             related_name="sign_in_events")
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.CharField(max_length=300, blank=True)
+    outcome = models.CharField(max_length=10, choices=Outcome.choices)
+
+    class Meta:
+        ordering = ["-at", "-id"]
+        indexes = [models.Index(fields=["username", "at"]), models.Index(fields=["ip", "at"])]
+
+    def __str__(self):
+        return f"{self.at:%Y-%m-%d %H:%M} {self.username} {self.outcome}"

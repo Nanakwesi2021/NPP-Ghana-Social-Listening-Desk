@@ -21,7 +21,7 @@ Confirm the current test baseline before making changes:
 cd src
 ../.venv/bin/python manage.py test desk
 ```
-**Expected:** `Ran 79 tests … OK`.
+**Expected:** `Ran 107 tests … OK`.
 
 ---
 
@@ -74,7 +74,7 @@ Passwords are never written in this repository. Create or reset them with `provi
 All commands run from `src/`:
 
 ```sh
-# Run full offline test suite (79 tests)
+# Run full offline test suite (107 tests, about 10 seconds)
 ../.venv/bin/python manage.py test desk
 
 # Run live news collection pass
@@ -97,7 +97,23 @@ All commands run from `src/`:
 
 # Provision or list staff accounts
 ../.venv/bin/python manage.py provision_user --list
+
+# Back up the database (SQLite or PostgreSQL), check it reads back, keep 14 days
+../.venv/bin/python manage.py backup_desk --keep-days 14
+
+# Check an existing backup can be read back (the restore check)
+../.venv/bin/python manage.py backup_desk --verify ../backups/<file>
 ```
+
+**Running safely (Phase 1 hardening):**
+
+- **Sign-in lockout:** a username is refused for 15 minutes after 5 failed attempts since its last successful sign-in. An address is refused after 20 failures. Every sign-in, failure, refusal and sign-out is in the read-only **Sign-in events** log in `/admin/`. To unlock someone early, wait out the window or reset their password with `provision_user`.
+- **Health check:** `/healthz/` needs no sign-in and returns only a status. It answers 503 when the database is down or, on a live desk, when trends are older than 5 minutes or collection is older than 20. Point an uptime monitor at it.
+- **Backups:** `deploy/npp-desk-backup.timer` (or the crontab line) backs up daily at 02:15 GMT. Copy the backups folder off the server.
+  - **Restore SQLite:** stop the services, then `gunzip` the backup over the database file.
+  - **Restore PostgreSQL:** stop the services, then `pg_restore --clean --if-exists --no-owner -d npp_desk <file>.dump`.
+- **Behind Nginx:** set `DESK_TRUST_PROXY_HEADERS=1` in the server's `.env`.
+- **Automatic tests:** `.github/workflows/tests.yml` runs the checks and the test suite on every push to `main` and every pull request.
 
 ---
 

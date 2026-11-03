@@ -4,6 +4,13 @@
 
 ### Added
 
+- **3 November 2026** — Phase 1 hardening for running the desk on a real server:
+  - **Sign-in lockout:** 5 failed attempts lock a username for 15 minutes, and 20 failures lock an address. The lockout also covers `/admin/`. A read-only sign-in log records every sign-in, failure, refusal and sign-out.
+  - **Health check:** `/healthz/` lets uptime monitors check the database and, on a live desk, that trends and collection are fresh. It needs no sign-in and reveals no desk content.
+  - **Backups:** `backup_desk` backs up SQLite or PostgreSQL, reads each backup back before keeping it, writes files readable by their owner only, and prunes old backups. A daily systemd timer and a crontab line run it.
+  - **Automatic tests:** a GitHub Actions workflow runs the checks and the full suite on every push and pull request.
+  - **Faster tests:** the suite runs in about 10 seconds instead of about a minute, using a fast password hasher in tests only.
+
 - **3 November 2026** — Prepared the initial project documentation from the NPP war room blueprint. The [README](README.md) identifies what the embedded Python example does and how to run one RSS pass locally.
 - Defined the first implementation milestone and acceptance criteria in the [roadmap](roadmap.md). The initial test uses a saved feed so a developer can check topic matching and duplicate handling without live credentials.
 - Documented the proposed data flow and implementation choices in the [architecture](architecture.md) and [decision log](decisions.md).
@@ -81,6 +88,8 @@
   - **Credentials removed:** staff passwords are removed from `HANDOFF.md`. They remain in earlier git history, so they must be changed.
   - **Docker Compose:** PostgreSQL and Redis now listen on loopback only, and PostgreSQL has no default password (`POSTGRES_PASSWORD` is required).
   - **Offline tests:** the social-collector test no longer reaches YouTube or X during the test run.
+  - **HTTPS behind Nginx:** with `DESK_TRUST_PROXY_HEADERS=1`, Django trusts Nginx's `X-Forwarded-Proto`. Before, `SECURE_SSL_REDIRECT` would have redirected every request forever on the deployed server.
+  - **PostgreSQL driver:** `requirements.txt` now includes it; before, only `requirements.lock` did.
   - **Database address:** a `DATABASE_URL` that is set but is not a `postgresql://` address now stops the desk with a clear error. Before, a placeholder or typo was ignored, and commands meant for PostgreSQL ran against the SQLite demo database.
 
 ### Changed

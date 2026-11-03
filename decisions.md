@@ -185,3 +185,35 @@ These proposals were recorded on 2026-11-03. Owners are suggested roles. The blu
 **Consequences.** A real account can only be opened with its password. A misconfigured server falls back to normal sign-in instead of an open desk. The passwords that were published must still be changed, because git history keeps them.
 
 **Revisit when** single sign-on or two-step sign-in replaces passwords. See `src/desk_site/safety.py` and `src/desk/tests/test_safety.py`.
+
+## 012 · Sign-in lockout, health check and verified backups before going live
+
+**Status** Accepted · **Date** 2026-11-03 · **Owners** Engineering and operations lead
+
+**Context.** The desk is moving from laptops to a server reachable over the internet. Three things had to exist first:
+- protection against password guessing
+- a way for an outside monitor to see that the desk and its worker are alive
+- backups that are known to restore
+
+The Nginx configuration also forwarded the visitor's protocol and address in headers that Django was never told to trust. With `SECURE_SSL_REDIRECT` on, every request would have redirected forever.
+
+**Options considered.**
+- **Lockout:** a third-party package would add a dependency for one feature. Counting failures in the database works across all Gunicorn workers with no cache server.
+- **Health:** a status page with counts and names would tell outsiders what the desk watches. A bare status with ages does not.
+- **Backups:** copying the SQLite file while it is being written can corrupt the copy. SQLite's online backup API and `pg_dump` are designed for this.
+
+**Decision and rationale.**
+- **Lockout:**
+  - 5 failures since the last successful sign-in lock a username for 15 minutes. 20 failures lock an address.
+  - The check runs before the password is tested, on both `/login/` and `/admin/`.
+  - Every attempt goes to a read-only `SignInEvent` log.
+- **Health:** `/healthz/` reports the database and, on a live desk, the age of the latest trend calculation and poll. It answers 503 when stale.
+- **Backups:**
+  - `backup_desk` reads every backup back before keeping it: SQLite's integrity check, or `pg_restore --list`.
+  - Files are readable by their owner only, and backups older than 14 days are pruned.
+  - It gives up with an error rather than waiting forever on a busy database.
+- **Proxy headers:** they are trusted only when `DESK_TRUST_PROXY_HEADERS=1`, because anyone can forge them on a server reachable without Nginx.
+
+**Consequences.** Guessing a password online is slow and visible, and a stopped worker pages someone. Backups are tested when they are made. Backups on the same server still need copying off-site, which depends on the hosting choice.
+
+**Revisit when** single sign-on or two-step sign-in is added, or when off-site backup storage is chosen. See `src/desk/signin.py`, `src/desk/health.py` and `src/desk/backups.py`.

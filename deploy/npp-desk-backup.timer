@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily desk database backup at 02:15 GMT
+
+[Timer]
+OnCalendar=*-*-* 02:15:00 UTC
+Persistent=true
+Unit=npp-desk-backup.service
+
+[Install]
+WantedBy=timers.target

@@ -96,6 +96,27 @@ else:
         }
     }
 
+TEST_RUNNER = "desk_site.test_runner.FastPasswordTestRunner"
+
+# Backups (desk/backups.py, manage.py backup_desk). Copy this folder off the server too.
+DESK_BACKUP_DIR = Path(os.environ.get("DESK_BACKUP_DIR", str(REPO_ROOT / "backups")))
+
+# /healthz/ (desk/health.py): a live desk is unhealthy when trends or collection are older than these.
+DESK_HEALTH_MAX_TREND_AGE_MINUTES = int(os.environ.get("DESK_HEALTH_MAX_TREND_AGE_MINUTES", "5"))
+DESK_HEALTH_MAX_POLL_AGE_MINUTES = int(os.environ.get("DESK_HEALTH_MAX_POLL_AGE_MINUTES", "20"))
+
+# Sign-in protection (desk/signin.py)
+DESK_SIGNIN_MAX_FAILURES = int(os.environ.get("DESK_SIGNIN_MAX_FAILURES", "5"))
+DESK_SIGNIN_MAX_FAILURES_PER_IP = int(os.environ.get("DESK_SIGNIN_MAX_FAILURES_PER_IP", "20"))
+DESK_SIGNIN_LOCK_MINUTES = int(os.environ.get("DESK_SIGNIN_LOCK_MINUTES", "15"))
+
+# Behind Nginx (deploy/nginx.conf), trust its X-Real-IP and X-Forwarded-Proto headers.
+# Without this, HTTPS redirects loop forever and every visitor appears to come from one address.
+# Leave off when the app is reachable directly, because anyone could then forge those headers.
+DESK_TRUST_PROXY_HEADERS = os.environ.get("DESK_TRUST_PROXY_HEADERS", "0") == "1"
+if DESK_TRUST_PROXY_HEADERS:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},

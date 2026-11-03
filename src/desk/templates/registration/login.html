@@ -24,7 +24,7 @@
       <hr>
       {% endif %}
       <form method="post" class="stack">{% csrf_token %}
-        {% if form.errors %}<div class="banner banner--error" role="alert"><div class="banner__text"><div class="banner__title">The username or password is not correct.</div></div></div>{% endif %}
+        {% if form.errors %}<div class="banner banner--error" role="alert"><div class="banner__text"><div class="banner__title">{% if form.locked_message %}{{ form.locked_message }}{% else %}The username or password is not correct.{% endif %}</div></div></div>{% endif %}
         <div class="field"><label for="id_username">Username</label><input type="text" name="username" id="id_username" autocomplete="username" required></div>
         <div class="field"><label for="id_password">Password</label><input type="password" name="password" id="id_password" autocomplete="current-password" required style="width:100%; border: 1px solid var(--border-strong); border-radius: 4px; padding: 9px 12px; font: inherit"></div>
         <input type="hidden" name="next" value="{{ next }}">
