@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger Morning Intelligence Brief at 05:45 GMT
+
+[Timer]
+OnCalendar=*-*-* 05:45:00 UTC
+Persistent=true
+Unit=npp-desk-brief.service
+
+[Install]
+WantedBy=timers.target

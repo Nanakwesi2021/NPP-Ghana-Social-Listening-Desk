@@ -1,0 +1,11 @@
+# ==============================================================================
+# NPP Ghana Social Listening Desk · Shift Briefing & Handover Crontab
+# Install with: crontab -u www-data deploy/crontab.txt
+# (Ensure times run in GMT/UTC)
+# ==============================================================================
+
+# 05:45 GMT · Morning War Room Briefing
+45 5 * * * cd /opt/npp-listening-desk/src && /opt/npp-listening-desk/.venv/bin/python manage.py brief_shift --title "Morning Intelligence Brief" --telegram >> /var/log/npp-desk/brief.log 2>&1
+
+# 21:30 GMT · Evening Shift Handover Briefing
+30 21 * * * cd /opt/npp-listening-desk/src && /opt/npp-listening-desk/.venv/bin/python manage.py brief_shift --title "Evening Handover Brief" --telegram >> /var/log/npp-desk/brief.log 2>&1

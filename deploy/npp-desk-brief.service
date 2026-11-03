@@ -1,0 +1,13 @@
+[Unit]
+Description=NPP Ghana Social Listening Desk - Shift Briefing Dispatch
+After=network.target
+
+[Service]
+Type=oneshot
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/npp-listening-desk/src
+EnvironmentFile=/opt/npp-listening-desk/.env
+ExecStart=/opt/npp-listening-desk/.venv/bin/python manage.py brief_shift --telegram
+StandardOutput=append:/var/log/npp-desk/brief.log
+StandardError=append:/var/log/npp-desk/brief-error.log

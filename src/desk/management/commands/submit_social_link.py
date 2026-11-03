@@ -146,3 +146,4 @@ class Command(BaseCommand):
             f"Topics: {topic_names}{tip_note}\n"
             f"URL: {item.url}"
         ))
+

@@ -68,6 +68,11 @@
   - **Live Ingestion & Search:** ran real-time multi-channel news and broadcast collection directly into PostgreSQL 16 (79 broadcast items, 125 news articles), and verified fuzzy trigram similarity search scores across ingested articles.
   - **Live Service Deployment:** launched authenticated live desk server backed by PostgreSQL 16 at `http://127.0.0.1:8002/`.
 
+- **3 November 2026** — Automated shift intelligence briefings and Telegram War Room dispatch (Path D):
+  - **Structured War Room Briefings:** upgraded `brief_shift` command with rich Telegram HTML formatting (`format_telegram_brief`), status badges, and direct clickable links to desk trends and cases.
+  - **Scheduling Automation:** provided production `crontab.txt` and systemd timers (`npp-desk-brief-morning.timer` for 05:45 GMT, `npp-desk-brief-evening.timer` for 21:30 GMT) for automated briefing generation.
+  - **Offline Tests:** five new unit tests in `test_brief_shift.py` covering text summary generation, custom titles, Telegram HTML formatting, mocked API delivery, and unconfigured credential safety (bringing total test suite to 70 passing tests).
+
 ### Changed
 
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.

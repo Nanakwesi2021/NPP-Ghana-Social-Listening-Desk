@@ -146,3 +146,21 @@ These proposals were recorded on 2026-11-03. Owners are suggested roles. The blu
 **Consequences.** The desk supports multi-user shifts with proper audit logs (attributing case events, reviews, and Telegram alerts to specific named personnel). Security hygiene is maintained via password rotation.
 
 **Revisit when** single sign-on (SSO) via Google Workspace, SAML, or enterprise identity providers is required. See `src/desk/management/commands/provision_user.py`.
+
+## 010 · Shift intelligence briefing schedules and Telegram War Room format
+
+**Status** Proposed · **Date** 2026-11-03 · **Owners** Operations lead, research editor, communications director
+
+**Context.** In addition to real-time Critical · L4 alert dispatches, leadership and duty editors require structured morning intelligence briefs (05:45 GMT, ahead of morning radio programmes such as Peace FM Kokrokoo and Joy Super Morning Show) and evening handover briefs (21:30 GMT). Fixed-width monospace text is difficult to read on mobile devices, and unlinked case references force recipients to manually search the desk.
+
+**Options considered.** Sending unformatted plaintext requires horizontal scrolling on mobile. Email newsletters are too slow for fast-moving campaign war rooms. Structured Telegram HTML messages with status indicators, clickable desk hyperlinks, and concise sectioning deliver immediate situational awareness on mobile devices.
+
+**Decision and rationale.**
+1. **Command Line & Automation (`brief_shift`):** Management command compiles top momentum trends, open critical queue cases, and source coverage health.
+2. **Rich Telegram HTML Formatting:** Formats briefs with mobile-optimized HTML, emoji status indicators (🟢, 🟡, 🔴, 🔵, 💬), and direct clickable hyperlinks to desk trends (`/trends/<slug>/`) and case files (`/issues/<ref>/`).
+3. **Automated Timers:** Provided systemd timer units (`npp-desk-brief-morning.timer`, `npp-desk-brief-evening.timer`) and `crontab.txt` scheduled for 05:45 GMT and 21:30 GMT.
+4. **Resilience & Testing:** Missing credentials or network issues skip dispatch without failing or blocking operations; covered by offline tests in `test_brief_shift.py`.
+
+**Consequences.** War room leadership receives actionable briefings before key broadcast cycles with direct links to primary evidence.
+
+**Revisit when** email or PDF briefing export is requested. See `src/desk/management/commands/brief_shift.py`.

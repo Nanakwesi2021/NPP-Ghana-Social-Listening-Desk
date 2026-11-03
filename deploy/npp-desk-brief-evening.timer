@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger Evening Handover Brief at 21:30 GMT
+
+[Timer]
+OnCalendar=*-*-* 21:30:00 UTC
+Persistent=true
+Unit=npp-desk-brief.service
+
+[Install]
+WantedBy=timers.target
