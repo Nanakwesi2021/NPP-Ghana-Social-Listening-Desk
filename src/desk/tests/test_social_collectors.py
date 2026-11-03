@@ -218,8 +218,15 @@ class SocialCollectorTests(TestCase):
         self.assertGreaterEqual(latest_tip_count(topic, start, end), 1)
 
     def test_sync_all_social_sources_command(self):
+        from io import StringIO
+
         from django.core.management import call_command
-        call_command("collect_social", sync_sources=True)
+        # Offline: no X token (so X is never called) and a stubbed YouTube fetcher.
+        empty_feed = b'<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"></feed>'
+        with patch.dict(os.environ, {"X_BEARER_TOKEN": ""}), \
+                patch("desk.collectors.youtube.http_fetch_youtube", return_value=empty_feed) as youtube_fetch:
+            call_command("collect_social", sync_sources=True, stdout=StringIO())
+        self.assertGreaterEqual(youtube_fetch.call_count, 1)
         self.assertTrue(Source.objects.filter(key="facebook-links").exists())
         self.assertTrue(Source.objects.filter(key="tiktok-links").exists())
         self.assertTrue(Source.objects.filter(key="whatsapp-tips").exists())

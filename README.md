@@ -44,7 +44,7 @@ python3 -m venv .venv
 .venv/bin/python src/manage.py runserver
 ```
 
-Open http://127.0.0.1:8000/ and choose a sample person on the sign-in page. Ama Owusu is the duty editor and Kwame Mensah is an analyst. The sample accounts have no passwords and exist only while `DESK_SAMPLE_MODE` is on, which is the default when `DJANGO_DEBUG=1`.
+Open http://127.0.0.1:8000/ and choose a sample person on the sign-in page. Ama Owusu is the duty editor and Kwame Mensah is an analyst. The sample accounts have no passwords and exist only while `DESK_SAMPLE_MODE` is on. It is on by default only for a plain local demo. It switches off when the settings look live (debug off, a `DATABASE_URL`, or a public host), and the desk refuses to start if it is forced on there. The sign-in only ever opens the fictional sample people.
 
 The demo flow:
 

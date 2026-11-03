@@ -7,7 +7,9 @@ trend rankings and the queue stay the same, and decisions made during a demo are
 import json
 from datetime import date, datetime
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 from django.contrib.auth.models import Group, Permission
 from django.db import transaction
 from django.utils import timezone
@@ -26,6 +28,20 @@ def _dt(value):
 
 def _read(fixture_dir, name):
     return json.loads((fixture_dir / name).read_text(encoding="utf-8"))
+
+
+def sample_people():
+    """The fictional Sample shift people: the only accounts the passwordless demo sign-in may open.
+
+    An account qualifies only if its username is listed in the sample fixture AND it has no
+    usable password, so a real staff account can never be opened this way, even if someone
+    gives it a sample username or leaves sample mode switched on.
+    """
+    try:
+        usernames = [p["username"] for p in _read(settings.DESK_FIXTURE_DIR, "shift.json")["people"]]
+    except (OSError, KeyError, ValueError):
+        usernames = []
+    return get_user_model().objects.filter(username__in=usernames, password__startswith=UNUSABLE_PASSWORD_PREFIX)
 
 
 def ensure_groups():

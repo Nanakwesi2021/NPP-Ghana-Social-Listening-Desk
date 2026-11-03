@@ -21,7 +21,7 @@ Confirm the current test baseline before making changes:
 cd src
 ../.venv/bin/python manage.py test desk
 ```
-**Expected:** `Ran 70 tests … OK`.
+**Expected:** `Ran 79 tests … OK`.
 
 ---
 
@@ -32,8 +32,10 @@ Three environments are currently active and listening on localhost:
 | Port | Backend Database | Mode | Description | Accounts |
 | :--- | :--- | :--- | :--- | :--- |
 | **8000** | `data/desk.sqlite3` | Sample shift (`DESK_SAMPLE_MODE=1`) | Offline tariff crisis demo with 1-click persona switcher | `ama` (Editor), `kwame` (Analyst) |
-| **8001** | `data/live.sqlite3` | Live desk (`DESK_SAMPLE_MODE=0`) | Local file-based live listening desk with background worker | `ama.editor` / `DeskEditor2026!`, `kwaku.analyst` / `DeskAnalyst2026!` |
-| **8002** | **PostgreSQL 16** (`npp_desk`) | Live desk (`DESK_SAMPLE_MODE=0`) | High-concurrency production PostgreSQL with GIN trigram search | `ama.editor` / `DeskEditor2026!`, `kwaku.analyst` / `DeskAnalyst2026!`, `admin` / `DeskAdmin2026!` |
+| **8001** | `data/live.sqlite3` | Live desk (`DESK_SAMPLE_MODE=0`) | Local file-based live listening desk with background worker | Staff accounts: see `provision_user --list` |
+| **8002** | **PostgreSQL 16** (`npp_desk`) | Live desk (`DESK_SAMPLE_MODE=0`) | High-concurrency production PostgreSQL with GIN trigram search | Staff accounts: see `provision_user --list` |
+
+Passwords are never written in this repository. Create or reset them with `provision_user --random-password` and hand them over privately. Each person then changes theirs at `/password-change/`.
 
 ---
 
@@ -72,7 +74,7 @@ Three environments are currently active and listening on localhost:
 All commands run from `src/`:
 
 ```sh
-# Run full offline test suite (70 tests)
+# Run full offline test suite (79 tests)
 ../.venv/bin/python manage.py test desk
 
 # Run live news collection pass

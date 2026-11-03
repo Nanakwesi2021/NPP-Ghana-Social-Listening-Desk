@@ -1,7 +1,7 @@
 from django.conf import settings
-from django.contrib.auth import get_user_model
 
 from . import clock
+from .ingest import sample_people
 from .models import TrendCalculation
 from .workflow import role_label
 
@@ -19,5 +19,5 @@ def desk(request):
         ctx["user_role"] = role_label(user)
         ctx["user_initials"] = ((user.first_name[:1] + user.last_name[:1]) or user.get_username()[:2]).upper()
     if settings.DESK_SAMPLE_MODE:
-        ctx["sample_people"] = get_user_model().objects.filter(groups__isnull=False).distinct().order_by("-groups__name", "first_name")
+        ctx["sample_people"] = sample_people().filter(groups__isnull=False).distinct().order_by("-groups__name", "first_name")
     return ctx

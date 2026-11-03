@@ -7,6 +7,8 @@ import os
 import urllib.parse
 from pathlib import Path
 
+from desk_site.safety import sample_mode
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = BASE_DIR.parent
 
@@ -113,7 +115,8 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "desk:overview"
 LOGOUT_REDIRECT_URL = "login"
 
-DESK_SAMPLE_MODE = os.environ.get("DESK_SAMPLE_MODE", "1" if DEBUG else "0") == "1"
+DESK_SAMPLE_MODE = sample_mode(os.environ.get("DESK_SAMPLE_MODE"), debug=DEBUG, database_url=_db_url,
+                               allowed_hosts=ALLOWED_HOSTS)
 DESK_FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "sample_shift"
 DESK_WINDOW_MINUTES = 60
 DESK_MIN_MENTIONS = 5

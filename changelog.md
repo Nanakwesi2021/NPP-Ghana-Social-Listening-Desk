@@ -73,6 +73,15 @@
   - **Scheduling Automation:** provided production `crontab.txt` and systemd timers (`npp-desk-brief-morning.timer` for 05:45 GMT, `npp-desk-brief-evening.timer` for 21:30 GMT) for automated briefing generation.
   - **Offline Tests:** five new unit tests in `test_brief_shift.py` covering text summary generation, custom titles, Telegram HTML formatting, mocked API delivery, and unconfigured credential safety (bringing total test suite to 70 passing tests).
 
+### Fixed
+
+- **3 November 2026** — Security fixes before live use (Phase 0):
+  - **Demo sign-in:** the passwordless Sample shift sign-in now opens only the five fictional sample people listed in the fixture, and only accounts with no password. Before, it could open any staff account, including duty editors.
+  - **Live settings:** sample mode now switches off by default when the settings look like a live deployment (debug off, a `DATABASE_URL`, or a public host). The desk refuses to start if sample mode is explicitly switched on there.
+  - **Credentials removed:** staff passwords are removed from `HANDOFF.md`. They remain in earlier git history, so they must be changed.
+  - **Docker Compose:** PostgreSQL and Redis now listen on loopback only, and PostgreSQL has no default password (`POSTGRES_PASSWORD` is required).
+  - **Offline tests:** the social-collector test no longer reaches YouTube or X during the test run.
+
 ### Changed
 
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.

@@ -164,3 +164,24 @@ These proposals were recorded on 2026-11-03. Owners are suggested roles. The blu
 **Consequences.** War room leadership receives actionable briefings before key broadcast cycles with direct links to primary evidence.
 
 **Revisit when** email or PDF briefing export is requested. See `src/desk/management/commands/brief_shift.py`.
+
+## 011 · Keep the demo sign-in away from real accounts and live deployments
+
+**Status** Accepted · **Date** 2026-11-03 · **Owners** Engineering and security desk
+
+**Context.** The Sample shift lets people sign in without a password by choosing a sample person. It opened any account in a desk group, so it could also open a real duty editor's account. It switched on whenever `DJANGO_DEBUG` was missing, so a server started without its `.env` file could have been opened by anyone. Staff passwords had also been written into `HANDOFF.md` in a public repository.
+
+**Options considered.** Deleting the demo sign-in would remove the easiest way to show the desk. Relying on operators to set `DESK_SAMPLE_MODE=0` leaves one forgotten variable between the desk and an open door. Narrowing who the sign-in can open, and refusing sample mode when settings look live, keeps the demo and closes both gaps in code.
+
+**Decision and rationale.**
+- **Who it can open:** only usernames listed in `tests/fixtures/sample_shift/shift.json` that have no usable password (`desk.ingest.sample_people`).
+- **When it runs:**
+  - Sample mode defaults on only for a plain local demo.
+  - It defaults off when debug is off, a `DATABASE_URL` is set, or `DJANGO_ALLOWED_HOSTS` names a public host.
+  - Forcing it on in those settings stops the start-up with an explanation (`desk_site/safety.py`).
+- **Secrets:** no passwords, tokens or chat IDs in the repository. `AGENTS.md` now states this as a rule.
+- **Database ports:** Docker publishes PostgreSQL and Redis on loopback only, and PostgreSQL needs an explicit password.
+
+**Consequences.** A real account can only be opened with its password. A misconfigured server falls back to normal sign-in instead of an open desk. The passwords that were published must still be changed, because git history keeps them.
+
+**Revisit when** single sign-on or two-step sign-in replaces passwords. See `src/desk_site/safety.py` and `src/desk/tests/test_safety.py`.

@@ -4,7 +4,7 @@ Read `HANDOFF.md` before starting work. These rules protect the current, working
 
 ## Before and after every change
 
-1. Run the test suite from `src/`: `../.venv/bin/python manage.py test desk`. On 3 November 2026, 34 tests passed. If a test fails before you start, stop and report it. Do not change code to make it pass.
+1. Run the test suite from `src/`: `../.venv/bin/python manage.py test desk`. On 3 November 2026 (after Phase 0), 79 tests passed. If a test fails before you start, stop and report it. Do not change code to make it pass.
 2. Run the same command after your change. Every existing test must still pass.
 3. If a change alters what the desk shows or calculates, say so explicitly in your summary.
 
@@ -25,6 +25,8 @@ Read `HANDOFF.md` before starting work. These rules protect the current, working
   - Capped or failed polls mark a platform partial.
 - **Design-token names** in `src/desk/static/desk/tokens.css`. They match the Figma variables' code syntax.
 - **Role checks:** editor-only actions (approve, escalate, close, reopen, send back) are refused on the server for users without `desk.decide_case`. Never rely on the template alone.
+- **Demo sign-in:** the passwordless sample sign-in (`sample_role`) may only open the fictional people in `tests/fixtures/sample_shift/shift.json` who have no usable password, and sample mode must never run on a live deployment (`desk_site/safety.py`). Never widen either.
+- **No secrets in the repository:** never write passwords, tokens, API keys or chat IDs into docs, code, fixtures or commit messages. Put them in `.env` (ignored by git) or the server environment. Hand temporary passwords over privately.
 - **Local databases:** never delete or reset `data/desk.sqlite3` or `data/live.sqlite3` unless the user asks. `replay_sample --wipe` discards demo decisions.
 
 ## How to work here

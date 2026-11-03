@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
@@ -14,6 +14,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
 from . import clock, coverage, trends, workflow
+from .ingest import sample_people
 from .models import Case, Document, Evidence, Item, Platform, Source, Subject, Topic, TrendRow
 from .trends import PLATFORM_ORDER
 
@@ -425,7 +426,7 @@ def search(request):
 def sample_role(request):
     if not settings.DESK_SAMPLE_MODE:
         raise Http404()
-    user = get_object_or_404(get_user_model(), username=request.POST.get("username", ""), groups__isnull=False)
+    user = get_object_or_404(sample_people(), username=request.POST.get("username", ""))
     login(request, user, backend="django.contrib.auth.backends.ModelBackend")
     target = request.POST.get("next", "")
     if not url_has_allowed_host_and_scheme(target, allowed_hosts={request.get_host()}):
