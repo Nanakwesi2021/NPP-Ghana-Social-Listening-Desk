@@ -122,3 +122,27 @@ These proposals were recorded on 2026-11-03. Owners are suggested roles. The blu
 **Consequences.** The platform is ready for immediate deployment on Linux cloud servers with PostgreSQL and continuous background ingestion.
 
 **Revisit when** horizontal multi-node scaling requires Celery/Redis task clustering. See `src/desk_site/settings.py` and `deploy/`.
+
+## 009 · Staff provisioning, account lifecycle, and self-service password management
+
+**Status** Proposed · **Date** 2026-11-03 · **Owners** Operations lead, security desk and research editor
+
+**Context.** Moving to live operations requires onboarding analysts and duty editors with strict role enforcement. Editorial rules require that only users with `desk.decide_case` can approve, escalate, close, or reopen cases. Relying solely on demo users (`ama`, `kwame`) or granting blanket superuser access compromises auditability and operational security. Staff also need self-service password rotation without administrative intervention.
+
+**Options considered.** Relying purely on the Django `/admin/` portal requires granting all users `is_staff` and exposes underlying database tables to operational analysts. A dedicated provisioning command (`provision_user`) combined with authenticated self-service password management provides tight group mapping and streamlined onboarding.
+
+**Decision and rationale.**
+1. **Provisioning CLI (`manage.py provision_user`):** Implemented an administrative CLI tool supporting:
+   - `--role editor`: assigns user to `Duty editor` group with explicit `desk.decide_case` permissions.
+   - `--role analyst`: assigns user to `Analyst` group without decision authority.
+   - `--role admin`: grants staff and superuser privileges.
+   - `--random-password`: generates cryptographically secure 16-character temporary passwords.
+   - `--activate` and `--deactivate`: handles staff offboarding or shift suspensions immediately.
+   - `--list`: presents formatted terminal overview of usernames, roles, groups, and active status.
+2. **Self-Service Password Management:** Integrated Django auth views (`/password-change/` and `/password-change/done/`) rendered using the desk's design system tokens, typography, and SVG icons.
+3. **Masthead User Menu:** Added direct "Change password" and "Administration" shortcuts inside the masthead user dropdown in `base.html`.
+4. **Offline Test Coverage:** Added 10 offline unit tests in `src/desk/tests/test_provisioning.py` verifying group membership, decision permission gates, password rotation, activation toggles, and view routing.
+
+**Consequences.** The desk supports multi-user shifts with proper audit logs (attributing case events, reviews, and Telegram alerts to specific named personnel). Security hygiene is maintained via password rotation.
+
+**Revisit when** single sign-on (SSO) via Google Workspace, SAML, or enterprise identity providers is required. See `src/desk/management/commands/provision_user.py`.

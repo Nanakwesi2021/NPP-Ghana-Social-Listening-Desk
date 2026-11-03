@@ -62,6 +62,11 @@
               {% endfor %}
               <hr>
             {% endif %}
+            <a class="menu-item" href="{% url 'password_change' %}">{% icon "lock" 16 %}Change password</a>
+            {% if user.is_staff %}
+            <a class="menu-item" href="{% url 'admin:index' %}">{% icon "shield-check" 16 %}Administration</a>
+            {% endif %}
+            <hr>
             <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="menu-item" type="submit">Sign out</button></form>
           </div>
         </details>

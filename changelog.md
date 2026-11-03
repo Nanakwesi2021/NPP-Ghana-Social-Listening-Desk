@@ -49,6 +49,12 @@
   - **Docker Compose:** provided `deploy/docker-compose.yml` for PostgreSQL 16 and Redis.
   - **Offline Tests:** four new unit tests in `test_postgres_backend.py` covering settings parsing, GIN index definitions, and search routing.
 
+- **3 November 2026** — Added staff user provisioning CLI, role lifecycle governance, and self-service password management:
+  - **Provisioning Tooling:** added `provision_user` management command to create, configure, list, and toggle real staff accounts for `Duty Editor` (with `desk.decide_case`), `Analyst`, and `Hub Admin`. Supports random high-entropy temporary passwords and terminal account overviews.
+  - **Self-Service Password Rotation:** added authenticated `/password-change/` and `/password-change/done/` views styled in the desk design system.
+  - **User Masthead Navigation:** integrated direct shortcuts to "Change password" and "Administration" within the account menu.
+  - **Offline Unit Tests:** ten new offline unit tests in `test_provisioning.py` verifying group membership, decision permissions, password rotation, and account deactivation/reactivation.
+
 ### Changed
 
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.
