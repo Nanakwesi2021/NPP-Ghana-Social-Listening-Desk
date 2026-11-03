@@ -39,7 +39,7 @@ def client_ip(request):
         return None
 
 
-def _record(request, outcome, *, username="", user=None):
+def record_event(request, outcome, *, username="", user=None):
     SignInEvent.objects.create(
         at=timezone.now(), outcome=outcome, user=user,
         username=(username or (user.get_username() if user else ""))[:150],
@@ -73,7 +73,7 @@ class LockoutMixin:
     def clean(self):
         username = (self.data.get("username") or "").strip()
         if is_locked(username, client_ip(self.request)):
-            _record(self.request, SignInEvent.Outcome.LOCKED, username=username)
+            record_event(self.request, SignInEvent.Outcome.LOCKED, username=username)
             self.locked_message = LOCKED_MESSAGE.format(minutes=settings.DESK_SIGNIN_LOCK_MINUTES)
             raise ValidationError(self.locked_message, code="locked")
         return super().clean()
@@ -89,16 +89,16 @@ class LockoutAdminAuthenticationForm(LockoutMixin, AdminAuthenticationForm):
 
 @receiver(user_logged_in, dispatch_uid="desk_signin_success")
 def _on_sign_in(sender, request, user, **kwargs):
-    _record(request, SignInEvent.Outcome.SUCCESS, user=user)
+    record_event(request, SignInEvent.Outcome.SUCCESS, user=user)
 
 
 @receiver(user_logged_out, dispatch_uid="desk_signin_sign_out")
 def _on_sign_out(sender, request, user, **kwargs):
     if user is not None:
-        _record(request, SignInEvent.Outcome.SIGN_OUT, user=user)
+        record_event(request, SignInEvent.Outcome.SIGN_OUT, user=user)
 
 
 @receiver(user_login_failed, dispatch_uid="desk_signin_failure")
 def _on_failure(sender, credentials, request=None, **kwargs):
     username = (credentials or {}).get(get_user_model().USERNAME_FIELD, "") or ""
-    _record(request, SignInEvent.Outcome.FAILURE, username=username)
+    record_event(request, SignInEvent.Outcome.FAILURE, username=username)

@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
+    "django_otp",
+    "django_otp.plugins.otp_totp",
+    "django_otp.plugins.otp_static",
     "desk",
 ]
 
@@ -47,6 +50,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_otp.middleware.OTPMiddleware",
+    "desk.twostep.TwoStepMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -138,6 +143,15 @@ LOGOUT_REDIRECT_URL = "login"
 
 DESK_SAMPLE_MODE = sample_mode(os.environ.get("DESK_SAMPLE_MODE"), debug=DEBUG, database_url=_db_url,
                                allowed_hosts=ALLOWED_HOSTS)
+
+# Two-step sign-in (desk/twostep.py): a password, then a code from an authenticator app.
+# Required for every account whenever sample mode is off, and sample_mode() never allows
+# sample mode on a live deployment, so every live desk asks for codes.
+DESK_TWO_STEP_REQUIRED = not DESK_SAMPLE_MODE
+DESK_TWO_STEP_BACKUP_CODES = 10
+OTP_TOTP_ISSUER = os.environ.get("DESK_TWO_STEP_ISSUER", "Listening Desk")  # the name shown in the app
+OTP_ADMIN_HIDE_SENSITIVE_DATA = True  # never show authenticator keys in the admin
+
 DESK_FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "sample_shift"
 DESK_WINDOW_MINUTES = 60
 DESK_MIN_MENTIONS = 5

@@ -63,6 +63,7 @@
               <hr>
             {% endif %}
             <a class="menu-item" href="{% url 'password_change' %}">{% icon "lock" 16 %}Change password</a>
+            {% if user.has_usable_password %}<a class="menu-item" href="{% url 'two_step_settings' %}">{% icon "smartphone" 16 %}Two-step sign-in</a>{% endif %}
             {% if user.is_staff %}
             <a class="menu-item" href="{% url 'admin:index' %}">{% icon "shield-check" 16 %}Administration</a>
             {% endif %}

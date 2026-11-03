@@ -4,6 +4,13 @@
 
 ### Added
 
+- **3 November 2026** — Two-step sign-in:
+  - **Codes:** after the password, the desk asks for a 6-digit code from an authenticator app on the person's phone. Every account needs it whenever sample mode is off, so every live desk asks for codes. `/admin/` and password changes need the code too.
+  - **Set-up:** at their first sign-in, each person scans a QR code (or types a key) and confirms it with a code. They then get 10 single-use backup codes, shown once.
+  - **Safety:** a used code is refused, each wrong code doubles the wait before the next try, and a password alone can never add a phone to an account that already has one. Accepted and refused codes, set-ups and resets go in the sign-in log.
+  - **Lost phone:** `provision_user --username NAME --reset-two-step` removes the phone and backup codes, and the person sets up again at their next sign-in. `provision_user --list` shows who has not set up.
+  - **Account menu:** **Two-step sign-in** shows how many backup codes are left, makes new ones and sets up a new phone.
+
 - **3 November 2026** — Phase 1 hardening for running the desk on a real server:
   - **Sign-in lockout:** 5 failed attempts lock a username for 15 minutes, and 20 failures lock an address. The lockout also covers `/admin/`. A read-only sign-in log records every sign-in, failure, refusal and sign-out.
   - **Health check:** `/healthz/` lets uptime monitors check the database and, on a live desk, that trends and collection are fresh. It needs no sign-in and reveals no desk content.

@@ -1,0 +1,37 @@
+{% extends "registration/two_step_base.html" %}
+{% block title %}{% if replacing %}Set up a new phone{% else %}Set up two-step sign-in{% endif %}{% endblock %}
+{% block content %}
+<h1 style="font-size: 22px; line-height: 28px">{% if replacing %}Set up a new phone{% else %}Set up two-step sign-in{% endif %}</h1>
+{% if replacing %}
+<div class="banner banner--info"><div class="banner__text"><div class="banner__title">This replaces your current phone</div><div class="banner__body">Codes from your old phone stop working once you confirm, and you get new backup codes.</div></div></div>
+{% else %}
+<p class="muted">Each time you sign in, the desk will ask for a code from your phone as well as your password, so a stolen password is not enough on its own.</p>
+{% endif %}
+<ol class="two-step__steps">
+  <li>Install an authenticator app on your phone, such as Google Authenticator, Microsoft Authenticator or 2FAS.</li>
+  <li>In the app, add an account and scan this code.
+    <div class="two-step__qr">{{ qr_svg }}</div>
+    <details class="two-step__manual">
+      <summary>Can’t scan it? Type a key instead</summary>
+      <p class="caption muted">Choose to enter a setup key, name it {{ issuer }}, and type:</p>
+      <p class="two-step__key">{{ key }}</p>
+      <p class="caption muted">Time-based · 6 digits · every 30 seconds</p>
+    </details>
+  </li>
+  <li>Type the 6&#8209;digit code the app now shows for {{ issuer }}.</li>
+</ol>
+<form method="post" class="stack">{% csrf_token %}
+  {% if error %}<div class="banner banner--error" role="alert"><div class="banner__text"><div class="banner__title">{{ error }}</div></div></div>{% endif %}
+  <div class="field">
+    <label for="id_code">6&#8209;digit code</label>
+    <input type="text" name="code" id="id_code" class="two-step__code" inputmode="numeric" autocomplete="one-time-code" maxlength="9" required>
+  </div>
+  <input type="hidden" name="next" value="{{ next }}">
+  <button class="btn btn--primary" type="submit">{% if replacing %}Use this phone{% else %}Turn on two-step sign-in{% endif %}</button>
+</form>
+{% if replacing %}
+<a class="btn btn--tertiary" href="{% url 'two_step_settings' %}?next={{ next|urlencode }}">Cancel</a>
+{% else %}
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="btn btn--tertiary" type="submit">Sign out</button></form>
+{% endif %}
+{% endblock %}

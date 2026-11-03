@@ -1,9 +1,11 @@
-# Exact versions verified on 2026-11-03 (107 tests passing). Install with: pip install -r requirements.lock
+# Exact versions verified on 2026-11-03 (127 tests passing). Install with: pip install -r requirements.lock
 asgiref==3.13.0
 certifi==2026.10.23
 Django==6.1.2
+django-otp==1.7.5
 feedparser==6.0.14
 feedparser-sgmllib==2.1.0
 psycopg==3.3.7
 psycopg-binary==3.3.7
+segno==1.6.6
 sqlparse==0.6.1

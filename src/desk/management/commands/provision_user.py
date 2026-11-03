@@ -16,6 +16,7 @@ from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand, CommandError
 
 from desk.ingest import ANALYST_GROUP, EDITOR_GROUP, ensure_groups
+from desk.twostep import has_authenticator, reset_two_step
 
 
 def generate_secure_password(length=16):
@@ -37,6 +38,9 @@ class Command(BaseCommand):
         parser.add_argument("--deactivate", action="store_true", help="Deactivate this user account.")
         parser.add_argument("--activate", action="store_true", help="Reactivate this user account.")
         parser.add_argument("--list", action="store_true", help="List all desk accounts and their roles.")
+        parser.add_argument("--reset-two-step", action="store_true",
+                            help="Remove this account's authenticator app and backup codes (for a lost phone). "
+                                 "The person sets up two-step sign-in again at their next sign-in.")
 
     def handle(self, *args, **options):
         ensure_groups()
@@ -49,19 +53,35 @@ class Command(BaseCommand):
                 self.stdout.write("No user accounts found.")
                 return
 
-            self.stdout.write(f"{'USERNAME':<15} {'NAME':<25} {'ROLE / GROUPS':<25} {'ACTIVE':<8} {'STAFF':<6}")
-            self.stdout.write("-" * 80)
+            self.stdout.write(f"{'USERNAME':<15} {'NAME':<25} {'ROLE / GROUPS':<25} {'ACTIVE':<8} {'STAFF':<6} TWO-STEP")
+            self.stdout.write("-" * 91)
             for u in users:
                 groups = ", ".join(g.name for g in u.groups.all()) or ("Superuser" if u.is_superuser else "None")
                 active = "Yes" if u.is_active else "No"
                 staff = "Yes" if u.is_staff else "No"
                 name = u.get_full_name() or "(no name)"
-                self.stdout.write(f"{u.username:<15} {name:<25} {groups:<25} {active:<8} {staff:<6}")
+                two_step = "On" if has_authenticator(u) else "Not set up"
+                self.stdout.write(f"{u.username:<15} {name:<25} {groups:<25} {active:<8} {staff:<6} {two_step}")
             return
 
         username = (options.get("username") or "").strip()
         if not username:
             raise CommandError("Specify --username or --list.")
+
+        if options["reset_two_step"]:
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                raise CommandError(f"User '{username}' does not exist.")
+            had_any = reset_two_step(user)
+            if had_any:
+                self.stdout.write(self.style.WARNING(
+                    f"Two-step sign-in reset for '{username}'. They will set up a phone again at their next sign-in."))
+            else:
+                self.stdout.write(f"'{username}' had not set up two-step sign-in. Nothing to reset.")
+            self.stdout.write("If the phone was lost or stolen, also give the account a new password with "
+                              "--random-password: that signs it out everywhere.")
+            return
 
         # Deactivate / Reactivate existing account
         if options["deactivate"]:

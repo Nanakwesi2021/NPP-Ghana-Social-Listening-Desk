@@ -1,0 +1,29 @@
+{% extends "registration/two_step_base.html" %}
+{% load desk_tags %}
+{% block title %}{% if new_codes %}Save your backup codes{% else %}Two-step sign-in{% endif %}{% endblock %}
+{% block content %}
+{% if new_codes %}
+  {% if just_set_up %}
+  <div class="banner banner--success">{% icon "check-circle" 18 %}<div class="banner__text"><div class="banner__title">Two-step sign-in is on</div></div></div>
+  {% endif %}
+  <h1 style="font-size: 22px; line-height: 28px">Save your backup codes</h1>
+  <p class="muted">If you don’t have your phone, each code lets you sign in once. Keep them somewhere private, such as a password manager or a printed copy in a locked drawer. The desk shows them only this once.</p>
+  <ul class="backup-codes" aria-label="Backup codes">{% for code in new_codes %}<li>{{ code }}</li>{% endfor %}</ul>
+  {% if not just_set_up %}<p class="caption muted">Your old backup codes no longer work.</p>{% endif %}
+  <a class="btn btn--primary" href="{{ next }}">I’ve saved them · continue</a>
+{% else %}
+  <h1 style="font-size: 22px; line-height: 28px">Two-step sign-in</h1>
+  <p>On for <strong>{{ user.get_username }}</strong>{% if app %}, with the authenticator app added on <time class="tabular" datetime="{{ app.created_at|date:'c' }}">{{ app.created_at|date:"j M Y" }}</time>{% endif %}.</p>
+  <p>Backup codes left: <strong class="tabular">{{ codes_left }}</strong></p>
+  {% if codes_left <= 3 %}
+  <div class="banner banner--info"><div class="banner__text"><div class="banner__title">Make new backup codes before you run out.</div></div></div>
+  {% endif %}
+  <form method="post" class="stack">{% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn--secondary" type="submit">Make new backup codes</button>
+    <span class="field__help">This replaces all your backup codes.</span>
+  </form>
+  <a class="btn btn--secondary" href="{% url 'two_step_setup' %}?next={{ next|urlencode }}">Set up a new phone</a>
+  <a class="btn btn--tertiary" href="{{ next }}">Back to the desk</a>
+{% endif %}
+{% endblock %}

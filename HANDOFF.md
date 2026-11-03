@@ -21,7 +21,7 @@ Confirm the current test baseline before making changes:
 cd src
 ../.venv/bin/python manage.py test desk
 ```
-**Expected:** `Ran 107 tests … OK`.
+**Expected:** `Ran 127 tests … OK`.
 
 ---
 
@@ -35,7 +35,7 @@ Three environments are currently active and listening on localhost:
 | **8001** | `data/live.sqlite3` | Live desk (`DESK_SAMPLE_MODE=0`) | Local file-based live listening desk with background worker | Staff accounts: see `provision_user --list` |
 | **8002** | **PostgreSQL 16** (`npp_desk`) | Live desk (`DESK_SAMPLE_MODE=0`) | High-concurrency production PostgreSQL with GIN trigram search | Staff accounts: see `provision_user --list` |
 
-Passwords are never written in this repository. Create or reset them with `provision_user --random-password` and hand them over privately. Each person then changes theirs at `/password-change/`.
+Passwords are never written in this repository. Create or reset them with `provision_user --random-password` and hand them over privately. Each person then changes theirs at `/password-change/`. On a live desk they also set up two-step sign-in with an authenticator app at their first sign-in.
 
 ---
 
@@ -54,7 +54,7 @@ Passwords are never written in this repository. Create or reset them with `provi
    - **Ghanaian Broadcast Channels:** Public Atom feed collector in `src/desk/collectors/youtube.py` monitoring 7 top national stations (JoyNews, Citi Tube, Peace FM / Despite Media, TV3 Ghana, UTV Ghana, Metro TV Ghana, Adom TV) with zero credentials.
    - **Analyst Submissions:** Management command `manage.py submit_social_link` for analysts to submit observed Facebook posts, TikTok clips, X posts, and WhatsApp field tips with automated language detection (English vs. Twi) and topic tagging. WhatsApp tips route into queue review but are strictly excluded from public trend momentum per Decision 002.
 5. **Staff Provisioning & Self-Service Password Management:**
-   - `manage.py provision_user`: role-gated CLI (`editor` with `desk.decide_case` permission, `analyst` for research, `admin` for superuser) with `--random-password`, `--deactivate`, `--activate`, and `--list`.
+   - `manage.py provision_user`: role-gated CLI (`editor` with `desk.decide_case` permission, `analyst` for research, `admin` for superuser) with `--random-password`, `--deactivate`, `--activate`, `--reset-two-step` and `--list` (which shows who has set up two-step sign-in).
    - `/password-change/` and `/password-change/done/` styled in desk design system with masthead user menu shortcuts.
 6. **PostgreSQL 16+ Production Backend:**
    - Database `npp_desk` on PostgreSQL 16.15 with `pg_trgm` and `btree_gin` extensions (`0004_case_desk_case_claim_trgm_and_more.py`).
@@ -74,7 +74,7 @@ Passwords are never written in this repository. Create or reset them with `provi
 All commands run from `src/`:
 
 ```sh
-# Run full offline test suite (107 tests, about 10 seconds)
+# Run full offline test suite (127 tests, about 10 seconds)
 ../.venv/bin/python manage.py test desk
 
 # Run live news collection pass
@@ -108,6 +108,7 @@ All commands run from `src/`:
 **Running safely (Phase 1 hardening):**
 
 - **Sign-in lockout:** a username is refused for 15 minutes after 5 failed attempts since its last successful sign-in. An address is refused after 20 failures. Every sign-in, failure, refusal and sign-out is in the read-only **Sign-in events** log in `/admin/`. To unlock someone early, wait out the window or reset their password with `provision_user`.
+- **Two-step sign-in:** on a live desk (sample mode off) everyone enters a 6-digit code from an authenticator app after their password, including in `/admin/`. Each person sets up their phone at their first sign-in and gets 10 backup codes. For a lost phone, run `provision_user --username NAME --reset-two-step`; if the phone was stolen, also give a new password with `--random-password`. Codes are in the **Sign-in events** log. See decision 013.
 - **Health check:** `/healthz/` needs no sign-in and returns only a status. It answers 503 when the database is down or, on a live desk, when trends are older than 5 minutes or collection is older than 20. Point an uptime monitor at it.
 - **Backups:** `deploy/npp-desk-backup.timer` (or the crontab line) backs up daily at 02:15 GMT. Copy the backups folder off the server.
   - **Restore SQLite:** stop the services, then `gunzip` the backup over the database file.

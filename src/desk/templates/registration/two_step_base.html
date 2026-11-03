@@ -1,0 +1,20 @@
+{% load static %}<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Two-step sign-in{% endblock %} · Social Listening Desk</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Archivo+Narrow:wght@700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="{% static 'desk/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'desk/desk.css' %}">
+</head>
+<body>
+<main class="login">
+  <div class="login__card">
+    <div class="brand-wrap"><span class="brand">{% include "desk/partials/_brand_mark.html" %}<span><span class="brand__name">Listening Desk</span><br><span class="brand__sub">NPP Ghana · sign&#8209;in</span></span></span></div>
+    <div class="login__body">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</main>
+</body>
+</html>

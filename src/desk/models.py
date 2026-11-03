@@ -385,13 +385,17 @@ class ShiftClock(models.Model):
 
 
 class SignInEvent(models.Model):
-    """Append-only record of every sign-in, failed attempt, lockout refusal and sign-out."""
+    """Append-only record of every sign-in, failed attempt, lockout refusal, two-step code and sign-out."""
 
     class Outcome(models.TextChoices):
         SUCCESS = "success", "Signed in"
         FAILURE = "failure", "Wrong username or password"
         LOCKED = "locked", "Refused: too many failed attempts"
         SIGN_OUT = "sign_out", "Signed out"
+        CODE_OK = "code_ok", "Two-step code accepted"
+        CODE_WRONG = "code_wrong", "Two-step code refused"
+        CODE_SETUP = "code_setup", "Two-step sign-in set up"
+        CODE_RESET = "code_reset", "Two-step sign-in reset by an administrator"
 
     at = models.DateTimeField(db_index=True)
     username = models.CharField(max_length=150, help_text="As typed, for failed attempts.")

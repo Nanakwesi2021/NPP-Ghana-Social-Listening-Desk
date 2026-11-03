@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path, reverse_lazy
 from django.views.generic import RedirectView
 
+from desk import twostep
 from desk.health import healthz
 from desk.signin import LockoutAuthenticationForm
 
@@ -10,6 +11,9 @@ urlpatterns = [
     path("", RedirectView.as_view(pattern_name="desk:overview", permanent=False)),
     path("login/", auth_views.LoginView.as_view(authentication_form=LockoutAuthenticationForm), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("two-step/", twostep.verify, name="two_step_verify"),
+    path("two-step/set-up/", twostep.setup, name="two_step_setup"),
+    path("two-step/settings/", twostep.manage, name="two_step_settings"),
     path("password-change/", auth_views.PasswordChangeView.as_view(
         template_name="desk/password_change.html",
         success_url=reverse_lazy("password_change_done"),

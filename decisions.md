@@ -217,3 +217,30 @@ The Nginx configuration also forwarded the visitor's protocol and address in hea
 **Consequences.** Guessing a password online is slow and visible, and a stopped worker pages someone. Backups are tested when they are made. Backups on the same server still need copying off-site, which depends on the hosting choice.
 
 **Revisit when** single sign-on or two-step sign-in is added, or when off-site backup storage is chosen. See `src/desk/signin.py`, `src/desk/health.py` and `src/desk/backups.py`.
+
+## 013 · Two-step sign-in with an authenticator app
+
+**Status** Accepted · **Date** 2026-11-03 · **Owners** Engineering and operations lead
+
+**Context.** The desk will be reachable over the internet and holds the party's monitoring, case notes and escalations. A password alone can be phished, reused from another breached site or seen over a shoulder. The user chose passwords with two-step sign-in over Google Workspace single sign-on.
+
+**Options considered.**
+- **Codes by text message:** need a paid SMS provider, and a SIM swap defeats them.
+- **Writing the code checks ourselves:** small, but replay protection, throttling and clock drift are easy to get subtly wrong.
+- **django-otp:** a long-maintained library for authenticator-app codes and backup codes, with replay protection and throttling built in. segno draws the QR code as inline SVG, so set-up works without JavaScript.
+- **Security keys or passkeys:** strongest, but every person needs a key or a compatible phone, and the pages need JavaScript.
+
+**Decision and rationale.**
+- Use django-otp with authenticator-app codes (6 digits, every 30 seconds) and 10 single-use backup codes.
+- Require it for every account when sample mode is off (`DESK_TWO_STEP_REQUIRED`). An account that has set it up is asked for a code even where it is not required.
+- A middleware sends anyone who has signed in but not entered a code to the code page, or to set-up if they have no phone yet. Only sign-in, sign-out, `/healthz/` and the two-step pages open before the code. The admin and password change do not.
+- A password alone can never add a phone to an account that already has one. An administrator resets a lost phone with `provision_user --reset-two-step`.
+- A used code is refused, and each wrong code doubles the wait before the next one is checked.
+
+**Consequences.**
+- Everyone needs a smartphone with an authenticator app, and a safe place for their backup codes.
+- Between an account being created and its owner's first sign-in, the password alone lets someone set up a phone. Hand passwords over privately and have people sign in promptly. `provision_user --list` shows who has not set up.
+- Someone who knows a password can make its owner wait by entering wrong codes. That means the password is known, so reset it.
+- Two new dependencies: django-otp and segno.
+
+**Revisit when** the party adopts Google Workspace or another identity provider, or staff can use passkeys. See `src/desk/twostep.py` and `src/desk/tests/test_two_step.py`.
