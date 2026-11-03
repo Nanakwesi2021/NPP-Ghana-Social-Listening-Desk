@@ -11,3 +11,4 @@ EnvironmentFile=/opt/npp-listening-desk/.env
 ExecStart=/opt/npp-listening-desk/.venv/bin/python manage.py brief_shift --telegram
 StandardOutput=append:/var/log/npp-desk/brief.log
 StandardError=append:/var/log/npp-desk/brief-error.log
+

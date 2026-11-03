@@ -8,3 +8,4 @@ Unit=npp-desk-brief.service
 
 [Install]
 WantedBy=timers.target
+

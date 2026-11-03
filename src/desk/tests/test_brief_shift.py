@@ -89,3 +89,4 @@ class ShiftBriefCommandTests(TestCase):
 
         output = out.getvalue()
         self.assertIn("Telegram dispatch skipped: credentials not configured.", output)
+
