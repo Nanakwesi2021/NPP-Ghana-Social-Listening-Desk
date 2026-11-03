@@ -90,6 +90,7 @@
   - **Offline tests:** the social-collector test no longer reaches YouTube or X during the test run.
   - **HTTPS behind Nginx:** with `DESK_TRUST_PROXY_HEADERS=1`, Django trusts Nginx's `X-Forwarded-Proto`. Before, `SECURE_SSL_REDIRECT` would have redirected every request forever on the deployed server.
   - **PostgreSQL driver:** `requirements.txt` now includes it; before, only `requirements.lock` did.
+  - **Fresh clones:** `data/` is now kept in the repository with a placeholder file. Without the folder, Django's start-up checks could not open the SQLite database, and the first GitHub test run failed.
   - **Database address:** a `DATABASE_URL` that is set but is not a `postgresql://` address now stops the desk with a clear error. Before, a placeholder or typo was ignored, and commands meant for PostgreSQL ran against the SQLite demo database.
 
 ### Changed
