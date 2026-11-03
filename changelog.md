@@ -62,6 +62,12 @@
   - **Comprehensive Source Sync:** updated `collect_social --sync-sources` to provision the full platform spectrum (News, X, YouTube, Facebook, TikTok, Instagram, Threads, WhatsApp tips) on the live sources dashboard.
   - **Offline Tests:** added four new unit tests in `test_social_collectors.py` verifying custom X queries, Facebook submissions, WhatsApp tips handling, and social source syncing (bringing test suite to 65 passing tests).
 
+- **3 November 2026** — Live PostgreSQL 16 database provisioning, schema migration, and verification (Path C):
+  - **Database & Extensions:** provisioned `npp_desk` on PostgreSQL 16.15 with native extensions `pg_trgm` and `btree_gin`. Applied all migrations including GIN indexes on `TrendRow.platform_counts`, `TrendRow.buckets`, `Item.excerpt`, and `Case.claim`.
+  - **Staff Seeding & Role Gates:** provisioned initial administrative and editorial staff (`admin`, `ama.editor`, `kwaku.analyst`) on the PostgreSQL database with proper group mapping.
+  - **Live Ingestion & Search:** ran real-time multi-channel news and broadcast collection directly into PostgreSQL 16 (79 broadcast items, 125 news articles), and verified fuzzy trigram similarity search scores across ingested articles.
+  - **Live Service Deployment:** launched authenticated live desk server backed by PostgreSQL 16 at `http://127.0.0.1:8002/`.
+
 ### Changed
 
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.
