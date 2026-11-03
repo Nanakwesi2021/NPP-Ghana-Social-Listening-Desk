@@ -154,3 +154,4 @@ class PasswordManagementViewsTests(TestCase):
         done_resp = self.client.get(reverse("password_change_done"))
         self.assertEqual(done_resp.status_code, 200)
         self.assertContains(done_resp, "Password updated successfully")
+

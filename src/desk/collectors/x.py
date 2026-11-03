@@ -61,6 +61,10 @@ def get_bearer_token():
     return os.environ.get("X_BEARER_TOKEN", "").strip()
 
 
+def get_search_query():
+    return os.environ.get("X_SEARCH_QUERY", "").strip() or DEFAULT_QUERY
+
+
 def ensure_x_source(sync=False):
     """Ensure the X source exists in the database. Defaults to kind=awaiting if no token is configured."""
     has_token = bool(get_bearer_token())
@@ -182,7 +186,7 @@ def collect_x(source=None, *, query=None, max_results=100, fetch=None, now=None,
         )
         return XPassResult(source, PollRun.Result.FAILED, note=note)
 
-    query_str = query or DEFAULT_QUERY
+    query_str = query or get_search_query()
     params = urllib.parse.urlencode({
         "query": query_str,
         "max_results": min(max(10, max_results), 100),

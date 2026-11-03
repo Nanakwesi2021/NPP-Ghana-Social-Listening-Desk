@@ -176,3 +176,52 @@ class SocialCollectorTests(TestCase):
 
         self.assertEqual(res.result, PollRun.Result.FAILED)
         self.assertIn("Connection refused", res.note)
+
+    def test_x_custom_query_from_env(self):
+        with patch.dict(os.environ, {"X_SEARCH_QUERY": "Bawumia digitization OR NPP"}):
+            self.assertEqual(x_collector.get_search_query(), "Bawumia digitization OR NPP")
+
+    def test_submit_social_link_facebook(self):
+        from django.core.management import call_command
+        call_command(
+            "submit_social_link",
+            platform="facebook",
+            account="Kumasi Traders",
+            url="https://facebook.com/kumasitraders/posts/99",
+            text="Protest over dumsor and electricity tariffs in Kumasi",
+        )
+        item = Item.objects.get(url="https://facebook.com/kumasitraders/posts/99")
+        self.assertEqual(item.author, "Kumasi Traders")
+        self.assertEqual(item.source.platform, "facebook")
+        self.assertEqual(item.source.kind, Source.Kind.MANUAL)
+        self.assertTrue(item.topics.filter(slug__in=["dumsor", "electricity-tariff"]).exists())
+
+    def test_submit_social_link_whatsapp_tip_and_twi_detection(self):
+        from django.core.management import call_command
+        from desk.coverage import latest_tip_count
+        topic = Topic.objects.get(slug="dumsor")
+
+        call_command(
+            "submit_social_link",
+            platform="whatsapp",
+            account="Bantama Lead",
+            text="Dumsor no reba bio wɔ Bantama kurotia, ECG nso nka hwee koraa",
+        )
+        item = Item.objects.filter(author="Bantama Lead").latest("collected_at")
+        self.assertEqual(item.language, Item.Language.TWI)
+        self.assertEqual(item.source.kind, Source.Kind.TIPS)
+        self.assertTrue(item.topics.filter(slug="dumsor").exists())
+
+        # Verify latest_tip_count detects the WhatsApp tip
+        start = item.collected_at - timezone.timedelta(minutes=5)
+        end = item.collected_at + timezone.timedelta(minutes=5)
+        self.assertGreaterEqual(latest_tip_count(topic, start, end), 1)
+
+    def test_sync_all_social_sources_command(self):
+        from django.core.management import call_command
+        call_command("collect_social", sync_sources=True)
+        self.assertTrue(Source.objects.filter(key="facebook-links").exists())
+        self.assertTrue(Source.objects.filter(key="tiktok-links").exists())
+        self.assertTrue(Source.objects.filter(key="whatsapp-tips").exists())
+        self.assertTrue(Source.objects.filter(key="instagram").exists())
+        self.assertTrue(Source.objects.filter(key="threads").exists())

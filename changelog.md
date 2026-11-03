@@ -55,6 +55,13 @@
   - **User Masthead Navigation:** integrated direct shortcuts to "Change password" and "Administration" within the account menu.
   - **Offline Unit Tests:** ten new offline unit tests in `test_provisioning.py` verifying group membership, decision permissions, password rotation, and account deactivation/reactivation.
 
+- **3 November 2026** — Expanded live social media feeds, broadcast monitoring, and analyst submission workflows (Path B):
+  - **Expanded Broadcast Coverage:** connected seven verified Ghanaian broadcast TV and radio channels (JoyNews, Citi Tube / ChannelOne TV, Peace FM / Despite Media, TV3 Ghana, UTV Ghana, Metro TV Ghana, Adom TV) via public Atom feeds with zero credentials.
+  - **Analyst Submission Tooling:** added `submit_social_link` management command for analysts to submit public Facebook posts, TikTok videos, X posts, and WhatsApp field tips with automated language detection (English vs Twi) and topic tagging.
+  - **Editorial Governance Compliance:** WhatsApp tips trigger manual case reviews while remaining strictly excluded from trend momentum calculation per Decision 002.
+  - **Comprehensive Source Sync:** updated `collect_social --sync-sources` to provision the full platform spectrum (News, X, YouTube, Facebook, TikTok, Instagram, Threads, WhatsApp tips) on the live sources dashboard.
+  - **Offline Tests:** added four new unit tests in `test_social_collectors.py` verifying custom X queries, Facebook submissions, WhatsApp tips handling, and social source syncing (bringing test suite to 65 passing tests).
+
 ### Changed
 
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.

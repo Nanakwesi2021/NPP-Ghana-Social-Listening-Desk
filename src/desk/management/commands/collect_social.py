@@ -7,6 +7,44 @@ from django.core.management.base import BaseCommand
 
 from desk.collectors import x as x_collector, youtube as youtube_collector
 from desk.ingest import ensure_groups
+from desk.management.commands.submit_social_link import ensure_manual_source
+from desk.models import Platform, Source
+
+
+def sync_all_social_sources():
+    """Ensure all social platforms exist with their appropriate kind and metadata."""
+    x_source = x_collector.ensure_x_source(sync=True)
+    yt_source = youtube_collector.ensure_youtube_source(sync=True)
+    ensure_manual_source(Platform.FACEBOOK)
+    ensure_manual_source(Platform.TIKTOK)
+    ensure_manual_source(Platform.WHATSAPP)
+    Source.objects.get_or_create(
+        key="instagram",
+        defaults={
+            "name": "Instagram",
+            "group": "Instagram",
+            "detail": "Public accounts",
+            "platform": Platform.INSTAGRAM,
+            "kind": Source.Kind.AWAITING,
+            "method": "Awaiting approved access",
+            "scope": "No collection yet. An outlet quoting an Instagram post counts as that outlet.",
+            "position": 50,
+        },
+    )
+    Source.objects.get_or_create(
+        key="threads",
+        defaults={
+            "name": "Threads",
+            "group": "Threads",
+            "detail": "Public accounts",
+            "platform": Platform.THREADS,
+            "kind": Source.Kind.AWAITING,
+            "method": "Awaiting approved access",
+            "scope": "No collection yet.",
+            "position": 60,
+        },
+    )
+    return x_source, yt_source
 
 
 class Command(BaseCommand):
@@ -16,13 +54,17 @@ class Command(BaseCommand):
         parser.add_argument(
             "--sync-sources",
             action="store_true",
-            help="Ensure social sources (X, YouTube) exist in the database.",
+            help="Ensure all social sources (X, YouTube, Facebook, TikTok, WhatsApp, etc.) exist in the database.",
         )
 
     def handle(self, *args, **options):
         ensure_groups()
-        x_source = x_collector.ensure_x_source(sync=options["sync_sources"])
-        yt_source = youtube_collector.ensure_youtube_source(sync=options["sync_sources"])
+        if options["sync_sources"]:
+            x_source, yt_source = sync_all_social_sources()
+            self.stdout.write(self.style.SUCCESS("Synced social sources: X, YouTube, Facebook, TikTok, WhatsApp, Instagram, Threads."))
+        else:
+            x_source = x_collector.ensure_x_source()
+            yt_source = youtube_collector.ensure_youtube_source()
 
         # 1. Collect X (Recent Search)
         if not x_collector.get_bearer_token():
@@ -44,4 +86,3 @@ class Command(BaseCommand):
         else:
             tags = ", ".join(f"{k} {v}" for k, v in sorted(r_yt.tagged.items())) or "none"
             self.stdout.write(self.style.SUCCESS(f"{yt_source.name}: {r_yt.new_items} new of {r_yt.seen} videos · tagged: {tags}"))
-

@@ -32,6 +32,10 @@ DEFAULT_CHANNELS = [
     {"name": "JoyNews", "channel_id": "UChd1DEecCRlxaa0-hvPACCw"},
     {"name": "Citi Tube / ChannelOne TV", "channel_id": "UCUTeE-as508hixQrNVHO7vQ"},
     {"name": "Peace FM / Despite Media", "channel_id": "UC5tDLzkXRDGSc98L2gTg1gQ"},
+    {"name": "TV3 Ghana", "channel_id": "UC9VSDs4ZXo3sjOoPkmW2iRQ"},
+    {"name": "Metro TV Ghana", "channel_id": "UCxm5-CYZ3VTVSshy0h5mTJw"},
+    {"name": "UTV Ghana", "channel_id": "UCpvXcuzvRyB4bM5FXJCzbGw"},
+    {"name": "Adom TV", "channel_id": "UC_KfNnlLMk2aCJP5S5GEWCQ"},
 ]
 
 

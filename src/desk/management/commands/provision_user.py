@@ -154,3 +154,4 @@ class Command(BaseCommand):
         action = "Created" if created else "Updated"
         role_label = "Duty Editor" if role == "editor" else ("Analyst" if role == "analyst" else "Hub Admin")
         self.stdout.write(self.style.SUCCESS(f"{action} account '{username}' as {role_label}."))
+
