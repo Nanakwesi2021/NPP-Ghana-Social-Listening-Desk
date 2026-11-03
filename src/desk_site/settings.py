@@ -7,7 +7,7 @@ import os
 import urllib.parse
 from pathlib import Path
 
-from desk_site.safety import sample_mode
+from desk_site.safety import check_database_url, sample_mode
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = BASE_DIR.parent
@@ -71,8 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "desk_site.wsgi.application"
 
-_db_url = os.environ.get("DATABASE_URL", "").strip()
-if _db_url.startswith(("postgres://", "postgresql://")):
+_db_url = check_database_url(os.environ.get("DATABASE_URL", "").strip())
+if _db_url:
     _parsed = urllib.parse.urlparse(_db_url)
     DATABASES = {
         "default": {

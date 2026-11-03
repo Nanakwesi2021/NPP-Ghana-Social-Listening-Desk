@@ -7,7 +7,7 @@ from django.test import SimpleTestCase, TestCase, override_settings
 from django.urls import reverse
 
 from desk.ingest import ensure_groups, sample_people
-from desk_site.safety import sample_mode
+from desk_site.safety import check_database_url, sample_mode
 
 LOCAL = {"debug": True, "database_url": "", "allowed_hosts": ["localhost", "127.0.0.1", "[::1]"]}
 
@@ -29,6 +29,21 @@ class SampleModeSettingTests(SimpleTestCase):
     def test_explicit_values_on_a_laptop(self):
         self.assertTrue(sample_mode("1", **LOCAL))
         self.assertFalse(sample_mode("0", **LOCAL))
+
+
+class DatabaseUrlTests(SimpleTestCase):
+    def test_unset_uses_sqlite(self):
+        self.assertEqual(check_database_url(""), "")
+
+    def test_postgresql_addresses_are_accepted(self):
+        for url in ("postgresql://u:p@localhost:5432/npp_desk", "postgres://u:p@db/npp_desk"):
+            self.assertEqual(check_database_url(url), url)
+
+    def test_anything_else_stops_instead_of_using_the_demo_database(self):
+        for url in ("YOUR_DATABASE_URL", "sqlite:///data/live.sqlite3", "localhost:5432/npp_desk"):
+            with self.subTest(url=url), self.assertRaises(ImproperlyConfigured) as caught:
+                check_database_url(url)
+            self.assertNotIn(url, str(caught.exception))  # never echo a value that may hold a password
 
 
 @override_settings(DESK_SAMPLE_MODE=True)

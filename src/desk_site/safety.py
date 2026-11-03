@@ -4,6 +4,23 @@ from django.core.exceptions import ImproperlyConfigured
 LOCAL_HOSTS = {"localhost", "127.0.0.1", "[::1]", "::1", ""}
 
 
+POSTGRES_SCHEMES = ("postgres://", "postgresql://")
+
+
+def check_database_url(database_url):
+    """A DATABASE_URL that is set must be a PostgreSQL address.
+
+    Anything else used to be ignored silently, so commands meant for the live database ran
+    against the SQLite demo database instead. The value is never echoed: it holds a password.
+    """
+    if database_url and not database_url.startswith(POSTGRES_SCHEMES):
+        raise ImproperlyConfigured(
+            "DATABASE_URL is set but is not a PostgreSQL address (it must start with postgresql://). "
+            "Refusing to fall back to the SQLite demo database. Fix DATABASE_URL, or unset it to use SQLite."
+        )
+    return database_url
+
+
 def live_deployment_signals(*, debug, database_url, allowed_hosts):
     """Reasons to believe these settings describe a live deployment rather than a laptop demo."""
     signals = []

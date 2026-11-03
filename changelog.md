@@ -81,6 +81,7 @@
   - **Credentials removed:** staff passwords are removed from `HANDOFF.md`. They remain in earlier git history, so they must be changed.
   - **Docker Compose:** PostgreSQL and Redis now listen on loopback only, and PostgreSQL has no default password (`POSTGRES_PASSWORD` is required).
   - **Offline tests:** the social-collector test no longer reaches YouTube or X during the test run.
+  - **Database address:** a `DATABASE_URL` that is set but is not a `postgresql://` address now stops the desk with a clear error. Before, a placeholder or typo was ignored, and commands meant for PostgreSQL ran against the SQLite demo database.
 
 ### Changed
 
