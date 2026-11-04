@@ -6,6 +6,9 @@
     <h1>Source coverage</h1>
     <p class="page-header__lede num">What the desk can see as of {{ calc.as_of|gmt }} GMT. A source with no new items is quiet, not missing.</p>
   </div>
+  <div class="page-header__actions">
+    <a class="btn btn--secondary" href="{% url 'desk:source_submit' %}">{% icon "share-2" 16 %}Submit social observation</a>
+  </div>
 </div>
 <section class="summary" aria-label="Status summary">
   {% for s in summary %}<div><span class="status status--{{ s.status }}">{% icon s.status|status_icon 14 %}{{ s.label }}</span><span class="num">{{ s.count }}</span></div>{% endfor %}

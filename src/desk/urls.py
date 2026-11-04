@@ -21,6 +21,7 @@ urlpatterns = [
     path("issues/<str:ref>/decision/", views.issue_decision, name="issue_decision"),
     path("issues/<str:ref>/retry-notification/", views.issue_retry_notification, name="issue_retry_notification"),
     path("sources/", views.sources, name="sources"),
+    path("sources/submit/", views.source_submit, name="source_submit"),
     path("search/", views.search, name="search"),
     path("sample/role/", views.sample_role, name="sample_role"),
 ]

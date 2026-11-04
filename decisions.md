@@ -244,3 +244,35 @@ The Nginx configuration also forwarded the visitor's protocol and address in hea
 - Two new dependencies: django-otp and segno.
 
 **Revisit when** the party adopts Google Workspace or another identity provider, or staff can use passkeys. See `src/desk/twostep.py` and `src/desk/tests/test_two_step.py`.
+
+## 014 · Automated cross-network spike detection, breakout alerts and unified scanning
+
+**Status** Accepted · **Date** 2026-11-04 · **Owners** Research desk lead and engineering
+
+**Context.** As social narratives and breaking stories evolve rapidly across Ghanaian portals and social media networks (News, YouTube broadcasts, X, Facebook, TikTok), the research desk and campaign War Room need early automated warning when a topic surges with high velocity or breaks out across multiple monitored networks simultaneously.
+
+**Options considered.**
+- **Manual analyst monitoring only:** relies on human observation in shift queues; risks missing early morning spikes or fast weekend breakouts.
+- **Immediate alert on every individual post:** floods the War Room channel with noise and duplicate notifications.
+- **Windowed cross-network breakout engine with hourly deduplication:** evaluates the desk's 60-minute window calculations against precise momentum and network diversity thresholds, deduplicating alerts by topic, hour, and surge tier.
+
+**Decision and rationale.**
+- Classify a topic as a **Key Trending Breakout** when:
+  1. It meets the desk minimum mention threshold (`current_count >= 5`) and is rising (`change > 0`).
+  2. And satisfies at least one breakout condition:
+     - **Cross-Network Breakout:** observed on $\ge 2$ distinct monitored platforms (e.g., News + YouTube, or YouTube + X, or News + Facebook).
+     - **High-Velocity Surge:** net change $\ge 5$ mentions compared to the previous 60-minute window.
+- Persist breakouts in a dedicated `TrendAlert` model with channel, tier, momentum, and platform counts.
+- Push formatted HTML notifications to the Telegram War Room with direct links to the desk trend view (`/trends/<slug>/`), platform distribution breakdown, and subject tags.
+- Deduplicate on `trend:{topic.slug}:{YYYYMMDDHH}:{tier}`: alerts are sent once per hour window for a tier (`surge_med` for change $\ge 5$, `surge_high` for change $\ge 10$), allowing escalation when momentum accelerates while preventing alert spam.
+- Implement a unified scanner `scan_networks` that unifies news feed collection, YouTube channel feeds, X search, 60-minute trend recomputation, and breakout alert dispatch in one command.
+- Surface active breakouts prominently on the Desk Overview web UI (`overview.html`) using accessible `.banner--info` components and row-level `Breakout` chips.
+- Add an in-browser analyst submission interface (`/sources/submit/`) allowing analysts to record observed Facebook, TikTok, WhatsApp, and X links directly with instantaneous auto-tagging and trend recomputation.
+
+**Consequences.**
+- The War Room receives timely, actionable alerts on surging cross-network topics without manual intervention.
+- The 127 existing tests continue to pass; 8 new offline tests verify breakout classification, formatting, deduplication, command execution, and web submission.
+- WhatsApp tips remain strictly excluded from trend calculations per Decision 002.
+- Red styling remains strictly reserved for confirmed Critical · L4 cases per editorial guidelines; breakouts use brand blue tokens.
+
+**Revisit when** alerting needs expand to SMS or additional chat channels, or when threshold tuning is requested by shift leads. See `src/desk/alerts.py`, `src/desk/models.py`, and `src/desk/tests/test_alerts.py`.

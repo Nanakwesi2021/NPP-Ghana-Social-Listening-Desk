@@ -82,6 +82,45 @@ def ensure_manual_source(platform):
     return source
 
 
+def create_manual_social_item(platform, account, text, url="", title="", language_choice="", now=None):
+    """Create and auto-tag an analyst-submitted social post, link or field tip."""
+    source = ensure_manual_source(platform)
+    now = now or timezone.now()
+    external_id = f"{platform}-manual-{uuid.uuid4().hex[:12]}"
+    if not url:
+        url = f"https://desk.internal/{platform}/{external_id}"
+
+    # Language detection
+    if language_choice == "tw":
+        language = Item.Language.TWI
+    elif language_choice == "pcm":
+        language = Item.Language.PIDGIN
+    elif language_choice == "en":
+        language = Item.Language.ENGLISH
+    else:
+        if re.search(r"[\u025B\u0254\u0190\u0186]", text) or any(w in text.lower().split() for w in ["ɛyɛ", "yie", "dɔɔso", "koraa"]):
+            language = Item.Language.TWI
+        else:
+            language = Item.Language.ENGLISH
+
+    item = Item.objects.create(
+        source=source,
+        external_id=external_id,
+        url=url[:500],
+        author=account[:120],
+        title=(title or text[:80])[:200],
+        excerpt=text,
+        summary=text,
+        language=language,
+        published_at=now,
+        collected_at=now,
+    )
+
+    rules = tagging.compile_rules()
+    tagged_topics = tagging.tag(item, text, rules)
+    return item, tagged_topics
+
+
 class Command(BaseCommand):
     help = "Submit an analyst-observed social post, link or field tip."
 
@@ -103,46 +142,19 @@ class Command(BaseCommand):
         title = options.get("title", "").strip()
         lang_choice = options.get("language")
 
-        source = ensure_manual_source(platform)
-
-        now = timezone.now()
-        external_id = f"{platform}-manual-{uuid.uuid4().hex[:12]}"
-        if not url:
-            url = f"https://desk.internal/{platform}/{external_id}"
-
-        # Language detection
-        if lang_choice == "tw":
-            language = Item.Language.TWI
-        elif lang_choice == "pcm":
-            language = Item.Language.PIDGIN
-        elif lang_choice == "en":
-            language = Item.Language.ENGLISH
-        else:
-            if re.search(r"[\u025B\u0254\u0190\u0186]", text) or any(w in text.lower().split() for w in ["ɛyɛ", "yie", "dɔɔso", "koraa"]):
-                language = Item.Language.TWI
-            else:
-                language = Item.Language.ENGLISH
-
-        item = Item.objects.create(
-            source=source,
-            external_id=external_id,
-            url=url[:500],
-            author=account[:120],
-            title=title[:200],
-            excerpt=text,
-            summary=text,
-            language=language,
-            published_at=now,
-            collected_at=now,
+        item, tagged_topics = create_manual_social_item(
+            platform=platform,
+            account=account,
+            text=text,
+            url=url,
+            title=title,
+            language_choice=lang_choice,
         )
 
-        rules = tagging.compile_rules()
-        tagged_topics = tagging.tag(item, text, rules)
         topic_names = ", ".join(t.name for t in tagged_topics) or "Untagged"
-
-        tip_note = " (Field tip: excluded from trend momentum calculation per Decision 002)" if source.kind == Source.Kind.TIPS else ""
+        tip_note = " (Field tip: excluded from trend momentum calculation per Decision 002)" if item.source.kind == Source.Kind.TIPS else ""
         self.stdout.write(self.style.SUCCESS(
-            f"Submitted {source.name} item #{item.pk} from {account} [{item.get_language_display()}].\n"
+            f"Submitted {item.source.name} item #{item.pk} from {account} [{item.get_language_display()}].\n"
             f"Topics: {topic_names}{tip_note}\n"
             f"URL: {item.url}"
         ))

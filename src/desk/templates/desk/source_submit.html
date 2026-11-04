@@ -1,0 +1,100 @@
+{% extends "desk/base.html" %}{% load desk_tags %}
+{% block title %}Submit Social Observation{% endblock %}
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Submit Social Observation</h1>
+    <p class="page-header__lede">Record analyst-observed posts, videos or grassroots tips from social networks.</p>
+  </div>
+  <div class="page-header__actions">
+    <a class="btn btn--secondary" href="{% url 'desk:sources' %}">{% icon "arrow-left" 16 %}View sources</a>
+  </div>
+</div>
+
+{% if error %}
+<div class="banner banner--error" role="alert" style="margin-bottom: 20px;">
+  {% icon "alert-triangle" 18 %}
+  <div class="banner__text">
+    <div class="banner__title">Submission incomplete</div>
+    <div class="banner__body">{{ error }}</div>
+  </div>
+</div>
+{% endif %}
+
+{% if success %}
+<div class="banner banner--success" role="status" style="margin-bottom: 20px;">
+  {% icon "check-circle" 18 %}
+  <div class="banner__text">
+    <div class="banner__title">Observation recorded</div>
+    <div class="banner__body">{{ success }}</div>
+  </div>
+  <a class="banner__action" href="{% url 'desk:overview' %}">Back to overview</a>
+</div>
+{% endif %}
+
+<div class="columns" style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+  <section class="panel" style="padding: 24px;">
+    <h2 style="font-size: 16px; margin-bottom: 16px;">Observation details</h2>
+    <form method="post" class="stack" style="display: flex; flex-direction: column; gap: 16px;">
+      {% csrf_token %}
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_platform" style="font-weight: 500; font-size: 13px;">Platform <span style="color: var(--text-critical)">*</span></label>
+        <select name="platform" id="id_platform" required style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 12px; font: inherit; background: var(--bg-surface)">
+          {% for val, label in platforms %}
+          <option value="{{ val }}" {% if request.POST.platform == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_account" style="font-weight: 500; font-size: 13px;">Account / Page / Sender handle <span style="color: var(--text-critical)">*</span></label>
+        <input type="text" name="account" id="id_account" value="{{ request.POST.account|default:'' }}" placeholder="e.g. Suame Magazine Traders, @kwame_ghana, Kumasi Central Lead" required style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 12px; font: inherit">
+      </div>
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_url" style="font-weight: 500; font-size: 13px;">Public Post or Video URL <span class="muted font-normal">(Optional)</span></label>
+        <input type="url" name="url" id="id_url" value="{{ request.POST.url|default:'' }}" placeholder="https://www.facebook.com/... or https://vm.tiktok.com/..." style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 12px; font: inherit">
+      </div>
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_title" style="font-weight: 500; font-size: 13px;">Short Headline or Claim Summary <span class="muted font-normal">(Optional)</span></label>
+        <input type="text" name="title" id="id_title" value="{{ request.POST.title|default:'' }}" placeholder="Brief summary of the claim or narrative" style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 12px; font: inherit">
+      </div>
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_text" style="font-weight: 500; font-size: 13px;">Observation Text / Transcript / Quote <span style="color: var(--text-critical)">*</span></label>
+        <textarea name="text" id="id_text" rows="5" required placeholder="Paste full post text, video transcript, or volunteer field report in original language..." style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 10px 12px; font: inherit; resize: vertical;">{{ request.POST.text|default:'' }}</textarea>
+      </div>
+
+      <div class="field" style="display: flex; flex-direction: column; gap: 6px;">
+        <label for="id_language" style="font-weight: 500; font-size: 13px;">Language</label>
+        <select name="language" id="id_language" style="width: 100%; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 8px 12px; font: inherit; background: var(--bg-surface)">
+          {% for val, label in languages %}
+          <option value="{{ val }}" {% if request.POST.language == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field" style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+        <input type="checkbox" name="recompute" id="id_recompute" value="1" checked>
+        <label for="id_recompute" style="font-size: 13px;">Recalculate 60-minute trend momentum immediately and scan for breakout spikes</label>
+      </div>
+
+      <div style="margin-top: 8px;">
+        <button type="submit" class="btn btn--primary">{% icon "plus" 16 %}Submit & Scan Observation</button>
+      </div>
+    </form>
+  </section>
+
+  <aside class="panel" style="padding: 20px; align-self: start;">
+    <h3 style="font-size: 14px; margin-bottom: 12px;">Editorial Standards</h3>
+    <ul style="font-size: 13px; line-height: 20px; color: var(--text-secondary); padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+      <li><strong>Observation vs Public Support:</strong> Counts reflect observed volume on monitored sources, never public sentiment.</li>
+      <li><strong>WhatsApp Tips:</strong> Tips trigger manual review and case creation, but are strictly excluded from trend momentum (Decision 002).</li>
+      <li><strong>Original Wording:</strong> Twi and Pidgin wording is preserved directly in the database alongside any translation.</li>
+      <li><strong>Auto-Tagging:</strong> Submitted text is automatically cross-referenced against all tracked national and campaign topics.</li>
+    </ul>
+  </aside>
+</div>
+{% endblock %}

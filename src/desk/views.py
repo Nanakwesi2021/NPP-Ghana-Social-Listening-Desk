@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
-from . import clock, coverage, trends, workflow
+from . import alerts, clock, coverage, trends, workflow
 from .ingest import sample_people
 from .models import Case, Document, Evidence, Item, Platform, Source, Subject, Topic, TrendRow
 from .trends import PLATFORM_ORDER
@@ -71,13 +71,20 @@ def trend_context(request, calc):
         Case.objects.exclude(status=Case.Status.CLOSED).filter(topic__isnull=False)
         .values_list("topic").annotate(n=Count("id"))
     )
+    breakouts = []
     for row in rows:
         row.open_issues = open_cases.get(row.topic_id, 0)
         row.partial_labels = [dict(Platform.choices)[p] for p in row.partial_platforms]
+        is_breakout, alert_type, tier = alerts.classify_breakout(row)
+        if is_breakout:
+            row.is_breakout = True
+            row.breakout_type = alert_type
+            row.breakout_tier = tier
+            breakouts.append(row)
     delayed = coverage.coverage(calc.as_of)["delayed"]
     return {"calc": calc, "rows": rows, "windows": _windows(calc), "subject": subject, "platform": platform,
             "subject_filters": SUBJECT_FILTERS, "platform_filters": PLATFORM_FILTERS, "delayed_sources": delayed,
-            "filtered": subject != "all" or platform != "all"}
+            "filtered": subject != "all" or platform != "all", "breakouts": breakouts}
 
 
 def queue_context(now):
@@ -391,6 +398,66 @@ def issue_new(request):
 def sources(request):
     calc = _calc_or_404()
     return render(request, "desk/sources.html", {**coverage.coverage(calc.as_of), "calc": calc, "nav": "sources"})
+
+
+@login_required
+def source_submit(request):
+    error = None
+    success = None
+    if request.method == "POST":
+        platform = request.POST.get("platform", "").strip()
+        account = request.POST.get("account", "").strip()
+        text = request.POST.get("text", "").strip()
+        url = request.POST.get("url", "").strip()
+        title = request.POST.get("title", "").strip()
+        language = request.POST.get("language", "").strip()
+        recompute = request.POST.get("recompute") == "1"
+
+        if platform not in ["facebook", "tiktok", "whatsapp", "x"]:
+            error = "Please choose a valid monitored platform."
+        elif not account:
+            error = "Please provide the account name, page name, or source handle."
+        elif not text:
+            error = "Please provide the observation text, transcript, or claim quote."
+        else:
+            from desk.management.commands.submit_social_link import create_manual_social_item
+            item, tagged_topics = create_manual_social_item(
+                platform=platform,
+                account=account,
+                text=text,
+                url=url,
+                title=title,
+                language_choice=language,
+            )
+            if recompute:
+                calc = trends.compute(clock.now())
+                alerts.detect_and_dispatch_trend_alerts(calc)
+            topics_str = ", ".join(t.name for t in tagged_topics) or "Untagged"
+            tip_note = " (Field tip: excluded from trend momentum calculation per Decision 002)" if item.source.kind == Source.Kind.TIPS else ""
+            success = f"Successfully recorded {item.source.name} observation #{item.pk} from {item.author}. Tagged topics: {topics_str}{tip_note}."
+            if recompute:
+                success += " Recalculated 60-minute trend momentum."
+
+    calc = _calc_or_404()
+    ctx = {
+        "calc": calc,
+        "error": error,
+        "success": success,
+        "nav": "sources",
+        "platforms": [
+            ("facebook", "Facebook (Public page / group post)"),
+            ("tiktok", "TikTok (Campaign video / clip)"),
+            ("whatsapp", "WhatsApp (Field or volunteer tip · excluded from trends)"),
+            ("x", "X (Post / tweet)"),
+        ],
+        "languages": [
+            ("", "Auto-detect (English or Twi)"),
+            ("en", "English"),
+            ("tw", "Twi / Akan"),
+            ("pcm", "Pidgin"),
+        ],
+    }
+    return render(request, "desk/source_submit.html", ctx)
 
 
 @login_required

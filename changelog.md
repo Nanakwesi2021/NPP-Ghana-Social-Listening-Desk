@@ -4,6 +4,16 @@
 
 ### Added
 
+- **4 November 2026** — Cross-network spike detection, automated trending breakouts and unified scanning:
+  - **Spike & Breakout Detection Engine:** `src/desk/alerts.py` evaluates 60-minute window momentum to detect cross-network breakouts (observed on $\ge 2$ distinct platforms) and high-velocity surges (net change $\ge 5$ mentions).
+  - **Telegram War Room Push:** automated HTML alerts dispatched to the Telegram War Room with topic context, momentum indicators, network breakdowns, and direct links to the desk trend view. Deduplicated per topic, hour, and surge tier (`surge_med` vs `surge_high`) to eliminate alert fatigue.
+  - **TrendAlert Model & Migration:** `TrendAlert` model (`0007_trendalert.py`) tracks alert records, delivery status (`sent`, `failed`, `disabled`), deduplication keys, and timestamps.
+  - **Unified Network Scanner:** `scan_networks` management command unifies news collection (Citi Newsroom, Joy Online, Daily Graphic), YouTube video broadcasts, X search, trend momentum recomputation, and breakout dispatch in a single call.
+  - **Continuous Background Worker:** `run_worker` updated to trigger breakout detection and dispatch automatically on every cycle.
+  - **Desk Overview Breakout Banner:** high-visibility `.banner--info` banner and `Breakout` chips on `overview.html` highlighting surging topics and linking directly to trend details.
+  - **Analyst Observation Submission:** web-based submission form at `/sources/submit/` allowing analysts to submit observed posts from Facebook, TikTok, WhatsApp tips, and X with auto-tagging and immediate trend recomputation without terminal access.
+  - **Offline Test Suite:** 8 new offline tests in `test_alerts.py` covering breakout classification, notification formatting, deduplication, command execution, and web submission (135 total tests passing).
+
 - **3 November 2026** — Two-step sign-in:
   - **Codes:** after the password, the desk asks for a 6-digit code from an authenticator app on the person's phone. Every account needs it whenever sample mode is off, so every live desk asks for codes. `/admin/` and password changes need the code too.
   - **Set-up:** at their first sign-in, each person scans a QR code (or types a key) and confirms it with a code. They then get 10 single-use backup codes, shown once.

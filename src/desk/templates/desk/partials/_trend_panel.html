@@ -46,7 +46,7 @@
     <tr class="trend-row">
       <td class="col-rank"><span class="rank num">{{ row.rank }}</span></td>
       <td>
-        <a class="trend-row__link" href="{% url 'desk:trend_detail' row.topic.slug %}" data-row>{{ row.topic.name }}</a>
+        <a class="trend-row__link" href="{% url 'desk:trend_detail' row.topic.slug %}" data-row>{{ row.topic.name }}</a>{% if row.is_breakout %}<span class="badge badge--l2" style="margin-left: 8px; font-size: 11px; height: 18px; padding: 0 6px;">Breakout</span>{% endif %}
         <div class="trend-row__meta"><span>Subject: {{ row.topic.subject_label }}</span>{% if row.open_issues %}<a class="issue-link" href="{% url 'desk:trend_detail' row.topic.slug %}#linked-issues">{{ row.open_issues }} open issue{{ row.open_issues|pluralize }}</a>{% endif %}</div>
         <div class="trend-compact num">{{ row.current_count }} this hour · {{ row.previous_count }} last hour<br><span class="caption muted">{{ row.observed_label }}</span>{% for p in row.partial_labels %} <span class="caption warning-text">{{ p }} partial</span>{% endfor %}</div>
       </td>

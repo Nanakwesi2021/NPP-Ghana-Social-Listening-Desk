@@ -23,7 +23,7 @@ class Command(BaseCommand):
                     call_command("collect_news", stdout=self.stdout, stderr=self.stderr)
                     call_command("collect_social", stdout=self.stdout, stderr=self.stderr)
                     last_collect = started
-                call_command("recompute_trends", stdout=self.stdout, stderr=self.stderr)
+                call_command("recompute_trends", alerts=True, stdout=self.stdout, stderr=self.stderr)
                 if options["once"]:
                     return
                 time.sleep(max(1, options["recompute_every"] - (time.monotonic() - started)))

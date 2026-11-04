@@ -19,9 +19,21 @@
   </div>
   <div class="page-header__actions">
     <span class="caption muted num">Windows calculated at {{ calc.as_of|gmt }} GMT</span>
+    <a class="btn btn--secondary" href="{% url 'desk:source_submit' %}">{% icon "share-2" 16 %}Submit observation</a>
     <a class="btn btn--secondary" href="{% url 'desk:trend_list' %}">{% icon "flag" 16 %}Flag an item</a>
   </div>
 </div>
+
+{% for b in breakouts %}
+<aside class="banner banner--info" style="margin-bottom: 16px;" role="status">
+  {% icon "trending-up" 18 %}
+  <div class="banner__text">
+    <span class="banner__title">Trending Breakout: {{ b.topic.name }}</span>
+    <span class="banner__body"> · {{ b.current_count }} distinct mentions this hour (+{{ b.change }} vs previous hour) across {{ b.observed_label }}.</span>
+  </div>
+  <a class="banner__action" href="{% url 'desk:trend_detail' b.topic.slug %}">View trend →</a>
+</aside>
+{% endfor %}
 
 <section class="brief" aria-label="Shift brief">
   <a class="brief__cell" href="#trending">

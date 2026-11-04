@@ -377,6 +377,51 @@ class CaseNotification(models.Model):
         return f"{self.get_channel_display()} alert for {self.case.ref} ({self.get_status_display()})"
 
 
+class TrendAlert(models.Model):
+    """External alert dispatched or recorded for a cross-network trending breakout or surge."""
+
+    class Channel(models.TextChoices):
+        TELEGRAM = "telegram", "Telegram"
+
+    class Status(models.TextChoices):
+        PENDING = "pending", "Pending"
+        SENT = "sent", "Sent"
+        FAILED = "failed", "Failed"
+        DISABLED = "disabled", "Disabled"
+
+    class AlertType(models.TextChoices):
+        CROSS_NETWORK = "cross_network", "Cross-Network Breakout"
+        VELOCITY_SURGE = "velocity_surge", "Velocity Surge"
+        BREAKOUT = "breakout", "Key Trending Breakout"
+
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name="trend_alerts")
+    calculation = models.ForeignKey(TrendCalculation, on_delete=models.CASCADE, related_name="trend_alerts")
+    rank = models.PositiveIntegerField(null=True, blank=True)
+    current_count = models.PositiveIntegerField()
+    previous_count = models.PositiveIntegerField(default=0)
+    change = models.IntegerField()
+    platforms = models.JSONField(default=list)
+    platform_counts = models.JSONField(default=dict)
+    observed_label = models.CharField(max_length=200)
+    alert_type = models.CharField(max_length=30, choices=AlertType.choices, default=AlertType.BREAKOUT)
+    tier = models.CharField(max_length=20, default="surge_med")
+    channel = models.CharField(max_length=20, choices=Channel.choices, default=Channel.TELEGRAM)
+    recipient = models.CharField(max_length=100, blank=True)
+    dedupe_key = models.CharField(max_length=150, unique=True)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
+    message_text = models.TextField()
+    external_message_id = models.CharField(max_length=100, blank=True)
+    error_message = models.TextField(blank=True)
+    created_at = models.DateTimeField()
+    sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["-created_at", "-id"]
+
+    def __str__(self):
+        return f"Trend alert for {self.topic.name} ({self.get_status_display()})"
+
+
 class ShiftClock(models.Model):
     """Anchors the Sample shift: sample time advances from sample_start at real speed."""
 
