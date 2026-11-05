@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 
 from desk.collectors import rss
 from desk.ingest import ensure_groups
+from desk_site.safety import refuse_in_sample_mode
 
 
 class Command(BaseCommand):
@@ -14,6 +15,7 @@ class Command(BaseCommand):
                             help="Re-apply the current topic keyword rules to stored items from these feeds first.")
 
     def handle(self, *args, **options):
+        refuse_in_sample_mode("collect_news", "reads the live news feeds")
         ensure_groups()
         rss.ensure_topics()
         sources = rss.ensure_sources(sync=options["sync_sources"])

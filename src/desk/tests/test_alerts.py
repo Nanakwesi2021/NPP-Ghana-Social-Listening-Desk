@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from io import StringIO
 
@@ -110,6 +110,7 @@ class TrendAlertTests(TestCase):
             # Electricity tariff in sample fixture has count 12 vs 4 (+8), so it qualifies!
             self.assertTrue(any(a.topic.slug == "electricity-tariff" for a in alerts_list))
 
+    @override_settings(DESK_SAMPLE_MODE=False)  # live commands refuse to run in sample mode
     def test_scan_networks_management_command(self):
         out = StringIO()
         call_command("scan_networks", no_news=True, no_social=True, no_push=True, stdout=out)

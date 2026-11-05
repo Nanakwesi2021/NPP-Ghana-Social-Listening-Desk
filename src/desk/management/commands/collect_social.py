@@ -9,6 +9,7 @@ from desk.collectors import x as x_collector, youtube as youtube_collector
 from desk.ingest import ensure_groups
 from desk.management.commands.submit_social_link import ensure_manual_source
 from desk.models import Platform, Source
+from desk_site.safety import refuse_in_sample_mode
 
 
 def sync_all_social_sources():
@@ -58,6 +59,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        refuse_in_sample_mode("collect_social", "reads live YouTube and X feeds")
         ensure_groups()
         if options["sync_sources"]:
             x_source, yt_source = sync_all_social_sources()

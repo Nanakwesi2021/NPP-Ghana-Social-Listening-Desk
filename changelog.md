@@ -99,6 +99,12 @@
 
 ### Fixed
 
+- **5 November 2026** — Live commands can no longer write into the Sample shift:
+  - **What happened:** on 3 November a live collection and trend calculation ran against the Sample shift database (`data/desk.sqlite3`) while sample mode was on. Real YouTube items went in, every fictional outlet showed as "collection delayed", and the tariff 4 → 12 story dropped off the overview.
+  - **The guard:** with sample mode on, `collect_news`, `collect_social`, `scan_networks`, `run_worker`, `recompute_trends` and `brief_shift --telegram` now stop before touching the network or the database. The error says to run them with `DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0`, or with `DATABASE_URL` set to the PostgreSQL desk.
+  - **Unchanged:** with sample mode off, the commands run exactly as before. In sample mode, `replay_sample` and `brief_shift` without `--telegram` still work.
+  - **Not repaired:** the Sample shift database still holds the items from that run. `replay_sample --wipe` restores the demo but discards demo decisions, so it is left for the owner to run.
+  - **Offline tests:** 7 new tests in `test_sample_guard.py`. Five existing tests that ran these commands now turn sample mode off first.
 - **3 November 2026** — Security fixes before live use (Phase 0):
   - **Demo sign-in:** the passwordless Sample shift sign-in now opens only the five fictional sample people listed in the fixture, and only accounts with no password. Before, it could open any staff account, including duty editors.
   - **Live settings:** sample mode now switches off by default when the settings look like a live deployment (debug off, a `DATABASE_URL`, or a public host). The desk refuses to start if sample mode is explicitly switched on there.

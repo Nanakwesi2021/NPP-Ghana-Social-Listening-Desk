@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 
 from django.conf import settings
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from desk.ingest import replay
 from desk.management.commands.brief_shift import format_telegram_brief
@@ -60,6 +60,7 @@ class ShiftBriefCommandTests(TestCase):
         self.assertIn("https://desk.npp.org.gh/issues/ISS-0409/", html)
         self.assertIn("🟢 <b>News feeds</b>", html)
 
+    @override_settings(DESK_SAMPLE_MODE=False)  # live commands refuse to run in sample mode
     @patch("desk.notifications.send_telegram_message")
     def test_brief_shift_telegram_dispatch(self, mock_send):
         mock_send.return_value = (True, "98765", "")
@@ -82,6 +83,7 @@ class ShiftBriefCommandTests(TestCase):
         self.assertIn("<b>NPP SOCIAL LISTENING DESK · SHIFT INTELLIGENCE BRIEF</b>", tg_text)
         self.assertIn("https://desk.npp.org.gh/issues/", tg_text)
 
+    @override_settings(DESK_SAMPLE_MODE=False)  # live commands refuse to run in sample mode
     def test_brief_shift_telegram_unconfigured_credentials_reports_warning(self):
         out = io.StringIO()
         with patch.dict(os.environ, {"TELEGRAM_BOT_TOKEN": "", "TELEGRAM_CHAT_ID": ""}):

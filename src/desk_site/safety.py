@@ -1,4 +1,8 @@
-"""Start-up guard: the passwordless Sample shift sign-in must never run as a live deployment."""
+"""Guards that keep the fictional Sample shift and a live desk apart.
+
+The passwordless Sample shift sign-in must never run as a live deployment, and live
+collection commands must never write into the Sample shift database.
+"""
 from django.core.exceptions import ImproperlyConfigured
 
 LOCAL_HOSTS = {"localhost", "127.0.0.1", "[::1]", "::1", ""}
@@ -32,6 +36,31 @@ def live_deployment_signals(*, debug, database_url, allowed_hosts):
     if public:
         signals.append("DJANGO_ALLOWED_HOSTS includes " + ", ".join(public))
     return signals
+
+
+def refuse_in_sample_mode(command, does):
+    """Stop a command that reads live sources or writes live trend data while sample mode is on.
+
+    In sample mode the database is the fictional Sample shift. A live collection or trend
+    calculation there mixes real items into the demo and puts a newer calculation ahead of its 10:37 one.
+    command is how the person ran it (e.g. "collect_news"); does says what it would do.
+    Call it first in handle(), before anything touches the database or the network.
+    """
+    from django.conf import settings
+    from django.core.management.base import CommandError
+
+    if not settings.DESK_SAMPLE_MODE:
+        return
+    # Sample mode never runs with DATABASE_URL set (see sample_mode below), so this is a SQLite path, not a secret.
+    database = settings.DATABASES["default"]["NAME"]
+    raise CommandError(
+        f"{command} {does}, but sample mode is on: this database ({database}) is the fictional Sample shift. "
+        "Refusing, so real and sample data never mix.\n"
+        "Run it against the live desk instead, from src/:\n"
+        f"  DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py {command}\n"
+        "or set DATABASE_URL to the PostgreSQL desk in that terminal. "
+        "To reload the Sample shift itself, use replay_sample."
+    )
 
 
 def sample_mode(requested, **deployment):

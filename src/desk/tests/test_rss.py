@@ -6,7 +6,7 @@ from unittest import mock
 
 from django.conf import settings
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from desk import coverage, tagging, trends
 from desk.collectors import rss
@@ -195,6 +195,7 @@ class CollectorTests(TestCase):
         unsynced = rss.ensure_sources(config=TEST_CONFIG)  # without sync, existing outlets keep their settings
         self.assertIn("/wp-json/", {s.key: s for s in unsynced}["citi-newsroom"].feed_url)
 
+    @override_settings(DESK_SAMPLE_MODE=False)  # live commands refuse to run in sample mode
     def test_collect_news_command_uses_the_same_isolation(self):
         out = StringIO()
         with mock.patch("desk.collectors.rss.http_fetch", fetcher(HEALTHY)):

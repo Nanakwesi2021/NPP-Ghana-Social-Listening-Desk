@@ -276,3 +276,31 @@ The Nginx configuration also forwarded the visitor's protocol and address in hea
 - Red styling remains strictly reserved for confirmed Critical · L4 cases per editorial guidelines; breakouts use brand blue tokens.
 
 **Revisit when** alerting needs expand to SMS or additional chat channels, or when threshold tuning is requested by shift leads. See `src/desk/alerts.py`, `src/desk/models.py`, and `src/desk/tests/test_alerts.py`.
+
+## 015 · Live commands refuse to run in sample mode
+
+**Status** Accepted · **Date** 2026-11-05 · **Owners** Engineering and operations lead
+
+**Context.** A plain local run uses the Sample shift database (`data/desk.sqlite3`) with sample mode on. Nothing stopped a live command from running there. On 3 November a live collection and a trend calculation did. Real YouTube items were stored beside the fictional ones, every fictional outlet showed as "collection delayed", and a calculation for 19:19 GMT became the newest, ahead of the 10:37 one that tells the tariff 4 → 12 story. `recompute_trends` and `scan_networks` also prune calculations more than 7 days older than the one they store, so a run a week later would have deleted the 10:37 calculation outright.
+
+**Options considered.**
+- **Rely on people setting the variables:** one forgotten `DESK_SAMPLE_MODE=0` is enough, and the handoff listed the live commands without the live settings.
+- **Refuse when the database file is `data/desk.sqlite3`:** catches the same accident, but a server may keep a live desk at that default path with sample mode off.
+- **Refuse when sample mode is on:** sample mode already means "this is the demo database", and it can never be on for a live deployment (decision 011).
+
+**Decision and rationale.**
+- One helper, `refuse_in_sample_mode` in `desk_site/safety.py`, raises a `CommandError` when `DESK_SAMPLE_MODE` is on. Each live command calls it first, before it reads a feed or writes to the database.
+- It covers every command that reads a live source, stores live trend data or sends to the war room: `collect_news`, `collect_social`, `scan_networks`, `run_worker`, `recompute_trends` and `brief_shift --telegram`.
+- The error names the database it protected and gives the two ways to run the command for real: `DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0`, or `DATABASE_URL` for PostgreSQL.
+- `replay_sample` keeps working, and still recalculates the Sample shift's own trends at 10:37.
+- `brief_shift` without `--telegram` keeps working, because the brief on screen only reads.
+- `submit_social_link` is not covered: it reads no network and stores only what the person typed, just like the demo's web form.
+
+**Consequences.**
+- Real and fictional data can no longer mix through these commands.
+- In sample mode, `recompute_trends --as-of` is refused too. `replay_sample` recalculates the sample's trends.
+- Live servers are unaffected: sample mode is always off there, so the systemd units and crontab lines run as before.
+- Tests that run these commands now turn sample mode off first.
+- The Sample shift database damaged on 3 November is not repaired by this change. `replay_sample --wipe` restores it but discards demo decisions, so it is left to the owner.
+
+**Revisit when** a live command needs a sample-mode variant, or the demo moves to its own deployment. See `src/desk_site/safety.py` and `src/desk/tests/test_sample_guard.py`.

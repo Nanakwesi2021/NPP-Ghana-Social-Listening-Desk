@@ -12,6 +12,7 @@ from django.utils import timezone
 
 from desk import coverage, trends
 from desk.models import Case
+from desk_site.safety import refuse_in_sample_mode
 
 
 def format_telegram_brief(title, as_of, calc, open_cases, cov_rows, base_url):
@@ -91,6 +92,8 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        if options["telegram"]:  # the brief on screen is read-only and fine in sample mode
+            refuse_in_sample_mode("brief_shift --telegram", "sends the brief to the war room's Telegram chat")
         now = timezone.now()
         calc = trends.latest()
         as_of = calc.as_of if calc else now
