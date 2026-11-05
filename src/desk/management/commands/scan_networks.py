@@ -12,6 +12,7 @@ from django.core.management.base import BaseCommand
 
 from desk import alerts, clock, trends
 from desk.management.commands.collect_social import sync_all_social_sources
+from desk_site.safety import refuse_in_sample_mode
 
 
 class Command(BaseCommand):
@@ -26,6 +27,7 @@ class Command(BaseCommand):
         parser.add_argument("--prune-days", type=int, default=7, help="Prune trend calculations older than N days.")
 
     def handle(self, *args, **options):
+        refuse_in_sample_mode("scan_networks", "reads live feeds, calculates trends for now and can push alerts")
         if options["sync_sources"]:
             sync_all_social_sources()
             self.stdout.write(self.style.SUCCESS("Synced all monitored news and social platform sources."))

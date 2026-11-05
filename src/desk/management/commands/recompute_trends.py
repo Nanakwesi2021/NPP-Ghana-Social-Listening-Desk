@@ -3,6 +3,7 @@ from datetime import datetime
 from django.core.management.base import BaseCommand
 
 from desk import clock, trends
+from desk_site.safety import refuse_in_sample_mode
 
 
 class Command(BaseCommand):
@@ -14,6 +15,8 @@ class Command(BaseCommand):
         parser.add_argument("--alerts", action="store_true", help="Detect and dispatch breakout alerts.")
 
     def handle(self, *args, **options):
+        # replay_sample recalculates the Sample shift's own trends; this would add a newer one and prune old ones.
+        refuse_in_sample_mode("recompute_trends", "stores a new trend calculation and prunes old ones")
         as_of = datetime.fromisoformat(options["as_of"].replace("Z", "+00:00")) if options["as_of"] else clock.now()
         calc = trends.compute(as_of)
         if options["prune_days"]:

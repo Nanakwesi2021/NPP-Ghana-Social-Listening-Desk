@@ -3,7 +3,7 @@ import os
 from unittest.mock import patch
 
 from django.conf import settings
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from desk.collectors import rss, x as x_collector, youtube as youtube_collector
@@ -217,6 +217,7 @@ class SocialCollectorTests(TestCase):
         end = item.collected_at + timezone.timedelta(minutes=5)
         self.assertGreaterEqual(latest_tip_count(topic, start, end), 1)
 
+    @override_settings(DESK_SAMPLE_MODE=False)  # live commands refuse to run in sample mode
     def test_sync_all_social_sources_command(self):
         from io import StringIO
 

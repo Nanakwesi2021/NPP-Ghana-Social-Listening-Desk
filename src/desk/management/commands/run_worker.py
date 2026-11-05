@@ -3,6 +3,8 @@ import time
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
+from desk_site.safety import refuse_in_sample_mode
+
 
 class Command(BaseCommand):
     help = ("Simple pilot worker: read the news feeds every --collect-every seconds and recalculate trends "
@@ -15,6 +17,7 @@ class Command(BaseCommand):
         parser.add_argument("--once", action="store_true", help="Run one collection and one recalculation, then exit.")
 
     def handle(self, *args, **options):
+        refuse_in_sample_mode("run_worker", "keeps reading live feeds and calculating trends for now")
         last_collect = None
         try:
             while True:

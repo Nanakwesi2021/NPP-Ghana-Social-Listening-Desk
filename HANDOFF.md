@@ -128,23 +128,26 @@ All commands run from `src/`:
 # Run full offline test suite (127 tests, about 10 seconds)
 ../.venv/bin/python manage.py test desk
 
+# Live commands refuse to run in sample mode (decision 015). Run them against the live desk:
+# with the settings below for data/live.sqlite3, or with DATABASE_URL set for PostgreSQL.
+
 # Run live news collection pass
-../.venv/bin/python manage.py collect_news
+DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py collect_news
 
 # Run live social & broadcast collection pass
-../.venv/bin/python manage.py collect_social --sync-sources
+DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py collect_social --sync-sources
 
 # Recalculate 60-minute momentum trends
-../.venv/bin/python manage.py recompute_trends
+DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py recompute_trends
 
 # Continuous worker (poll feeds every 5m, recalculate trends every 60s)
-../.venv/bin/python manage.py run_worker
+DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py run_worker
 
 # Submit an analyst manual link or WhatsApp field tip
 ../.venv/bin/python manage.py submit_social_link --platform facebook --account "Kumasi Traders" --text "Protest over power outages"
 
 # Generate shift intelligence brief
-../.venv/bin/python manage.py brief_shift --title "Morning Intelligence Brief" --telegram
+DESK_DATABASE=../data/live.sqlite3 DESK_SAMPLE_MODE=0 ../.venv/bin/python manage.py brief_shift --title "Morning Intelligence Brief" --telegram
 
 # Provision or list staff accounts
 ../.venv/bin/python manage.py provision_user --list
