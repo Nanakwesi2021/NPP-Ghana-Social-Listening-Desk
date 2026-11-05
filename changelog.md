@@ -99,6 +99,12 @@
 
 ### Fixed
 
+- **5 November 2026** — The top bar no longer overlaps on laptop and tablet screens. Before, between 768 and about 1,400 px wide, the desk time ran into "Evidence as of". As the window narrows, the bar now drops extras in steps:
+  - **Below 1,420 px:** the date and "· fictional data".
+  - **Below 1,220 px:** the person's name beside their initials; the brand and search box get smaller.
+  - **Below 1,000 px:** the desk time.
+
+  "Evidence as of", search and the account menu stay until the phone layout. On phones, the brand block is narrower, so "Sample shift" no longer touches the account initials.
 - **3 November 2026** — Security fixes before live use (Phase 0):
   - **Demo sign-in:** the passwordless Sample shift sign-in now opens only the five fictional sample people listed in the fixture, and only accounts with no password. Before, it could open any staff account, including duty editors.
   - **Live settings:** sample mode now switches off by default when the settings look like a live deployment (debug off, a `DATABASE_URL`, or a public host). The desk refuses to start if sample mode is explicitly switched on there.
@@ -112,6 +118,11 @@
 
 ### Changed
 
+- **5 November 2026** — The desk is now called **War Room** wherever people see its name:
+  - **On screen:** the masthead, browser tabs, sign-in, two-step and password pages, and `/admin/`.
+  - **Telegram:** briefs start with `NPP WAR ROOM ·`.
+  - **Authenticator apps:** new set-ups are labelled War Room. Phones already set up keep the old Listening Desk label, and their codes still work.
+  - **Unchanged:** code names, web addresses, commands and design-token names.
 - **3 November 2026** — Revised the brief around the NPP social media team’s shift workflow in Ghana. The first milestone now pairs a news feed fixture with social post fixtures and a dashboard that ranks rising issues. Reviewers can test the planned assignment and verification process before connecting live sources.
 - Added platform-by-platform coverage requirements and pilot checks for freshness, collection failures and the time to review an urgent issue. The design distinguishes discussion of the NPP from claims about the governing party or a public institution.
 

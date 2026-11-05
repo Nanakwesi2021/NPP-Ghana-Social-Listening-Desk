@@ -149,7 +149,7 @@ DESK_SAMPLE_MODE = sample_mode(os.environ.get("DESK_SAMPLE_MODE"), debug=DEBUG, 
 # sample mode on a live deployment, so every live desk asks for codes.
 DESK_TWO_STEP_REQUIRED = not DESK_SAMPLE_MODE
 DESK_TWO_STEP_BACKUP_CODES = 10
-OTP_TOTP_ISSUER = os.environ.get("DESK_TWO_STEP_ISSUER", "Listening Desk")  # the name shown in the app
+OTP_TOTP_ISSUER = os.environ.get("DESK_TWO_STEP_ISSUER", "War Room")  # the name shown in the app
 OTP_ADMIN_HIDE_SENSITIVE_DATA = True  # never show authenticator keys in the admin
 
 DESK_FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "sample_shift"

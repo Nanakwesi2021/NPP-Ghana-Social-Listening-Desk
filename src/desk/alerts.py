@@ -173,3 +173,4 @@ def detect_and_dispatch_trend_alerts(calc, base_url=None, force_retry=False):
         if alert:
             alerts.append(alert)
     return alerts
+

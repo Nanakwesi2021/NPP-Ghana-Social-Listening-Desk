@@ -23,7 +23,7 @@ class ShiftBriefCommandTests(TestCase):
         output = out.getvalue()
 
         # Check sections
-        self.assertIn("NPP SOCIAL LISTENING DESK · SHIFT INTELLIGENCE BRIEF", output)
+        self.assertIn("NPP WAR ROOM · SHIFT INTELLIGENCE BRIEF", output)
         self.assertIn("1. TOP RISING TOPICS & MOMENTUM", output)
         self.assertIn("2. CRITICAL ISSUES & QUEUE", output)
         self.assertIn("3. SOURCE COVERAGE & PLATFORM HEALTH", output)
@@ -38,7 +38,7 @@ class ShiftBriefCommandTests(TestCase):
         out = io.StringIO()
         call_command("brief_shift", title="Morning Handover (05:45 GMT)", stdout=out)
         output = out.getvalue()
-        self.assertIn("NPP SOCIAL LISTENING DESK · MORNING HANDOVER (05:45 GMT)", output)
+        self.assertIn("NPP WAR ROOM · MORNING HANDOVER (05:45 GMT)", output)
 
     def test_format_telegram_brief_html_structure(self):
         calc = TrendCalculation.objects.latest("as_of")
@@ -54,7 +54,7 @@ class ShiftBriefCommandTests(TestCase):
             base_url="https://desk.npp.org.gh",
         )
 
-        self.assertIn("<b>NPP SOCIAL LISTENING DESK · WAR ROOM MORNING BRIEF</b>", html)
+        self.assertIn("<b>NPP WAR ROOM · WAR ROOM MORNING BRIEF</b>", html)
         self.assertIn("TOP RISING TOPICS", html)
         self.assertIn("https://desk.npp.org.gh/trends/electricity-tariff/", html)
         self.assertIn("https://desk.npp.org.gh/issues/ISS-0409/", html)
@@ -79,7 +79,7 @@ class ShiftBriefCommandTests(TestCase):
 
         # Verify arguments sent to send_telegram_message
         tg_text = mock_send.call_args[0][0]
-        self.assertIn("<b>NPP SOCIAL LISTENING DESK · SHIFT INTELLIGENCE BRIEF</b>", tg_text)
+        self.assertIn("<b>NPP WAR ROOM · SHIFT INTELLIGENCE BRIEF</b>", tg_text)
         self.assertIn("https://desk.npp.org.gh/issues/", tg_text)
 
     def test_brief_shift_telegram_unconfigured_credentials_reports_warning(self):

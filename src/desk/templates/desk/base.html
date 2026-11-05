@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Desk{% endblock %} · Social Listening Desk</title>
+  <title>{% block title %}Desk{% endblock %} · War Room</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Archivo+Narrow:wght@700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -22,7 +22,7 @@
       <a class="brand" href="{% url 'desk:overview' %}">
         {% include "desk/partials/_brand_mark.html" %}
         <span>
-          <span class="brand__name"><span class="long">Social </span>Listening Desk</span><br>
+          <span class="brand__name">War Room</span><br>
           <span class="brand__sub">NPP Ghana<span class="long"> · Research and social media</span></span>
         </span>
       </a>
@@ -30,7 +30,7 @@
     <div class="masthead__content">
       <div class="masthead__group">
         {% if sample_mode %}<span class="sample-tag">Sample shift<span class="long"> · fictional data</span></span>{% endif %}
-        <span class="shift-time num">{{ desk_now|gmt_date }} · desk time {{ desk_now|gmt }} GMT</span>
+        <span class="shift-time num"><span class="shift-time__date">{{ desk_now|gmt_date }} · </span>desk time {{ desk_now|gmt }} GMT</span>
       </div>
       <div class="masthead__group">
         {% if evidence_as_of %}<span class="as-of num" aria-live="polite" data-as-of>Evidence as of {{ evidence_as_of|gmt }} GMT</span>{% endif %}

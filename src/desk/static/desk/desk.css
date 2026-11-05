@@ -47,7 +47,8 @@ p { margin: 0; }
 .masthead__content { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 24px 0 18px; min-width: 0; }
 .masthead__group { display: flex; align-items: center; gap: 14px; min-width: 0; }
 .sample-tag { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border: 1px solid var(--border-focus-on-dark); border-radius: 12px; color: var(--text-on-dark-selected); font-size: 12px; font-weight: 600; white-space: nowrap; }
-.shift-time { color: var(--text-on-dark-muted); font-size: 13px; white-space: nowrap; }
+.shift-time { color: var(--text-on-dark-muted); font-size: 13px; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.masthead__group + .masthead__group { flex: none; } /* evidence time, search and account keep their size; desk time shortens */
 .as-of { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; white-space: nowrap; }
 .as-of::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--chart-previous); }
 .search { display: flex; align-items: center; gap: 8px; width: 216px; height: 32px; padding: 0 10px; border-radius: var(--radius-md); background: var(--bg-rail-selected); color: var(--text-on-dark-muted); }
@@ -382,12 +383,29 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 .login__card .brand-wrap { width: 100%; height: 64px; clip-path: none; background: var(--bg-masthead); }
 .login__body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 
+/* ---------- Narrower desktops and tablets: drop extras in steps so the masthead never overlaps ---------- */
+@media (max-width: 1419px) {
+  .sample-tag .long, .shift-time__date { display: none; }
+}
+@media (max-width: 1219px) {
+  .user-menu__who { display: none; }
+  .brand-wrap { width: 226px; clip-path: polygon(0 0, 226px 0, 207px 100%, 0 100%); }
+  .brand { width: 214px; clip-path: polygon(0 0, 214px 0, 196px 100%, 0 100%); padding-left: 16px; gap: 8px; }
+  .brand__sub .long { display: none; }
+  .search { width: 160px; }
+}
+@media (max-width: 999px) {
+  .shift-time { display: none; }
+  .masthead__content { padding: 0 16px 0 12px; gap: 12px; }
+  .search { width: 128px; }
+}
+
 /* ---------- Mobile (< 768 px): urgent cases first, rail becomes a tab bar ---------- */
 @media (max-width: 767px) {
   .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: 56px 1fr; }
   .masthead { height: 56px; }
-  .brand-wrap { width: 226px; clip-path: polygon(0 0, 226px 0, 207px 100%, 0 100%); }
-  .brand { width: 214px; clip-path: polygon(0 0, 214px 0, 196px 100%, 0 100%); padding-left: 16px; gap: 8px; }
+  .brand-wrap { width: 196px; clip-path: polygon(0 0, 196px 0, 177px 100%, 0 100%); }
+  .brand { width: 184px; clip-path: polygon(0 0, 184px 0, 166px 100%, 0 100%); padding-left: 16px; gap: 8px; }
   .brand__mark { width: 32px; height: 24px; }
   .brand__name { font-size: 16px; }
   .brand__name .long, .brand__sub .long { display: none; }

@@ -74,3 +74,4 @@ class Command(BaseCommand):
                             f"{alert.current_count} mentions (+{alert.change}) · Status: {alert.get_status_display()}"
                         )
                     )
+

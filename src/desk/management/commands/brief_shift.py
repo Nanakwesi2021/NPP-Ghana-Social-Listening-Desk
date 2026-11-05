@@ -18,7 +18,7 @@ def format_telegram_brief(title, as_of, calc, open_cases, cov_rows, base_url):
     """Format structured HTML briefing message for Telegram War Room dispatch."""
     base_url = (base_url or "http://127.0.0.1:8000").rstrip("/")
     lines = [
-        f"🇬🇭 <b>NPP SOCIAL LISTENING DESK · {html.escape(title.upper())}</b>",
+        f"🇬🇭 <b>NPP WAR ROOM · {html.escape(title.upper())}</b>",
         f"<i>Generated: {as_of.strftime('%d %b %Y · %H:%M')} GMT</i>",
         "━━━━━━━━━━━━━━━━━━━━━━━━━━",
         "",
@@ -96,7 +96,7 @@ class Command(BaseCommand):
         as_of = calc.as_of if calc else now
 
         lines = [
-            f"🇬🇭 NPP SOCIAL LISTENING DESK · {options['title'].upper()}",
+            f"🇬🇭 NPP WAR ROOM · {options['title'].upper()}",
             f"Generated: {as_of.strftime('%d %b %Y · %H:%M')} GMT",
             "=" * 60,
             "",
